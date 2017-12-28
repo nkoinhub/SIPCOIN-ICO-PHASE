@@ -157,20 +157,20 @@ html(lang='en')
               center
                 .row
                   .col-sm-12
-                    h3.boldLatto Buy SIP Tokens
+                    h3.boldLatto Buy SIP Coins
                 hr(style="border-top:1px solid black;")
               .row
                 .col-sm-5(style='height:300px;background-color:#d0d3c5;margin-left:14px;margin-right:14px;border-radius:5px;')
                   center
                     br
-                    h4.regularLatto Tokens Value
+                    h4.regularLatto Coins Value
                     hr(style="border-top:1px solid black;")
                     h3#targer_here.lightLatto(style='color:black;font-size:25px;')
                       | $ 0.00000
                   br
                   center
                     br
-                    h4.regularLatto Tokens Value in BTC
+                    h4.regularLatto Coins Value in BTC
                     hr(style="border-top:1px solid black;")
                     h1#targetBTC.lightLatto(style='color:black;font-size:25px;') BTC 0.0000000000
                   br
@@ -180,7 +180,7 @@ html(lang='en')
                     br
                     button#btn-logout(style='display:none')
                     form(method='post', action='/payment')
-                      input#ex3.form-control.input-lg.lightLatto(style='background:#222222;color:white;',onkeypress="return isNumber(event)" ,name='tokenvalue', placeholder='Enter number of tokens')
+                      input#ex3.form-control.input-lg.lightLatto(style='background:#222222;color:white;',onkeypress="return isNumber(event)" ,name='tokenvalue', placeholder='Enter number of coins')
                       br
                       br
                       input#NXT.btn.button_style.btn-primary.btn-md(type='submit',onclick='return isEmpty();', style='background-color: #08708a;')

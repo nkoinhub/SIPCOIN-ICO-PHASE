@@ -1,1 +1,1 @@
-# SIPcoin project's README
+SIPcoin Project's README
