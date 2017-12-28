@@ -47,6 +47,7 @@ app.use(session({
 );
 
 console.log("app.js starting");
+console.log("another git test");
 
 require('./app/server/routes')(app);
 
