@@ -1,0 +1,280 @@
+doctype html
+html(lang='en')
+  head
+    title SIPcoin
+    meta(charset='utf-8')
+    meta(name='viewport', content='width=device-width, initial-scale=1')
+    link(rel='stylesheet', href='/css/bootstrap.min.css')
+    link(rel='stylesheet', href='/css/index.css')
+    link(rel='stylesheet', href='/css/mate_icon.css')
+    script(src='/js/views/jquery.min.js')
+    script(src='/js/views/bootstrap.min.js')
+    script(src='/js/views/countUp.js')
+    script(src='/js/controllers/homeController.js')
+    script(src='/js/views/home.js')
+    script(src='/js/form-validators/accountValidator.js')
+    link(rel='stylesheet', href='/font-awesome/css/font-awesome.min.css')
+    <link rel="apple-touch-icon" sizes="180x180" href="/images/favicons/apple-touch-icon.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="/images/favicons/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="/images/favicons/favicon-16x16.png">
+    <link rel="manifest" href="/images/favicons/manifest.json">
+    <link rel="mask-icon" href="favicons/safari-pinned-tab.svg" color="#5bbad5">
+    <meta name="theme-color" content="#ffffff">
+
+    style.
+      .sidenav {
+      color:white;
+      height: 100%;
+      width: 0;
+      position: fixed;
+      z-index: 1;
+      top: 0;
+      left: 0;
+      background-color: #032b2f;
+      overflow-x: hidden;
+      transition: 0.5s;
+      padding-top: 60px;
+      -webkit-box-shadow: 4px 6px 49px -1px rgba(3,43,47,1);
+      -moz-box-shadow: 4px 6px 49px -1px rgba(3,43,47,1);
+      box-shadow: 4px 6px 49px -1px rgba(3,43,47,1);
+      }
+      
+      .sidenav a {
+      padding: 8px 8px 8px 32px;
+      text-decoration: none;
+      font-size: 19px;
+      color: white;
+      display: block;
+      transition: 0.3s;
+      font-family:lato_light;
+      }
+      .sidenav .closebtn:hover {
+      transition:1s;
+      background-color:none;
+      }
+      .hey_me a:hover {
+      transition:1s;
+      background-color:#11a8ab;
+      }
+      .sidenav .closebtn {
+      position: absolute;
+      top: 0;
+      right: 25px;
+      font-size: 36px;
+      margin-left: 50px;
+      }
+      @media screen and (max-height: 450px) {
+      .sidenav {padding-top: 15px;}
+      .sidenav a {font-size: 18px;}
+      }
+  body
+  - user = typeof(udata) != 'undefined' ? udata : { }
+    #mySidenav.sidenav(style='z-index:1234;')
+      a.closebtn(href='javascript:void(0)', onclick='closeNav()') ×
+      .Container.hey_me
+        .row
+          .col-sm-2.col-sm-offset-1
+            center
+              img(src='/images/sipcoin_logo2d.png', style='width:50px;height:50px;display:inline-block;')
+              center
+          .col-sm-8.col-sm-offset-1
+            h3
+              center.boldLatto  SIPcoin
+          .col-sm-10.col-sm-offset-1
+            hr
+          .col-sm-12
+            br
+          .col-sm-12
+            a(href='/dashboard')
+              i.fa.fa-home(aria-hidden='true')
+              |  &nbsp DashBoard
+          .col-sm-12
+            br
+          .col-sm-12
+            a(href='/referral')
+              i.fa.fa-handshake-o(aria-hidden='true')
+              |  &nbsp Referrals
+          .col-sm-12
+            br
+          .col-sm-12
+            a(href='/transaction')
+              i.fa.fa-list-alt(aria-hidden='true')
+              |  &nbsp Transaction List
+          .col-sm-12
+            br
+          .col-sm-12
+            a(href='/account')
+              i.fa.fa-wrench(aria-hidden='true')
+              |  &nbsp Settings
+          .col-sm-12
+            br
+          .col-sm-12
+            a
+              .button_hey_logout(style='cursor:pointer;')
+                i.fa.fa-power-off(aria-hidden='true')
+                |   &nbsp Log Out
+    #first_frame
+      .container
+        .row
+          br
+          br
+          br
+          nav.navbar.navbar-inverse.navbar-fixed-top
+            .container-fluid
+              .navbar-header
+                button.navbar-toggle(style='margin-top:15px;', type='button', data-toggle='collapse', data-target='#myNavbar')
+                  span.icon-bar
+                  span.icon-bar
+                  span.icon-bar
+                a.navbar-brand(onclick='openNav()', href='#', style='margin-left:5px;color:white;padding-bottom: 43px;margin-right:15px;margin-top:5px;')
+                  i.fa.fa-bars(aria-hidden='true',style="font-size:30px;margin-top:5px;")
+                a.navbar-brand.boldLatto(href='#', style='color:white;padding-bottom: 33px;padding-top:24px;font-size:25px;margin-top:5px;') SIPcoin
+              #myNavbar.collapse.navbar-collapse
+                ul.nav.navbar-nav.navbar-right
+                  button.btn(type='button',style="margin-top:10px;margin-bottom:5px;")
+                    .chip(style='font-size:18px;')
+                      img(src='/images/coin.png', alt='Person',style='height:40px;width:40px;')
+                      |   $ #{btcValue}
+                  button.btn(type='button',style="margin-top:10px;margin-bottom:5px;")
+                    .chip(style='font-size:18px;')
+                      img(src='/images/sipcoin_logo2d.png', alt='Person', style='height:40px;width:40px;')
+                      |  $ #{sipValue}
+                  //
+                    <li><div class="chip"><img src="/images/avatar.png" alt="Person" width="50" height="50"></div><a class="bit_current_value" href="#" style="color:white;font-size:25px;margin-top:10px;"> $ 1234  </a></li>
+                    <li><a class="sip_current_value" href="#" style="color:white;font-size:25px;margin-top:10px;"> Sipcoin &nbsp; - &nbsp; $ 1.5 </a></li>
+                  button.btn.open_the_popup(type='button',style="margin-top:10px;margin-bottom:5px;")
+                    .chip
+                      img(src='/images/avatar.png', alt='Person', style='height:40px;width:40px;')
+                      |                       #{user.name}
+      div(style='margin-left:10px; margin-right:10px;')
+        .container
+          .row
+            br
+            br
+            br
+            #step_one.col-sm-8.col-sm-offset-2.my_card_style_2
+              br
+              center
+                .row
+                  .col-sm-12
+                    h3.boldLatto Buy SIP Tokens
+                hr(style="border-top:1px solid black;")
+              .row
+                .col-sm-5(style='height:300px;background-color:#d0d3c5;margin-left:14px;margin-right:14px;border-radius:5px;')
+                  center
+                    br
+                    h4.regularLatto Tokens Value
+                    hr(style="border-top:1px solid black;")
+                    h3#targer_here.lightLatto(style='color:black;font-size:25px;')
+                      | $ 0.00000
+                  br
+                  center
+                    br
+                    h4.regularLatto Tokens Value in BTC
+                    hr(style="border-top:1px solid black;")
+                    h1#targetBTC.lightLatto(style='color:black;font-size:25px;') BTC 0.0000000000
+                  br
+                  br
+                .col-sm-6
+                  center
+                    br
+                    button#btn-logout(style='display:none')
+                    form(method='post', action='/payment')
+                      input#ex3.form-control.input-lg.lightLatto(style='background:#222222;color:white;',onkeypress="return isNumber(event)" ,name='tokenvalue', placeholder='Enter number of tokens')
+                      br
+                      br
+                      input#NXT.btn.button_style.btn-primary.btn-md(type='submit',onclick='return isEmpty();', style='background-color: #08708a;')
+              br
+              br
+    script.
+      var count_for_dots=0;
+      function isNumber(evt) {
+      evt = (evt) ? evt : window.event;
+      var charCode = (evt.which) ? evt.which : evt.keyCode;
+      if (charCode > 31 && (charCode < 48 || charCode > 57) && charCode==46) {
+      return false;
+      }
+      return true;
+      }
+      
+      function isEmpty(){
+      var value=$("#ex3").val();
+      console.log(value);
+      if(value.length==0 || parseInt(value) == 0)
+      {
+      alert('Enter valid number');
+      return false;
+      }
+      }
+      
+      
+      var options = {
+      useEasing: true,
+      useGrouping: true,
+      separator: ',',
+      decimal: '.',
+      prefix: '$ ',
+      };
+
+      if("#{buyButton}" == "false")
+      {
+        $("#NXT").remove();
+      }
+
+      var options2 = {
+      useEasing: true,
+      useGrouping: true,
+      separator: ',',
+      decimal: '.',
+      prefix: 'BTC ',
+      };
+      var value = 1;
+      setInterval(function(){
+      var value2 = document.getElementById('ex3').value;
+      console.log(value2);
+      if(value != value2)
+      {
+      var demo = new CountUp('targer_here', 0, value2*"#{sipValue}", 5, 1.2, options);
+      if (!demo.error) {
+      demo.start();
+      value = value2;
+      } else {
+      console.error(demo.error);
+      }
+      var demo2 = new CountUp('targetBTC', 0, (value2*"#{sipValue}")/"#{btcValue}" , 10, 1.2, options2);
+      if (!demo2.error) {
+      demo2.start();
+      //value = value2;
+      } else {
+      console.error(demo2.error);
+      }
+      }
+      },1000)
+      $(function(){
+      $(document).on('click',".button_hey_logout",function(){
+      $("#btn-logout").click();
+      });
+      })
+      // var demo = new CountUp('targer_here', 0, 4178, 0, 2.5, options);
+      // if (!demo.error) {
+      // demo.start();
+      // } else {
+      // console.error(demo.error);
+      // }
+      var data_for_the_popover='<div class="container"> <div class="row"> <div class="col-sm-2" style="background-color:#222222;color:white;padding-left: 0px;padding-right: 0px;"> <div class="row"> <div class="col-sm-12" style="color:white;padding:20px;font-family:lato_bold,open-serif;"> <center><h5 style="font-size:17px;color:white;">#{user.email} </h5> </center> </div> <div class="col-sm-12"> <br> </div> <div class="col-sm-12 hover_change_back"> <h5 style="font-size:20px;font-family:lato_light;"> <a href="/account" style="color:white;text-decoration:none;"> <i style="padding-right:3px;padding-left:10px;"class="fa fa-cogs" aria-hidden="true"></i> Account Settings </a> </h5> </div> <div class="col-sm-12"> <hr> </div> <div  class="col-sm-12 hover_change_back button_hey_logout"> <h5 style="font-size:20px;font-family:lato_light;"> <i style="padding-right:12px;padding-left:10px;" class="fa fa-power-off" aria-hidden="true"></i>Log out </h5> </div> </div> <br> </div> </div> </div>';
+      $(function(){
+      $('.open_the_popup').popover({content:data_for_the_popover ,placement: "bottom",html: true,trigger: "focus"});
+      })
+      function openNav() {
+      document.getElementById("mySidenav").style.width = "300px";
+      }
+      function closeNav() {
+      document.getElementById("mySidenav").style.width = "0";
+      }
+      //
+      // $(document).on('click',function(){
+      //   document.getElementById("mySidenav").style.width = "0";
+      //  })
+      //
+include modals/alert
+include modals/confirm

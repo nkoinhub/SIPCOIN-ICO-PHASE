@@ -1,0 +1,196 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <title>SipCoin</title>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="/css/bootstrap.min.css">
+  <link rel="stylesheet" href="/css/index.css">
+  <link rel="stylesheet" href="/css/mate_icon.css">
+  <script src="/js/views/jquery.min.js"></script>
+  <script src="/js/views/bootstrap.min.js"></script>
+  <script src="/js/views/countUp.js"></script>
+  <link rel="stylesheet" href="/font-awesome/css/font-awesome.min.css">
+  <link rel="stylesheet" href="/css/animate.css">
+
+</head>
+<body>
+
+  <div id='second_frame'>
+    <div class="container">
+        <div class="row"> <br> <br> <br>
+          <nav class="navbar navbar-inverse">
+            <div class="container-fluid">
+              <div class="navbar-header pull-left">
+                <a class="navbar-brand" href="#" style="color:white;padding-bottom: 43px;">Dashboard</a>
+              </div>
+
+              <div class="navbar-header pull-right">
+                <ul class="nav navbar-nav pull-left">
+                  <button type="button" class="btn open_the_popup">
+                    <div class="chip">
+                      <img src="/images/avatar.png" alt="Person" width="96" height="96">
+                      John Doe
+                    </div>
+                  </button>
+                </ul>
+              </div>
+
+            </div>
+          </nav>
+
+        </div>
+    </div>
+
+    <div style="margin-left:10px; margin-right:10px;">
+    <div class="container" >
+      <div class="row">
+        <br>
+        <div class="col-sm-4 my_card_style" > <br> <br>
+          <center>
+
+          <div class="row">
+            <div class="col-sm-1 ">
+              <img src="/images/coin.png" style="width:50px;height:50px;display:inline-block;">
+            </div>
+            <div class="col-sm-9 col-sm-offset-1">
+              <h3>Current BTC Value </h3>
+            </div>
+          </div>
+
+          <hr>
+          <h1  style="color:white;font-size:50px;"> $ 18,901.08 </h1>
+          </center>
+          <br> <br>
+        </div>
+        <div id="step_one" class="col-sm-7 col-sm-offset-1 my_card_style "> <br> <br>
+          <center>
+          <div class="row">
+            <div class="col-sm-12">
+              <h3>Buy your Tokens</h3>
+            </div>
+          </div>
+          <hr>
+            </center>
+
+          <div class="row">
+            <div class="col-sm-5" style="background-color:#e64c65;margin-left:14px;margin-right:14px;border-radius:5px;">
+              <center> <br>
+              <h4>Value of Tokens</h4>
+              <hr>
+              <h1 id="targer_here" style="color:white;font-size:50px;"> </h1>
+            </center> <br>
+            </div>
+
+            <div class="col-sm-6 ">
+              <!-- <label for="ex3">col-xs-4</label> --> <br>
+              <center>
+                <form method="post" action="/paymentAddr">
+                  <input style="background:#50597b;color:white;"class="form-control input-lg" id="ex3" type="text" placeholder="Enter number of tokens">
+                  <br> <br>
+                  <button type="submit">click me</button>
+                  <a onclick="parentNode.submit();" class="btn button_style btn-primary btn-md" style="background-color: #11a8ab;" >Next &nbsp <i class="fa fa-share fa-1x" aria-hidden="true"></i> </a>
+                </form>
+
+              </center>
+            </div>
+          </div>
+          <br>
+          <br><br>
+        </div>
+
+
+    </div>
+  </div>
+  </div>
+
+  <div class="modal-body" >
+
+    <input type="hidden" id="userId"/>
+    <div id="account-form-container" class="center-vertical">
+      <form method="post" id="account-form" class="form-horizontal well">
+        <h2></h2>
+        <h6 id="sub1">Please tell us a little about yourself.</h6>
+        <hr/>
+        <div class="form-group">
+          <label class="control-label col-sm-3">Name</label>
+          <div class="col-sm-9">
+            <input id="name-tf" type="text" name="name" class="form-control"/>
+          </div>
+        </div>
+        <div class="form-group">
+          <label class="control-label col-sm-3">Email</label>
+          <div class="col-sm-9">
+            <input id="email-tf" type="text" name="email" class="form-control"/>
+          </div>
+        </div>
+        <div class="form-group">
+          <label class="control-label col-sm-3">Location</label>
+          <div class="col-sm-9">
+            <select id="country-list" name="country" class="form-control">
+              <!--each item in countriesoption(selected=item.name == user.country)= item.name
+              -->
+            </select>
+          </div>
+        </div>
+        <hr/>
+        <h6 id="sub2"></h6>
+        <div class="form-group">
+          <label class="control-label col-sm-3">Username</label>
+          <div class="col-sm-9">
+            <input id="user-tf" type="text" name="user" class="form-control disabled"/>
+          </div>
+        </div>
+        <div class="form-group">
+          <label class="control-label col-sm-3">Password</label>
+          <div class="col-sm-9">
+            <input id="pass-tf" type="password" name="pass" value="" class="form-control"/>
+          </div>
+        </div>
+        <hr/>
+        <div class="form-buttons">
+          <button type="button" id="account-form-btn1" class="btn btn-default"></button>
+          <button type="submit" id="account-form-btn2" class="btn btn-primary"></button>
+        </div>
+        <div class="clearfix"></div>
+      </form>
+    </div>
+  </div>
+</div>
+</div>
+</div>
+
+
+
+  <script>
+
+      // $("#go_to_step_2").click(function(){
+      //   $("#step_one").addClass("animated bounceOutLeft");
+      //   $("#step_two").css('display','block');
+      //   $("#step_two").addClass("animated bounceInRight");
+      // })
+      //
+      var options = {
+        useEasing: true,
+        useGrouping: true,
+        separator: ',',
+        decimal: '.',
+        prefix: '$ ',
+      };
+
+      var demo = new CountUp('targer_here', 0, 4178, 0, 2.5, options);
+      if (!demo.error) {
+        demo.start();
+      } else {
+        console.error(demo.error);
+      }
+
+      var data_for_the_popover='<div class="container"> <div class="row"> <div class="col-sm-2" style="background-color:#394264;color:white;padding-left: 0px;padding-right: 0px;"> <div class="row"> <div class="col-sm-12" style="color:white;padding:20px;"> <center><h4 style="font-size:25px;"> <i style="margin:10px;" class="fa fa-envelope fa-1x" aria-hidden="true"></i> Jhon Doe</h4> </center> </div> <div class="col-sm-12"> <br> </div> <div data-toggle="modal" data-target="#myModal" class="col-sm-12 hover_change_back"> <h5 style="font-size:20px;"> <i style="padding-right:3px;padding-left:10px;"class="fa fa-cogs" aria-hidden="true"></i> Account Settings </h5> </div> <div class="col-sm-12"> <hr> </div> <div class="col-sm-12 hover_change_back"> <h5 style="font-size:20px;"> <i style="padding-right:12px;padding-left:10px;" class="fa fa-power-off" aria-hidden="true"></i>Log out </h5> </div> </div> <br> </div> </div> </div>';
+
+      $(function(){
+          $('.open_the_popup').popover({content:data_for_the_popover ,placement: "bottom",html: true,trigger: "focus"});
+      })
+
+  </script>
+</body>
+</html>

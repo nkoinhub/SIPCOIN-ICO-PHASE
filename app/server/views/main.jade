@@ -1,0 +1,565 @@
+What is SIPcoin?doctype html
+html(lang='en')
+  head
+    title SIPcoin
+    meta(charset='utf-8')
+    meta(name='viewport', content='width=device-width, initial-scale=1')
+    link(rel='stylesheet', href='/css/bootstrap.min.css')
+    link(rel='stylesheet', href='/css/index.css')
+    link(rel='stylesheet', href='/css/style1.css')
+    link(rel='stylesheet', href='/font-awesome/css/font-awesome.min.css')
+    script(src='js/views/jquery.min.js')
+    script(src='js/views/bootstrap.min.js')
+    script(src='js/views/countUp.js')
+    // <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/meyer-reset/2.0/reset.min.css">
+    link(rel='stylesheet prefetch', href='/css/Raleway.css')
+    link(rel='stylesheet prefetch', href='/css/animate.min.css')
+    <link rel="apple-touch-icon" sizes="180x180" href="/images/favicons/apple-touch-icon.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="/images/favicons/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="/images/favicons/favicon-16x16.png">
+    <link rel="manifest" href="/images/favicons/manifest.json">
+    <link rel="mask-icon" href="favicons/safari-pinned-tab.svg" color="#5bbad5">
+    <meta name="theme-color" content="#ffffff">
+
+    style.
+      .sidenav {
+      color:white;
+      height: 100%;
+      width: 0;
+      position: fixed;
+      z-index: 1;
+      top: 0;
+      left: 0;
+      background-color: #394264;
+      overflow-x: hidden;
+      transition: 0.5s;
+      padding-top: 60px;
+      }
+      .sidenav a {
+      padding: 8px 8px 8px 32px;
+      text-decoration: none;
+      font-size: 25px;
+      color: white;
+      display: block;
+      transition: 0.3s;
+      }
+      .sidenav .closebtn:hover {
+      transition:1s;
+      background-color:none;
+      }
+      .hey_me a:hover {
+      transition:1s;
+      background-color:#11a8ab;
+      }
+      .sidenav .closebtn {
+      position: absolute;
+      top: 0;
+      right: 25px;
+      font-size: 36px;
+      margin-left: 50px;
+      }
+      @media screen and (max-height: 450px) {
+      .sidenav {padding-top: 15px;}
+      .sidenav a {font-size: 18px;}
+      }
+      @-webkit-keyframes mymove {
+      0%   {left:0px;top:0px;opacity:1.0}
+      25%  {left:0px; top:0px;opacity:0.50;}
+      50%  {left:0px; top:20px;opacity:0;}
+      75%  {left:0px; top:20px;opacity:0;}
+      100% {left:0px; top:20px;opacity:0;}
+      }
+      @keyframes mymove {
+      0%   { left:0px; top:0px;opacity:1.0}
+      25%  {left:0px; top:0px;opacity:0.50}
+      50%  {left:0px; top:20px;opacity:0}
+      75%  {left:0px; top:20px;opacity:0}
+      100% {left:0px; top:20px;opacity:0}
+      }
+      #animate_down {
+      /*width: 100px;
+      height: 100px;*/
+      /*background: red;*/
+      position: relative;
+      -webkit-animation: mymove 1.5s infinite; /* Safari 4.0 - 8.0 */
+      animation: mymove 1.5s infinite;
+      }
+      .progress {
+      background-color: #222222;
+      height: 40px;
+      border-radius: 0px;
+      border-right: 1px solid white;
+      border-left: 1px solid white;
+      border-top-left-radius:4px;
+      border-bottom-right-radius:4px;
+      /*background-color: white;*/
+      }
+      .progress-bar{
+      font-family: "Raleway", Helvetica, sans-serif;
+      padding: 0px;
+      font-size: 20px;
+      border: 0px;
+      }
+  body
+    #mySidenav.sidenav(style='z-index:4;')
+      a.closebtn(href='javascript:void(0)', onclick='closeNav()') ×
+      .Container.hey_me
+        .row
+          .col-sm-2.col-sm-offset-1
+            center
+              img(src='/images/sipcoin_logo2d.png', style='width:50px;height:50px;display:inline-block;')
+              center
+          .col-sm-8.col-sm-offset-1
+            h3
+              center  SIPcoin
+          .col-sm-10.col-sm-offset-1
+            hr
+          .col-sm-12
+            br
+          .col-sm-12
+            a(href='/dashboard')
+              i.fa.fa-home(aria-hidden='true')
+              |  &nbsp DashBoard
+          .col-sm-12
+            br
+          .col-sm-12
+            a(href='/refferal')
+              i.fa.fa-handshake-o(aria-hidden='true')
+              |  &nbsp Refferal Code
+          .col-sm-12
+            br
+          .col-sm-12
+            a(href='/transaction')
+              i.fa.fa-list-alt(aria-hidden='true')
+              |  &nbsp Transaction List
+          .col-sm-12
+            br
+          .col-sm-12
+            a(href='/account')
+              i.fa.fa-wrench(aria-hidden='true')
+              |  &nbsp Settings
+          .col-sm-12
+            br
+          .col-sm-12
+            a
+              .button_hey_logout(style='cursor:pointer;')
+                i.fa.fa-power-off(aria-hidden='true')
+                |   &nbsp Log Out
+    #first_frame
+      .container
+        .row
+          br
+          br
+          br
+          nav.navbar.navbar-inverse.navbar-fixed-top
+            .container-fluid
+              .navbar-header
+                button.navbar-toggle(style='margin-top:15px;', type='button', data-toggle='collapse', data-target='#myNavbar')
+                  span.icon-bar
+                  span.icon-bar
+                  span.icon-bar
+                button.btn(type='button', style="margin-top:10px;margin-bottom:5px;")
+                  a(href='/', style='border:none;color:white;margin-right:0px;')
+                    img(src='/images/sipcoin_logo2d.png', alt='Person', style='height:40px;width:40px;')
+                button.btn(type='button', style="margin-top:10px;margin-bottom:5px;")
+                  a(href='/', style='text-decoration:none;color:white;font-size:30px;') SIPcoin
+              #myNavbar.collapse.navbar-collapse
+                ul.nav.navbar-nav.navbar-right
+                  button.btn(type='button')
+                    .chip(style='font-size:18px;')
+                      img(src='/images/coin.png', alt='Person', style='height:40px;width:40px;')
+                      |    $ #{USD}
+                  button.btn(type='button',style="margin-top:10px;margin-bottom:5px;")
+                    .chip(style='font-size:18px;')
+                      img(src='/images/sipcoin_logo2d.png', alt='Person', style='height:40px;width:40px;')
+                      |  $ #{SIP}
+                  //
+                    <li><div class="chip"><img src="images/avatar.png" alt="Person" width="96" height="96"></div><a class="bit_current_value" href="#" style="color:white;font-size:25px;margin-top:10px;"> $ 1234  </a></li>
+                    <li><a class="sip_current_value" href="#" style="color:white;font-size:25px;margin-top:10px;"> Sipcoin &nbsp; - &nbsp; $ 1.5 </a></li>
+                  a(href='/login', style='text-decoration:none;color:white;margin-right:15px;margin-left:10px;')
+                    img(src='/images/avatar.png', alt='Person', style='height:40px;width:40px;margin-right:10px;')
+                    |  Login / Register
+      div(style='margin-left:10px; margin-right:10px;')
+        .container
+          .row
+            br
+            br
+            br
+            .col-sm-4
+              .col-sm-12
+                br
+                center
+                  img(src='/images/sipcoin_logo2d.png', style='width:75px;height:75px;display:inline-block;')
+              .col-sm-12
+                br
+                center
+                  h1(style='color:black;font-size:34px;')  Pre-Sale is ON
+                br
+              .col-sm-6
+                center
+                  a(href='/signup')
+                    button.boldLatto.btn.btn-lg.btn-primary(style='margin-bottom:20px;color:white;font-size:17px', type='button',) JOIN THE ICO
+              .col-sm-6
+                center
+                  a(href='/images/SIP.pdf',download='')
+                    button.boldLatto.btn.btn-lg.btn-default(style='margin-bottom:20px;background-color:white;color:black;font-size:17px', type='button') WHAT IS SIPCOIN ?
+              .col-sm-12
+                br
+                center
+                  a(href='https://www.facebook.com/SIPcoin-556867244663535', target='_blank')
+                    img(src='/images/facebook.png', height='40px;', width='40px;', style='margin-right:25px;')
+                  a(href='https://www.instagram.com/sipcoin.io/?hl=en', target='_blank')
+                    img(src='/images/instagram.png', height='40px;', width='40px;', style='margin-right:25px;')
+                  a(href='https://twitter.com/sipcoin_io', target='_blank')
+                    img(src='/images/twitter.png', height='40px;', width='40px;', style='margin-right:25px;')
+                  a(href='https://goo.gl/e37G3Z', target='_blank')
+                    img(src='/images/Slack.png', height='40px;', width='40px;', style='margin-right:25px;')
+                // <img src="images/idea.png" height="100px;" width="100px;">
+              //
+                <div class="col-sm-12">
+                <div class="row">
+                <div class="col-sm-6">
+                <button type="button" class="btn btn-primary">Primary</button>
+                </div>
+                <div class="col-sm-6">
+                <center><button type="button" class="btn btn-primary">Primary</button> </center>
+                </div>
+                </div>
+                </div>
+            .col-sm-8
+              //
+                <div class="loader">
+                </div>
+              center
+                iframe#iframe_value(style='border-radius:5px;z-index:1234;', src='https://player.vimeo.com/video/247189667', width='100%', height='360', frameborder='0', webkitallowfullscreen='', mozallowfullscreen='', allowfullscreen='')
+            .col-sm-12.clear_it_when_small
+            //
+              <div class="col-sm-12">
+              <center><i id="animate_down" class="fa fa-angle-down" aria-hidden="true" style="margin-top:-90%;color:white;font-size:50px;" ></i> <i  id="animate_down" class=" material-icons" style="margin-top:-90%;color:white;font-size:50px;">expand_more</i> </center>
+              </div>
+            .col-sm-4(style='padding:0px;')
+              center
+                h4(style='color:black')  Stage 1 ( 3 Million Coins )
+              .progress
+                .progress-bar.stage_1_bar(role='progressbar', style='width:0%;')
+                  h4#stage_1_data(style='width:150%;')
+                    h4
+              center
+                h4.lightLatto(style='color:black;;margin-top:-10px;margin-bottom:25px;')  Coin Value : $ 1.5
+            .col-sm-4(style='padding:0px;')
+              center
+                h4(style='color:black')  Stage 2 ( 3 Million Coins )
+              .progress
+                .progress-bar.stage_2_bar(role='progressbar', style='width:0%;')
+                  h4#stage_2_data(style='width:150%;')
+                    h4
+              center
+                h4.lightLatto(style='color:black;;margin-top:-10px;margin-bottom:25px;')  Coin Value : $ 2.5
+            .col-sm-4(style='padding:0px;')
+              center
+                h4(style='color:black')  Stage 3 ( 3 Million Coins )
+              .progress
+                .progress-bar.stage_3_bar(role='progressbar', style='width:0%;')
+                  h4#stage_3_data(style='width:150%;')
+                    h4
+              center
+                h4.lightLatto(style='color:black;;margin-top:-10px;margin-bottom:25px;')  Coin Value : $ 4
+
+            //
+              <div class="col-sm-12">
+              <div class="row">
+              <div class="col-sm-4">
+              </div>
+              <div class="col-sm-4">
+              <div class="progress-bar" role="progressbar" aria-valuenow="70" aria-valuemin="0" aria-valuemax="100" style="width:70%">
+              70%
+              </div>
+              </div>
+              <div class="col-sm-4">
+              <div class="progress-bar" role="progressbar" aria-valuenow="70" aria-valuemin="0" aria-valuemax="100" style="width:70%">
+              70%
+              </div>
+              </div>
+              </div>
+              </div>
+            .col-sm-12
+              center
+                i#animate_down.fa.fa-angle-down(aria-hidden="true",style='margin-top:-90%;color:white;font-size:50px;')
+            br
+            br
+            br
+      #new_frame
+        .timeline-wrap(style='background-color: #032b2f;')
+          br
+          br
+          br
+          center(style='font-size:40px;color:white;') Road Map #forthePeople
+          ul.timeline.timeline--first
+            li.era
+              h2.era__title Quarter 2 - 2017
+            li.entry.entry--left
+              .entry__content.wow.animated.fadeIn(data-wow-duration='1s', data-wow-delay='0.5s')
+                center
+                  img(src='/images/idea.png', height='100px;', width='100px;')
+                br
+                h4
+                  i.fa.fa-angle-right.margin_it(aria-hidden='true')
+                  |  Idea Preparation
+                  br
+                h4
+                  i.fa.fa-angle-right.margin_it(aria-hidden='true')
+                  |  Analysis of traditional copy-trading platforms for stocks     and &nbsp; &nbsp;  Foreign Exchange
+                  br
+                h4
+                  i.fa.fa-angle-right.margin_it(aria-hidden='true')
+                  |  Features Testing, Demand Research
+                  br
+                h4
+                  i.fa.fa-angle-right.margin_it(aria-hidden='true')
+                  |  Growth Projections,Team Formation
+                  br
+                h4
+                  i.fa.fa-angle-right.margin_it(aria-hidden='true')
+                  |  First steps in development of architecture of the smart  &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Investement Platform
+                  br
+            li.era
+              h2.era__title Quarter 3 - 2017
+            li.entry.entry--right
+              .entry__content.wow.animated.fadeIn(data-wow-duration='1s', data-wow-delay='0.5s')
+                center
+                  img(src='/images/bchain.png', height='100px;', width='100px;')
+                br
+                h4
+                  i.fa.fa-angle-right.margin_it(aria-hidden='true')
+                  |  Blockchain Development ICO Development
+                  br
+            li.era
+              h2.era__title Quarter 4 - 2017
+            li.entry.entry--left
+              .entry__content.wow.animated.fadeIn(data-wow-duration='1s', data-wow-delay='0.5s')
+                center
+                  img(src='/images/sale.png', height='100px;', width='100px;')
+                br
+                h4
+                  i.fa.fa-angle-right.margin_it(aria-hidden='true')
+                  |  Presale starts on Dec 25th
+                  br
+                h4
+                  i.fa.fa-angle-right.margin_it(aria-hidden='true')
+                  |  Marketing starts
+                  br
+                h4
+                  i.fa.fa-angle-right.margin_it(aria-hidden='true')
+                  |  On going Developments
+                  br
+                h4
+                  i.fa.fa-angle-right.margin_it(aria-hidden='true')
+                  |  New features integration
+                  br
+            li.era
+              h2.era__title Quarter 1 - 2018
+            li.entry.entry--right
+              .entry__content.wow.animated.fadeIn(data-wow-duration='1s', data-wow-delay='0.5s')
+                center
+                  img(src='/images/coin_1.png', height='100px;', width='100px;')
+                br
+                h4
+                  i.fa.fa-angle-right.margin_it(aria-hidden='true')
+                  |  Customer Portal Launch on 2nd March
+                  br
+                h4
+                  i.fa.fa-angle-right.margin_it(aria-hidden='true')
+                  |  SIP coins issued to ICO customers
+                  br
+                h4
+                  i.fa.fa-angle-right.margin_it(aria-hidden='true')
+                  |  SIP BTC/ETH exchange go live
+                  br
+                h4
+                  i.fa.fa-angle-right.margin_it(aria-hidden='true')
+                  |  Lending program start
+                  br
+                h4
+                  i.fa.fa-angle-right.margin_it(aria-hidden='true')
+                  |  First Payout release
+                  br
+                h4
+                  i.fa.fa-angle-right.margin_it(aria-hidden='true')
+                  |  SIP Headquarters setup in London
+                  br
+                h4
+                  i.fa.fa-angle-right.margin_it(aria-hidden='true')
+                  |  Demo version of the platform released
+                  br
+            li.era
+              h2.era__title Quarter 2 - 2018
+            li.entry.entry--left
+              .entry__content.wow.animated.fadeIn(data-wow-duration='1s', data-wow-delay='0.5s')
+                center
+                  img(src='/images/search.png', height='100px;', width='100px;')
+                br
+                h4
+                  i.fa.fa-angle-right.margin_it(aria-hidden='true')
+                  |  SIP Desktop wallet release
+                  br
+                h4
+                  i.fa.fa-angle-right.margin_it(aria-hidden='true')
+                  |  Smart Investement Platform is opened to the community
+                  br
+                h4
+                  i.fa.fa-angle-right.margin_it(aria-hidden='true')
+                  |  Further front-end and back-end development
+                  br
+                h4
+                  i.fa.fa-angle-right.margin_it(aria-hidden='true')
+                  |  API testing.Latency Testing
+                  br
+                h4
+                  i.fa.fa-angle-right.margin_it(aria-hidden='true')
+                  |  Testing of mirror-trade execution
+                  br
+                h4
+                  i.fa.fa-angle-right.margin_it(aria-hidden='true')
+                  |  Liquidity aggregator setup.
+                  br
+                h4
+                  i.fa.fa-angle-right.margin_it(aria-hidden='true')
+                  |  Opeartions Development User acquisition fro Platform
+                  br
+                h4
+                  i.fa.fa-angle-right.margin_it(aria-hidden='true')
+                  |  Risk Management and reporting system Integration
+                  br
+                h4
+                  i.fa.fa-angle-right.margin_it(aria-hidden='true')
+                  |  Platforms Improvements. Mobile App
+                  br
+                h4
+                  i.fa.fa-angle-right.margin_it(aria-hidden='true')
+                  |  Licensing for crypto currency Exchange
+                  br
+                h4
+                  i.fa.fa-angle-right.margin_it(aria-hidden='true')
+                  |  Trade Partnerships and continuous user acquisition
+                  br
+            li.era
+              h2.era__title Quarter 3 - 2018
+            li.entry.entry--right
+              .entry__content.wow.animated.fadeIn(data-wow-duration='1s', data-wow-delay='0.5s')
+                center
+                  img(src='/images/devel.png', height='100px;', width='100px;')
+                br
+                h4
+                  i.fa.fa-angle-right.margin_it(aria-hidden='true')
+                  |  Operation Development User Acquisition
+                  br
+                h4
+                  i.fa.fa-angle-right.margin_it(aria-hidden='true')
+                  |  Development of trading terminal
+                  br
+                h4
+                  i.fa.fa-angle-right.margin_it(aria-hidden='true')
+                  |  Trading alogrithm development
+                  br
+                h4
+                  i.fa.fa-angle-right.margin_it(aria-hidden='true')
+                  |  User acquisition globally. Local Presence
+                  br
+                h4
+                  i.fa.fa-angle-right.margin_it(aria-hidden='true')
+                  |  Liquidity aggregation
+                  br
+                h4
+                  i.fa.fa-angle-right.margin_it(aria-hidden='true')
+                  |  Exchange listing of SIPcoin
+                  br
+                h4
+                  i.fa.fa-angle-right.margin_it(aria-hidden='true')
+                  |  Beta Version of the platform released.
+                  br
+            li.era
+              h2.era__title    .  .  .   .   .
+            //
+              <li class="entry entry--left">
+              <div class="entry__content wow animated fadeIn" data-wow-duration="1s" data-wow-delay="0.5s">
+              <h2>Bacon Ipsum</h2>
+              <p>Swine pork belly prosciutto jowl pork chop chicken filet mignon cupim doner boudin.</p>
+              </div>
+              </li>
+        br
+        br
+      #footer.my_footer_class(style='margin-bottom:0px;')
+        .container
+          .row
+            br
+            .col-sm-4
+              center
+                button.btn(type='button', style='padding-top:20px;')
+                  a(href='/', style='border:none;color:white;margin-right:0px;')
+                    img(src='/images/sipcoin_logo2d.png', alt='Person', width='50', height='50')
+                button.btn(type='button', style='padding-top:20px;')
+                  a(href='/', style='text-decoration:none;color:white;font-size:30px;') SIPcoin
+            .col-sm-4
+              .row
+                .col-sm-12
+                  h3 Contact
+                .col-sm-12
+                  h4
+                    i.fa.fa-envelope.fa-1x(aria-hidden='true', style='margin-right:10px;')
+                    a(href='http://support.sipcoin.io', style='border:none;color:white;margin-right:0px;' target='_blank') support.sipcoin.io
+                .col-sm-12
+            .col-sm-4
+              .row
+                .col-sm-12
+                  h3 Follow Us
+                .col-sm-12
+                  a(href='https://www.facebook.com/SIPcoin-556867244663535', target='_blank')
+                    img(src='/images/facebook.png', height='50px;', width='50px;', style='margin-right:15px;')
+                  a(href='https://www.instagram.com/sipcoin.io/?hl=en', target='_blank')
+                    img(src='/images/insta_1.png', height='50px;', width='50px;', style='margin-right:15px;')
+                  a(href='https://twitter.com/sipcoin_io', target='_blank')
+                    img(src='/images/twitter.png', height='50px;', width='50px;', style='margin-right:15px;')
+                  a(href='https://goo.gl/e37G3Z', target='_blank')
+                    img(src='/images/Slack.png', height='50px;', width='50px;', style='margin-right:15px;')
+            .col-sm-12
+              hr
+            .col-sm-12
+              center
+                h4 © Copyright SIPcoin.io 2017
+            .col-sm-12
+              br
+        script.
+          var stage_current='1';
+          var tokens_current=parseFloat(1200000);
+          var stage_limit=3000000;
+          if(stage_current == '1')
+          {
+          var percent=(tokens_current/stage_limit) *100;
+          var percentage = parseFloat(percent.toFixed(2));
+          $(".stage_1_bar").css('width',percentage+'%');
+          $("#stage_1_data").html(percentage+"%");
+          }
+          if(stage_current=='2')
+          {
+          $(".stage_1_bar").css('width','100%');
+          $("#stage_1_data").html("Stage 1 Completed");
+          var tokens_for_second_bar=tokens_current-stage_limit;
+          var percentage=(tokens_for_second_bar/stage_limit) *100;
+          percentage = parseFloat(percentage.toFixed(2));
+          $(".stage_2_bar").css('width',percentage+'%');
+          $("#stage_2_data").html(percentage+"%");
+          }
+          if(stage_current=='3')
+          {
+          $(".stage_1_bar").css('width','100%');
+          $(".stage_2_bar").css('width','100%');
+          $("#stage_1_data").html("Stage 1 Completed");
+          $("#stage_2_data").html("Stage 2 Completed");
+          var tokens_for_third_bar=tokens_current-stage_limit*2;
+          var percentage=(tokens_for_third_bar/stage_limit) *100;
+          percentage = parseFloat(percentage.toFixed(2));
+          $(".stage_3_bar").css('width',percentage+'%');
+          $("#stage_3_data").html(percentage+"%");
+          }
+
+<script src='js/views/jquery_2.min.js'></script>

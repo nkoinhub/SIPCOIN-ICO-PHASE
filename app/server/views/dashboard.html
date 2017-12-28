@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <title>Bootstrap Example</title>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="css/bootstrap.min.css">
+  <link rel="stylesheet" href="css/index.css">
+  <link rel="stylesheet" href="css/mate_icon.css">
+  <script src="js/jquery.min.js"></script>
+  <script src="js/bootstrap.min.js"></script>
+  <script src="js/countUp.js"></script>
+  <link rel="stylesheet" href="font-awesome/css/font-awesome.min.css">
+
+
+</head>
+<body>
+
+  <div id='first_frame'>
+
+    <div class="container">
+        <div class="row"> <br> <br> <br>
+          <nav class="navbar navbar-inverse">
+            <div class="container-fluid">
+              <div class="navbar-header pull-left">
+                <a class="navbar-brand" href="#" style="color:white;padding-bottom: 43px;">Dashboard</a>
+              </div>
+
+              <div class="navbar-header pull-right">
+                <ul class="nav navbar-nav pull-left">
+                  <button type="button" class="btn open_the_popup">
+                    <div class="chip">
+                      <img src="images/avatar.png" alt="Person" width="96" height="96">
+                      John Doe
+                    </div>
+                  </button>
+                </ul>
+              </div>
+
+            </div>
+          </nav>
+        </div>
+    </div>
+
+
+    <div style="margin-left:10px; margin-right:10px;">
+    <div class="container" >
+      <div class="row">
+        <br>
+        <div class="col-sm-4 my_card_style" > <br> <br>
+          <center>
+
+          <div class="row">
+            <div class="col-sm-2 col-sm-offset-1">
+              <img src="images/coin.png" style="width:50px;height:50px;display:inline-block;">
+            </div>
+            <div class="col-sm-8">
+              <h3>Total Tokens </h3>
+            </div>
+          </div>
+
+          <hr>
+          <h1  style="color:white;font-size:50px;"> 23,000 </h1>
+          </center>
+          <br> <br>
+
+
+        </div>
+        <div class="col-sm-3 col-sm-offset-1 my_card_style"> <br> <br>
+          <center>
+
+          <div class="row">
+            <div class="col-sm-12">
+              <h3>Total Amount</h3>
+
+            </div>
+          </div>
+          <hr>
+
+          <h1 id="targer_here" style="color:white;font-size:50px;"> </h1>
+          </center>
+
+          <br>
+
+          <br><br>
+        </div>
+        <div class="col-sm-3 col-sm-offset-1 my_card_style" > <br> <br>
+          <center>
+            <b>JOIN THE NEWSLETTER </b> <br> <br> <br>
+
+          <a href="2nd_page.html" class="btn button_style" style="background-color: #11a8ab;" >Buy More Coins </a>
+          </center>
+          <br> <br>
+        </div>
+      </div>
+    </div>
+  </div>
+  </div>
+
+  <script>
+
+      var options = {
+        useEasing: true,
+        useGrouping: true,
+        separator: ',',
+        decimal: '.',
+        prefix: '$ ',
+      };
+
+      var demo = new CountUp('targer_here', 0, 4178, 0, 2.5, options);
+      if (!demo.error) {
+        demo.start();
+      } else {
+        console.error(demo.error);
+      }
+
+      var data_for_the_popover='<div class="container"> <div class="row"> <div class="col-sm-2" style="background-color:#394264;color:white;padding-left: 0px;padding-right: 0px;"> <div class="row"> <div class="col-sm-12" style="color:white;padding:20px;"> <center><h4 style="font-size:25px;"> <i style="margin:10px;" class="fa fa-envelope fa-1x" aria-hidden="true"></i> Jhon Doe</h4> </center> </div> <div class="col-sm-12"> <br> </div> <div class="col-sm-12 hover_change_back"> <h5 style="font-size:20px;"> <i style="padding-right:3px;padding-left:10px;"class="fa fa-cogs" aria-hidden="true"></i> Account Settings </h5> </div> <div class="col-sm-12"> <hr> </div> <div class="col-sm-12 hover_change_back"> <h5 style="font-size:20px;"> <i style="padding-right:12px;padding-left:10px;" class="fa fa-power-off" aria-hidden="true"></i>Log out </h5> </div> </div> <br> </div> </div> </div>';
+
+      $(function(){
+          $('.open_the_popup').popover({content:data_for_the_popover ,placement: "bottom",html: true,trigger: "focus"});
+      })
+
+
+  </script>
+</body>
+</html>

@@ -1,0 +1,12 @@
+
+// Trigger the modal with a button
+button.btn.btn-info.btn-lg(type='button', data-toggle='modal', data-target='#myModal') Account Settings
+// Modal
+#myModal.modal.fade(role='dialog')
+  .modal-dialog
+    // Modal content
+    .modal-content
+      .modal-body
+        include account
+      .modal-footer
+        button.btn.btn-default(type='button', data-dismiss='modal') Close

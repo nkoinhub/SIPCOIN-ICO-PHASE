@@ -1,0 +1,242 @@
+doctype html
+html(lang='en')
+  head
+    title SIPcoin
+    meta(charset='utf-8')
+    meta(name='viewport', content='width=device-width, initial-scale=1')
+    link(rel='stylesheet', href='/css/bootstrap.min.css')
+    link(rel='stylesheet', href='/css/index.css')
+    link(rel='stylesheet', href='/css/mate_icon.css')
+    script(src='js/views/jquery.min.js')
+    script(src='js/views/bootstrap.min.js')
+    script(src='js/views/countUp.js')
+    script(src='/js/controllers/homeController.js')
+    script(src='/js/views/home.js')
+    script(src='/js/form-validators/accountValidator.js')
+    link(rel='stylesheet', href='/font-awesome/css/font-awesome.min.css')
+    link(rel='stylesheet', href='/css/animate.css')
+    link(rel='stylesheet', href='/font-awesome/css/font-awesome.min.css')
+    <link rel="apple-touch-icon" sizes="180x180" href="/images/favicons/apple-touch-icon.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="/images/favicons/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="/images/favicons/favicon-16x16.png">
+    <link rel="manifest" href="/images/favicons/manifest.json">
+    <link rel="mask-icon" href="favicons/safari-pinned-tab.svg" color="#5bbad5">
+    <meta name="theme-color" content="#ffffff">
+    script(src='/js/views/qrcode.js')
+
+    style.
+      .sidenav {
+      color:white;
+      height: 100%;
+      width: 0;
+      position: fixed;
+      z-index: 1;
+      top: 0;
+      left: 0;
+      background-color: #032b2f;
+      overflow-x: hidden;
+      transition: 0.5s;
+      padding-top: 60px;
+      -webkit-box-shadow: 4px 6px 49px -1px rgba(3,43,47,1);
+      -moz-box-shadow: 4px 6px 49px -1px rgba(3,43,47,1);
+      box-shadow: 4px 6px 49px -1px rgba(3,43,47,1);
+      }
+      
+      .sidenav a {
+      font-family:lato_light;
+      padding: 8px 8px 8px 32px;
+      text-decoration: none;
+      font-size: 19px;
+      color: white;
+      display: block;
+      transition: 0.3s;
+      }
+      .sidenav .closebtn:hover {
+      transition:1s;
+      background-color:none;
+      }
+      .hey_me a:hover {
+      transition:1s;
+      background-color:#11a8ab;
+      }
+      .sidenav .closebtn {
+      position: absolute;
+      top: 0;
+      right: 25px;
+      font-size: 36px;
+      margin-left: 50px;
+      }
+      @media screen and (max-height: 450px) {
+      .sidenav {padding-top: 15px;}
+      .sidenav a {font-size: 18px;}
+      }
+  body
+    - user = typeof(udata) != 'undefined' ? udata : { }
+
+    #mySidenav.sidenav(style='z-index:1234;')
+      a.closebtn(href='javascript:void(0)', onclick='closeNav()') ×
+      .Container.hey_me
+        .row
+          .col-sm-2.col-sm-offset-1
+            center
+              img(src='/images/sipcoin_logo2d.png', style='width:50px;height:50px;display:inline-block;')
+              center
+          .col-sm-8.col-sm-offset-1
+            h3
+              center.regularLatto  SIPcoin
+          .col-sm-10.col-sm-offset-1
+            hr
+          .col-sm-12
+            br
+          .col-sm-12
+            a(href='/dashboard')
+              i.fa.fa-home(aria-hidden='true')
+              |  &nbsp DashBoard
+          .col-sm-12
+            br
+          .col-sm-12
+            a(href='/referral')
+              i.fa.fa-handshake-o(aria-hidden='true')
+              |  &nbsp Referrals
+          .col-sm-12
+            br
+          .col-sm-12
+            a(href='/transaction')
+              i.fa.fa-list-alt(aria-hidden='true')
+              |  &nbsp Transaction List
+          .col-sm-12
+            br
+          .col-sm-12
+            a(href='/account')
+              i.fa.fa-wrench(aria-hidden='true')
+              |  &nbsp Settings
+          .col-sm-12
+            br
+          .col-sm-12
+            a
+              .button_hey_logout(style='cursor:pointer;')
+                i.fa.fa-power-off(aria-hidden='true')
+                |   &nbsp Log Out
+    #third_frame
+      .container
+        .row
+          br
+          br
+          br
+          nav.navbar.navbar-inverse.navbar-fixed-top
+            button#btn-logout(style='display:none')
+            .container-fluid
+              .navbar-header
+                button.navbar-toggle(style='margin-top:15px;', type='button', data-toggle='collapse', data-target='#myNavbar')
+                  span.icon-bar
+                  span.icon-bar
+                  span.icon-bar
+                a.navbar-brand(onclick='openNav()', href='#', style='margin-left:5px;color:white;padding-bottom: 43px;margin-right:15px;margin-top:5px;')
+                  i.fa.fa-bars(aria-hidden='true',style="font-size:30px;margin-top:5px;")
+                a.navbar-brand.regularLatto(href='#', style='color:white;padding-bottom: 33px;padding-top:24px;font-size:25px;margin-top:5px;') SIPcoin
+              #myNavbar.collapse.navbar-collapse
+                ul.nav.navbar-nav.navbar-right
+                  button.btn(type='button',style="margin-top:10px;margin-bottom:5px;")
+                    .chip(style='font-size:18px;')
+                      img(src='/images/coin.png', alt='Person',style='height:40px;width:40px;')
+                      |    $ #{currentBTC}
+                  button.btn(type='button',style="margin-top:10px;margin-bottom:5px;")
+                    .chip(style='font-size:18px;')
+                      img(src='/images/sipcoin_logo2d.png', alt='Person', style='height:40px;width:40px;')
+                      |      $ #{SIP}
+                  //
+                    <li><div class="chip"><img src="/images/avatar.png" alt="Person" width="50" height="50"></div><a class="bit_current_value" href="#" style="color:white;font-size:25px;margin-top:10px;"> $ 1234  </a></li>
+                    <li><a class="sip_current_value" href="#" style="color:white;font-size:25px;margin-top:10px;"> Sipcoin &nbsp; - &nbsp; $ 1.5 </a></li>
+                  button.btn.open_the_popup(type='button',style="margin-top:10px;margin-bottom:5px;")
+                    .chip
+                      img(src='/images/avatar.png', alt='Person', style='height:40px;width:40px;')
+                      |                       #{user.name}
+      div(style='margin-left:10px; margin-right:10px;')
+        .container
+          .row
+            br
+            br
+            br
+            .col-sm-4.my_card_style
+              br
+              br
+              center
+                .row
+                  .col-sm-1
+                    img(src='/images/coin.png', style='width:50px;height:50px;display:inline-block;')
+                  .col-sm-9.col-sm-offset-1
+                    h3.regularLatto Amount to be Transferred in BTC
+                hr(style="border-top:1px solid black;")
+                h6.lightLatto(style='color:black;font-size:25px;')  #{BTCTokens}
+              br
+              br
+              br
+              center
+                .row
+                  .col-sm-1
+                    img(src='/images/sipcoin_logo2d.png', style='width:50px;height:50px;display:inline-block;')
+                  .col-sm-9.col-sm-offset-1
+                    h3  Total Coins
+                hr(style="border-top:1px solid black;")
+                h1.lightLatto(style='color:black;font-size:25px;')  #{totaltokens}
+              br
+              br
+            #step_one.col-sm-7.col-sm-offset-1.my_card_style
+              center
+                .row
+                  .col-sm-12
+                    h3 Payment Address
+                    br
+                    h4.lightLatto#payement_adress #{address}
+                hr(style="border-top:1px solid black;")
+              .row
+                .col-sm-3
+                .col-sm-6(style='margin:10px;background-color:#d0d3c5;margin-left:14px;margin-right:14px;border-radius:5px;')
+                  center
+                    br
+                    h4 BTC Wallet Address
+                    hr(style="border-top:1px solid black;")
+                    #bitcoin_wallet(style='background-color:white;width:150px; height:150px;padding-left:5px;padding-top:25px;')
+                    // <img src="images/qr.jpg" style="height:175px;width:175px;">
+                  br
+              br
+    script.
+      var bitocoin_Wallet_Address= "#{address}" ;
+      var bitcoin_qr_code = new QRCode(document.getElementById("bitcoin_wallet"), {
+      width : 100,
+      height : 100
+      });
+      function makeCode () {
+      var bitcoin_text = {value:bitocoin_Wallet_Address};
+      if (!bitcoin_text.value) {
+      alert("Input a text");
+      bitcoin_text.focus();
+      return;
+      }
+      $(function(){
+      $(document).on('click',".button_hey_logout",function(){
+      $("#btn-logout").click();
+      });
+      })
+      bitcoin_qr_code.makeCode(bitcoin_text.value);
+      }
+      makeCode();
+      // $("#go_to_step_2").click(function(){
+      //   $("#step_one").addClass("animated bounceOutLeft");
+      //   $("#step_two").css('display','block');
+      //   $("#step_two").addClass("animated bounceInRight");
+      // })
+      //
+      var data_for_the_popover='<div class="container"> <div class="row"> <div class="col-sm-2" style="background-color:#222222;color:white;padding-left: 0px;padding-right: 0px;"> <div class="row"> <div class="col-sm-12" style="color:white;padding:20px;font-family:lato_bold,open-serif;"> <center><h5 style="font-size:17px;color:white;">#{user.email} </h5> </center> </div> <div class="col-sm-12"> <br> </div> <div class="col-sm-12 hover_change_back"> <h5 style="font-size:20px;font-family:lato_light;"> <a href="/account" style="color:white;text-decoration:none;"> <i style="padding-right:3px;padding-left:10px;"class="fa fa-cogs" aria-hidden="true"></i> Account Settings </a> </h5> </div> <div class="col-sm-12"> <hr> </div> <div  class="col-sm-12 hover_change_back button_hey_logout"> <h5 style="font-size:20px;font-family:lato_light;"> <i style="padding-right:12px;padding-left:10px;" class="fa fa-power-off" aria-hidden="true"></i>Log out </h5> </div> </div> <br> </div> </div> </div>';
+      $(function(){
+      $('.open_the_popup').popover({content:data_for_the_popover ,placement: "bottom",html: true,trigger: "focus"});
+      })
+      function openNav() {
+      document.getElementById("mySidenav").style.width = "300px";
+      }
+      function closeNav() {
+      document.getElementById("mySidenav").style.width = "0";
+      }
+
+include modals/alert
+include modals/confirm

@@ -1,0 +1,341 @@
+doctype html
+html(lang='en')
+  head
+    title SIPcoin
+    meta(charset='utf-8')
+    meta(name='viewport', content='width=device-width, initial-scale=1')
+    link(rel='stylesheet', href='/css/bootstrap.min.css')
+    link(rel='stylesheet', href='/css/index.css')
+    link(rel='stylesheet', href='/css/mate_icon.css')
+    script(src='/js/views/jquery_2.min.js')
+    script(src='/js/views/bootstrap.min.js')
+    script(src='/js/controllers/homeController.js')
+    script(src='/js/form-validators/accountValidator.js')
+    script(src='/js/views/home.js')
+    script(src='/vendor/jquery.form.min.js')
+    script(src='/vendor/bootstrap.min.js')
+    link(rel='stylesheet', href='/font-awesome/css/font-awesome.min.css')
+    <link rel="apple-touch-icon" sizes="180x180" href="/images/favicons/apple-touch-icon.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="/images/favicons/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="/images/favicons/favicon-16x16.png">
+    <link rel="manifest" href="/images/favicons/manifest.json">
+    <link rel="mask-icon" href="favicons/safari-pinned-tab.svg" color="#5bbad5">
+    <meta name="theme-color" content="#ffffff">
+
+    style.
+      .table>tbody>tr>td, .table>tbody>tr>th, .table>tfoot>tr>td, .table>tfoot>tr>th, .table>thead>tr>td, .table>thead>tr>th{
+      border-top:none;
+      font-family:lato_light;
+      }
+      .sidenav {
+      color:white;
+      height: 100%;
+      width: 0;
+      position: fixed;
+      z-index: 1;
+      top: 0;
+      left: 0;
+      background-color: #032b2f;
+      overflow-x: hidden;
+      transition: 0.5s;
+      padding-top: 60px;
+      -webkit-box-shadow: 4px 6px 49px -1px rgba(3,43,47,1);
+      -moz-box-shadow: 4px 6px 49px -1px rgba(3,43,47,1);
+      box-shadow: 4px 6px 49px -1px rgba(3,43,47,1);
+      }
+      .sidenav a {
+      padding: 8px 8px 8px 32px;
+      text-decoration: none;
+      font-size: 19px;
+      color: white;
+      display: block;
+      transition: 0.3s;
+      }
+      .sidenav .closebtn:hover {
+      transition:1s;
+      background-color:none;
+      }
+      .hey_me a:hover {
+      transition:1s;
+      background-color:#11a8ab;
+      }
+      .sidenav .closebtn {
+      position: absolute;
+      top: 0;
+      right: 25px;
+      font-size: 36px;
+      margin-left: 50px;
+      }
+      @media screen and (max-height: 450px) {
+      .sidenav {padding-top: 15px;}
+      .sidenav a {font-size: 18px;}
+      }
+  body
+  - user = typeof(udata) != 'undefined' ? udata : { }
+    #mySidenav.sidenav(style='z-index:1234;')
+      a.closebtn(href='javascript:void(0)', onclick='closeNav()') ×
+      .Container.hey_me
+        .row
+          .col-sm-2.col-sm-offset-1
+            center
+              img(src='/images/sipcoin_logo2d.png', style='width:50px;height:50px;display:inline-block;')
+              center
+          .col-sm-8.col-sm-offset-1
+            h3
+              center(style="font-size:25px;") SIPcoin
+          .col-sm-10.col-sm-offset-1
+            hr
+          .col-sm-12
+            br
+          .col-sm-12
+            a(href='/dashboard')
+              i.fa.fa-home(aria-hidden='true')
+              |  &nbsp DashBoard
+          .col-sm-12
+            br
+          .col-sm-12
+            a(href='/referral')
+              i.fa.fa-handshake-o(aria-hidden='true')
+              |  &nbsp Referrals
+          .col-sm-12
+            br
+          .col-sm-12
+            a(href='/transaction')
+              i.fa.fa-list-alt(aria-hidden='true')
+              |  &nbsp Transaction List
+          .col-sm-12
+            br
+          .col-sm-12
+            a(href='/account')
+              i.fa.fa-wrench(aria-hidden='true')
+              |  &nbsp Settings
+          .col-sm-12
+            br
+          .col-sm-12
+            a
+              .button_hey_logout(style='cursor:pointer;')
+                i.fa.fa-power-off(aria-hidden='true')
+                |   &nbsp Log Out
+    #first_frame
+      - user = typeof(udata) != 'undefined' ? udata : { }
+
+      .container
+        .row
+          br
+          br
+          br
+          nav.navbar.navbar-inverse.navbar-fixed-top
+            button#btn-logout(style='display:none')
+            .container-fluid
+              .navbar-header
+                button.navbar-toggle(style='margin-top:23px;', type='button', data-toggle='collapse', data-target='#myNavbar')
+                  span.icon-bar
+                  span.icon-bar
+                  span.icon-bar
+                a.navbar-brand(onclick='openNav()', href='#', style='margin-left:5px;color:white;padding-bottom: 43px;margin-right:15px;margin-top:5px;')
+                  i.fa.fa-bars(aria-hidden='true',style="font-size:30px;margin-top:5px;")
+                a.navbar-brand(href='#', style='color:white;padding-bottom: 33px;padding-top:24px;font-size:25px;margin-top:5px;') SIPcoin
+              #myNavbar.collapse.navbar-collapse
+                ul.nav.navbar-nav.navbar-right
+                  button.btn(type='button',style="margin-top:10px;margin-bottom:5px;")
+                    .chip(style='font-size:18px;')
+                      img(src='/images/coin.png', alt='Person',style='height:40px;width:40px;')
+                      |  $ #{USD}
+                  button.btn(type='button',style="margin-top:10px;margin-bottom:5px;")
+                    .chip(style='font-size:18px;')
+                      img(src='/images/sipcoin_logo2d.png', alt='Person', style='height:40px;width:40px;')
+                      |  $ #{SIP}
+                  //
+                    <li><div class="chip"><img src="/images/avatar.png" alt="Person" width="50" height="50"></div><a class="bit_current_value" href="#" style="color:white;font-size:25px;margin-top:10px;"> $ 1234  </a></li>
+                    <li><a class="sip_current_value" href="#" style="color:white;font-size:25px;margin-top:10px;"> Sipcoin &nbsp; - &nbsp; $ 1.5 </a></li>
+                  button.btn.open_the_popup(type='button',style="margin-top:10px;margin-bottom:5px;")
+                    .chip
+                      img(src='/images/avatar.png', alt='Person', style='height:40px;width:40px;')
+                      |                       #{user.name}
+      div(style='margin-left:10px; margin-right:10px;')
+        .container
+          .row
+            br
+            br
+            br
+            .col-sm-12.my_card_style
+              br
+              br
+              center
+                .row
+                  .col-sm-4
+                    h3
+                      i.fa.fa-handshake-o.regularLatto(aria-hidden='true', style='margin-right:20px;')
+                      |  Referral Code
+                  #referral_code_value.col-sm-4.boldLatto(style='color:black;')
+                    h3   #{selfReferralCode}
+                  .col-sm-4
+                    br
+                    button.btn.btn-primary(type='button') Share Code
+                  .col-sm-12
+                    hr
+                  .col-sm-3.lightLatto
+                    center
+                      h3#refferal_level
+                        i.fa.fa-level-up(aria-hidden='true', style='margin-right:10px;')
+                        |  Refferal Level  &nbsp - &nbsp #{level}
+                  .col-sm-4.lightLatto
+                    center
+                      h3#no_of_referral_code
+                        i.fa.fa-thumbs-o-up(aria-hidden='true', style='margin-right:10px;')
+                        |  No. of Refferals &nbsp - &nbsp #{referredCount}
+                  .col-sm-5.lightLatto
+                    center
+                      h3#no_of_referral_tokens
+                        img(src='/images/sipcoin_logo2d.png', height='40px', weight='40px', style='margin-right:10px;')
+                        |  Refferals Tokens Earned &nbsp - &nbsp #{referralTokens}
+              br
+            .col-sm-12
+              br
+              br
+            .col-sm-8.col-sm-offset-2.my_card_style
+              br
+              .row
+                .col-sm-12
+                  center
+                    h3.boldLatto  Referral Sytem
+                .col-sm-12
+                  br
+                .col-sm-12
+                  .table-responsive
+                    table.table
+                      thead
+                        tr
+                          th
+                            center.regularLatto Level
+                          th
+                            center.regularLatto Expected Members
+                          th
+                            center.regularLatto % Bonus
+                      tbody
+                        .center
+                          tr
+                            td#col_1
+                              center 1
+                            td#col_2
+                              center 2
+                            td#col_3
+                              center 10
+                          tr
+                            td#col_1
+                              center 2
+                            td#col_2
+                              center 4
+                            td#col_3
+                              center 4
+                          tr
+                            td#col_1
+                              center 3
+                            td#col_2
+                              center 8
+                            td#col_3
+                              center 3
+                          tr
+                            td#col_1
+                              center 4
+                            td#col_2
+                              center 16
+                            td#col_3
+                              center 3
+                          tr
+                            td#col_1
+                              center 5
+                            td#col_2
+                              center 32
+                            td#col_3
+                              center 3
+                          tr
+                            td#col_1
+                              center 6
+                            td#col_2
+                              center 64
+                            td#col_3
+                              center 2
+                          tr
+                            td#col_1
+                              center 7
+                            td#col_2
+                              center 128
+                            td#col_3
+                              center 2
+                          tr
+                            td#col_1
+                              center 8
+                            td#col_2
+                              center 256
+                            td#col_3
+                              center 2
+                          tr
+                            td#col_1
+                              center 9
+                            td#col_2
+                              center 512
+                            td#col_3
+                              center 1
+                          tr
+                            td#col_1
+                              center 10
+                            td#col_2
+                              center 1024
+                            td#col_3
+                              center 1
+                          tr
+                            td#col_1
+                              center 11
+                            td#col_2
+                              center 2048
+                            td#col_3
+                              center 1
+                          tr
+                            td#col_1
+                              center 12
+                            td#col_2
+                              center 4096
+                            td#col_3
+                              center 1
+                          tr
+                            td#col_1
+                              center 13
+                            td#col_2
+                              center 8192
+                            td#col_3
+                              center 0.5
+                          tr
+                            td#col_1
+                              center 14
+                            td#col_2
+                              center 16384
+                            td#col_3
+                              center 0.5
+                          tr
+                            td#col_1
+                              center 15
+                            td#col_2
+                              center 32768
+                            td#col_3
+                              center 0.5
+    script.
+      $(function(){
+      $(document).on('click',".button_hey_logout",function(){
+      $("#btn-logout").click();
+      });
+      })
+
+      var data_for_the_popover='<div class="container"> <div class="row"> <div class="col-sm-2" style="background-color:#222222;color:white;padding-left: 0px;padding-right: 0px;"> <div class="row"> <div class="col-sm-12" style="color:white;padding:20px;font-family:lato_bold,open-serif;"> <center><h5 style="font-size:17px;color:white;">#{user.email} </h5> </center> </div> <div class="col-sm-12"> <br> </div> <div class="col-sm-12 hover_change_back"> <h5 style="font-size:20px;font-family:lato_light;"> <a href="/account" style="color:white;text-decoration:none;"> <i style="padding-right:3px;padding-left:10px;"class="fa fa-cogs" aria-hidden="true"></i> Account Settings </a> </h5> </div> <div class="col-sm-12"> <hr> </div> <div  class="col-sm-12 hover_change_back button_hey_logout"> <h5 style="font-size:20px;font-family:lato_light;"> <i style="padding-right:12px;padding-left:10px;" class="fa fa-power-off" aria-hidden="true"></i>Log out </h5> </div> </div> <br> </div> </div> </div>';
+      $(function(){
+      $('.open_the_popup').popover({content:data_for_the_popover ,placement: "bottom",html: true,trigger: "focus"});
+      })
+      function openNav() {
+      document.getElementById("mySidenav").style.width = "300px";
+      }
+      function closeNav() {
+      document.getElementById("mySidenav").style.width = "0";
+      }
+
+include modals/alert
+include modals/confirm
