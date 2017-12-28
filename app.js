@@ -46,6 +46,8 @@ app.use(session({
 	})
 );
 
+console.log("app.js starting");
+
 require('./app/server/routes')(app);
 
 http.createServer(app).listen(app.get('port'), function(){
