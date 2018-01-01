@@ -4,13 +4,12 @@ html(lang='en')
     title SIPcoin
     meta(charset='utf-8')
     meta(name='viewport', content='width=device-width, initial-scale=1')
-    link(rel='stylesheet', href='/css/bootstrap.min.css')
+    link(rel='stylesheet', href='/css/bootstrap_new.css')
     link(rel='stylesheet', href='/css/index.css')
     link(rel='stylesheet', href='/font-awesome/css/font-awesome.min.css')
-    script(src='js/views/jquery_1.min.js')
+    script(src='js/views/jquery.min.js')
     script(src='js/views/bootstrap.min.js')
     script(src='js/views/countUp.js')
-    // <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/meyer-reset/2.0/reset.min.css">
     style.
       .sidenav {
       color:white;
@@ -27,6 +26,8 @@ html(lang='en')
       -webkit-box-shadow: 4px 6px 49px -1px rgba(3,43,47,1);
       -moz-box-shadow: 4px 6px 49px -1px rgba(3,43,47,1);
       box-shadow: 4px 6px 49px -1px rgba(3,43,47,1);
+      font-family:lato_light;
+      font-size:19px;
       }
       .sidenav a {
       padding: 8px 8px 8px 32px;
@@ -57,6 +58,22 @@ html(lang='en')
       }
   body
   - user = typeof(udata) != 'undefined' ? udata : { }
+    #myModal_many.modal.fade(role='dialog')
+      .modal-dialog
+        // Modal content
+        .modal-content
+          .modal-header
+            button.close(type='button', data-dismiss='modal') ×
+            h4.modal-title Account Verfication
+          .modal-body
+            p Verified Account Needed for Buying Coins
+            p A verification mail with a link has been sent to
+              b &nbsp; #{user.email}
+            p Didn't receive one. Click the below button.
+          .modal-footer
+              a(href='/resendActivation')
+                button.btn.btn-primary(type='button') Resend Verification Mail
+
     #mySidenav.sidenav(style='z-index:1234;')
       a.closebtn(href='javascript:void(0)', onclick='closeNav()') ×
       .Container.hey_me
@@ -67,7 +84,7 @@ html(lang='en')
               center
           .col-sm-8.col-sm-offset-1
             h3
-              center(style="font-size:25px;") SIPcoin
+              center.regularLatto(style="font-size:25px;") SIPcoin
           .col-sm-10.col-sm-offset-1
             hr
           .col-sm-12
@@ -75,7 +92,7 @@ html(lang='en')
           .col-sm-12
             a(href='/dashboard')
               i.fa.fa-home(aria-hidden='true')
-              |  &nbsp DashBoard
+              |  &nbsp Dashboard
           .col-sm-12
             br
           .col-sm-12
@@ -114,7 +131,7 @@ html(lang='en')
                   span.icon-bar
                   span.icon-bar
                   span.icon-bar
-                a.navbar-brand(onclick='openNav()', href='#', style='margin-left:5px;color:white;padding-bottom: 43px;margin-right:15px;margin-top:5px;')
+                a.navbar-brand(onclick='openNav()', href='javascript:void(0)', style='margin-left:5px;color:white;padding-bottom: 43px;margin-right:15px;margin-top:5px;')
                   i.fa.fa-bars(aria-hidden='true',style="font-size:30px;margin-top:5px;")
                 a.navbar-brand(href='/', style='color:white;padding-bottom: 33px;padding-top:24px;font-size:25px;margin-top:5px;') SIPcoin
               #myNavbar.collapse.navbar-collapse
@@ -128,8 +145,8 @@ html(lang='en')
                       img(src='/images/sipcoin_logo2d.png', alt='Person', style='height:40px;width:40px;')
                       |  $ #{sipValue}
                   //
-                    <li><div class="chip"><img src="/images/avatar.png" alt="Person" width="50" height="50"></div><a class="bit_current_value" href="#" style="color:white;font-size:25px;margin-top:10px;"> $ 1234  </a></li>
-                    <li><a class="sip_current_value" href="#" style="color:white;font-size:25px;margin-top:10px;"> Sipcoin &nbsp; - &nbsp; $ 1.5 </a></li>
+                    <li><div class="chip"><img src="/images/avatar.png" alt="Person" width="50" height="50"></div><a class="bit_current_value" href="javascript:void(0)" style="color:white;font-size:25px;margin-top:10px;"> $ 1234  </a></li>
+                    <li><a class="sip_current_value" href="javascript:void(0)" style="color:white;font-size:25px;margin-top:10px;"> Sipcoin &nbsp; - &nbsp; $ 1.5 </a></li>
                   button.btn.open_the_popup(type='button',style="margin-top:10px;margin-bottom:5px;")
                     .chip
                       img(src='/images/avatar.png', alt='Person', style='height:40px;width:40px;')
@@ -172,23 +189,75 @@ html(lang='en')
               br
               br
             .col-sm-3.col-sm-offset-1.my_card_style
-              br
-              br
               center
-                //br
-                //br
-                button#btn-logout(style='display:none')
-                h1.boldLatto(style='font-size:19px;') Verified Account Needed for Buying Coins
+                .row
+                  br
+                  br
+                  .col-sm-2.col-sm-offset-1
+                    img(src='/images/sipcoin_logo2d.png', style='width:50px;height:50px;display:inline-block;')
+                  .col-sm-8
+                    h3.boldLatto(style='font-size:21px;') Buy Coins
+                    button#btn-logout(style='display:none')
                 hr(style='border-top:1px solid black;')
                 br
-                a.btn.button_style#main_buy_button(href='/buy', style='background-color: #08708a;margin-bottom:20px;') Buy More Coins
-                a.btn.button_style#resend_button(href='/resendActivation', style='background-color: #08708a;display:none;margin-bottom:20px;') Resend Activation Email
-                h6#resend_text(style='color:black;font-size:15px;display:none') * &nbsp;Account Not Verified
+                br
+                a.btn.button_style#main_buy_button(href='/buy', style='background-color: #08708a;margin-bottom:8px;') Buy Coins
+                //a.btn.button_style#resend_button(href='/resendActivation', style='background-color: #08708a;display:none;margin-bottom:20px;') Resend Activation Email
+                //h6#resend_text(style='color:black;font-size:15px;display:none') * &nbsp;Account Not Verified
                 br
                 br
+                br
+                br
+      br
+      br
+      br
+      br
+      br
+      br
+      br
+      #footer.my_footer_class(style='margin-bottom:0px;')
+        .container
+          .row
+            br
+            .col-sm-4
+              center
+                button.btn(type='button', style='padding-top:20px;')
+                  a(href='/', style='border:none;color:white;margin-right:0px;')
+                    img(src='/images/sipcoin_logo2d.png', alt='Person', width='50', height='50')
+                button.btn(type='button', style='padding-top:20px;')
+                  a(href='/', style='text-decoration:none;color:white;font-size:30px;') SIPcoin
+            .col-sm-4
+              .row
+                .col-sm-12
+                  h3 Contact
+                .col-sm-12
+                  h4
+                    i.fa.fa-ticket.fa-1x(aria-hidden='true', style='margin-right:10px;')
+                    a(href='http://support.sipcoin.io', style='border:none;color:white;margin-right:0px;' target='_blank') Support Center
+                .col-sm-12
+            .col-sm-4
+              .row
+                br
+                .col-sm-12
+                  h3 Follow Us
+                .col-sm-12
+                  a(href='https://www.facebook.com/sipcoin/', target='_blank')
+                    img(src='/images/facebook.png', height='50px;', width='50px;', style='margin-right:15px;')
+                  a(href='https://www.instagram.com/sipcoin.io/?hl=en', target='_blank')
+                    img(src='/images/insta_1.png', height='50px;', width='50px;', style='margin-right:15px;')
+                  a(href='https://twitter.com/sipcoin_io', target='_blank')
+                    img(src='/images/twitter.png', height='50px;', width='50px;', style='margin-right:15px;')
+                  a(href='https://goo.gl/e37G3Z', target='_blank')
+                    img(src='/images/Slack.png', height='50px;', width='50px;', style='margin-right:15px;')
+            .col-sm-12
+              hr
+            .col-sm-12
+              center
+                h4 © Copyright SIPcoin.io 2017
+            .col-sm-12
               br
-              br
-              br
+
+
     script.
       $(function(){
       $(document).on('click',".button_hey_logout",function(){
@@ -198,23 +267,14 @@ html(lang='en')
 
       if("#{accountDetails.accountVerified}"=="false")
       {
-      $("#resend_button").css('display','block');
-      $("#resend_text").css('display','block');
+        console.log('false');
+        //$("#main_buy_button").addClass("disabled");
+        $('#myModal_many').modal('show');
       }
 
       if("#{buyButton}"=="false")
       {
       $("#main_buy_button").remove();
-      }
-
-      if(#{accountDetails.accountVerified}==false){
-      console.log("false");
-      $('.modal-form-errors .modal-body p').text('Account not verified ');
-      var ul = $('.modal-form-errors .modal-body ul');
-      ul.empty();
-      ul.append('<li> Captcha Not Selected </li>')
-      $('.modal-form-errors').modal('show');
-
       }
 
 
@@ -258,6 +318,24 @@ html(lang='en')
       function closeNav() {
       document.getElementById("mySidenav").style.width = "0";
       }
+
+      $("#mySidenav").mouseleave(function(){
+      document.getElementById("mySidenav").style.width = "0";
+      });
+
+      $(document).mouseup(function(e)
+      {
+      var container = $("#sideNav");
+      if (!container.is(e.target) && container.has(e.target).length === 0)
+      {
+      document.getElementById("mySidenav").style.width = "0";
+      }
+      });
+
+      $(window).scroll(function(){
+      document.getElementById("mySidenav").style.width = "0";
+      });
+
       //
       // $(document).on('click',function(){
       //   document.getElementById("mySidenav").style.width = "0";

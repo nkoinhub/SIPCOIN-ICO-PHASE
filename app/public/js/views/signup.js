@@ -59,7 +59,7 @@ $(document).ready(function(){
 
 			if(responseText=='ok')
 			{
-				$('.modal-alert').modal('show');
+					window.location.href = '/confirmation?email='+$("#email-tf").val()+'&user='+$("#name-tf").val();
 			}
 			console.log(responseText);
 		},
@@ -88,6 +88,6 @@ $(document).ready(function(){
 
 	$('.modal-alert').modal({ show:false, keyboard : false, backdrop : 'static' });
 	$('.modal-alert .modal-header h4').text('Account Created!');
-	$('.modal-alert .modal-body p').html('Your account has been created.</br>Click OK to return to the login page.');
+	$('.modal-alert .modal-body p').html('Your account has been successfully registered with SIPcoin.io </br>.');
 
 });

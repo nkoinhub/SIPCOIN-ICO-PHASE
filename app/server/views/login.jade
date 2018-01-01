@@ -3,9 +3,10 @@ html(lang='en')
   head
     title SIPcoin
     meta(charset='utf-8')
-    meta(name='viewport', content='width=device-width, initial-scale=1')
+    <meta name="viewport" content="width=device-width, initial-scale=1">
     link(rel='stylesheet', href='/css/bootstrap.min.css')
     link(rel='stylesheet', href='/css/index.css')
+    link(rel='stylesheet', href='/font-awesome/css/font-awesome.min.css')
     link(rel='stylesheet', href='/css/styleLogin.css')
     script(src='/js/views/jquery.min.js')
     script(src='/js/views/bootstrap.min.js')
@@ -40,8 +41,8 @@ html(lang='en')
                       img(src='/images/sipcoin_logo2d.png', alt='Person', style='height:40px;width:40px;')
                       |    $ #{SIP}
                   //
-                    <li><div class="chip"><img src="/images/avatar.png" alt="Person" width="96" height="96"></div><a class="bit_current_value" href="#" style="color:white;font-size:25px;margin-top:10px;"> $ 1234  </a></li>
-                    <li><a class="sip_current_value" href="#" style="color:white;font-size:25px;margin-top:10px;"> Sipcoin &nbsp; - &nbsp; $ 1.5 </a></li>
+                    <li><div class="chip"><img src="/images/avatar.png" alt="Person" width="96" height="96"></div><a class="bit_current_value" href="javascript:void(0)" style="color:white;font-size:25px;margin-top:10px;"> $ 1234  </a></li>
+                    <li><a class="sip_current_value" href="javascript:void(0)" style="color:white;font-size:25px;margin-top:10px;"> Sipcoin &nbsp; - &nbsp; $ 1.5 </a></li>
       div
         .container
           .row
@@ -67,7 +68,7 @@ html(lang='en')
                   hr
                   .btm-links
                     #forgot-password
-                      a(href='#',style="color:white;text-decoration:none;") Forgot Your Password?
+                      a(href='javascript:void(0)',style="color:white;text-decoration:none;") Forgot Your Password?
                     #create-account
                       a(href='/signup',style="color:white;text-decoration:none;") Create An Account
                   .clearfix
@@ -88,6 +89,7 @@ html(lang='en')
                     h3 Contact
                   .col-sm-12
                     h4
+                      i.fa.fa-ticket.fa-1x(aria-hidden='true', style='margin-right:10px;')
                       a(href='http://support.sipcoin.io', style='border:none;color:white;margin-right:0px;' target='_blank') Support Center
                   .col-sm-12
               .col-sm-4
@@ -96,26 +98,25 @@ html(lang='en')
                   .col-sm-12
                     h3 Follow Us
                   .col-sm-12
-                    a(href='', target='_blank')
+                    a(href='https://www.facebook.com/sipcoin/', target='_blank')
                       img(src='/images/facebook.png', height='50px;', width='50px;', style='margin-right:15px;')
-                    a(href='', target='_blank')
+                    a(href='https://www.instagram.com/sipcoin.io/?hl=en', target='_blank')
                       img(src='/images/insta_1.png', height='50px;', width='50px;', style='margin-right:15px;')
-                    a(href='', target='_blank')
+                    a(href='https://twitter.com/sipcoin_io', target='_blank')
                       img(src='/images/twitter.png', height='50px;', width='50px;', style='margin-right:15px;')
-                    a(href='', target='_blank')
+                    a(href='https://goo.gl/e37G3Z', target='_blank')
                       img(src='/images/Slack.png', height='50px;', width='50px;', style='margin-right:15px;')
               .col-sm-12
                 hr
               .col-sm-12
                 center
-                  h4 © Copyright sipcoin.io 2017
+                  h4 © Copyright SIPcoin.io 2017
               .col-sm-12
                 br
 include modals/alert
 include modals/lost-password
 
 block scripts
-script(src='/vendor/jquery-2.2.3.min.js')
 script(src='/vendor/jquery.form.min.js')
 script(src='/vendor/bootstrap.min.js')
 script(src='/js/views/login.js')

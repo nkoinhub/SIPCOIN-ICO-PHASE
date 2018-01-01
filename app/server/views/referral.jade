@@ -13,7 +13,6 @@ html(lang='en')
     script(src='/js/form-validators/accountValidator.js')
     script(src='/js/views/home.js')
     script(src='/vendor/jquery.form.min.js')
-    script(src='/vendor/bootstrap.min.js')
     link(rel='stylesheet', href='/font-awesome/css/font-awesome.min.css')
     <link rel="apple-touch-icon" sizes="180x180" href="/images/favicons/apple-touch-icon.png">
     <link rel="icon" type="image/png" sizes="32x32" href="/images/favicons/favicon-32x32.png">
@@ -42,6 +41,8 @@ html(lang='en')
       -webkit-box-shadow: 4px 6px 49px -1px rgba(3,43,47,1);
       -moz-box-shadow: 4px 6px 49px -1px rgba(3,43,47,1);
       box-shadow: 4px 6px 49px -1px rgba(3,43,47,1);
+      font-size:19px;
+      font-family:lato_light;
       }
       .sidenav a {
       padding: 8px 8px 8px 32px;
@@ -72,6 +73,27 @@ html(lang='en')
       }
   body
   - user = typeof(udata) != 'undefined' ? udata : { }
+
+    #myModal_for_envitaion.modal.fade(role='dialog')
+      .modal-dialog
+        .modal-content
+          .modal-header
+            button.close(type='button', data-dismiss='modal') ×
+            h4.modal-title Referral Code Share Via Email
+          .modal-body
+            p
+            h4 Enter email
+            p
+            input#email_entry(type='text',style="width:65%;")
+            button#add_people.btn.btn-primary(type='button', style='margin-left:30px;')  Add
+            br
+            h4#message(style='display:none') This doesn't looks to be email
+            h4#mail_not_correct(style="display:none;margin:10px;") Atleast enter one Email address
+            #add_people_data
+          .modal-footer
+            button.btn.btn-primary(type='button', onclick='send_email()') Send Mail
+          center
+            h4#success_mail(style="display:none;margin:10px;") Invitation Sent Sucessfully
     #mySidenav.sidenav(style='z-index:1234;')
       a.closebtn(href='javascript:void(0)', onclick='closeNav()') ×
       .Container.hey_me
@@ -82,7 +104,7 @@ html(lang='en')
               center
           .col-sm-8.col-sm-offset-1
             h3
-              center(style="font-size:25px;") SIPcoin
+              center.regularLatto(style="font-size:25px;") SIPcoin
           .col-sm-10.col-sm-offset-1
             hr
           .col-sm-12
@@ -132,9 +154,9 @@ html(lang='en')
                   span.icon-bar
                   span.icon-bar
                   span.icon-bar
-                a.navbar-brand(onclick='openNav()', href='#', style='margin-left:5px;color:white;padding-bottom: 43px;margin-right:15px;margin-top:5px;')
+                a.navbar-brand(onclick='openNav()', href='javascript:void(0)', style='margin-left:5px;color:white;padding-bottom: 43px;margin-right:15px;margin-top:5px;')
                   i.fa.fa-bars(aria-hidden='true',style="font-size:30px;margin-top:5px;")
-                a.navbar-brand(href='#', style='color:white;padding-bottom: 33px;padding-top:24px;font-size:25px;margin-top:5px;') SIPcoin
+                a.navbar-brand(href='/', style='color:white;padding-bottom: 33px;padding-top:24px;font-size:25px;margin-top:5px;') SIPcoin
               #myNavbar.collapse.navbar-collapse
                 ul.nav.navbar-nav.navbar-right
                   button.btn(type='button',style="margin-top:10px;margin-bottom:5px;")
@@ -146,8 +168,8 @@ html(lang='en')
                       img(src='/images/sipcoin_logo2d.png', alt='Person', style='height:40px;width:40px;')
                       |  $ #{SIP}
                   //
-                    <li><div class="chip"><img src="/images/avatar.png" alt="Person" width="50" height="50"></div><a class="bit_current_value" href="#" style="color:white;font-size:25px;margin-top:10px;"> $ 1234  </a></li>
-                    <li><a class="sip_current_value" href="#" style="color:white;font-size:25px;margin-top:10px;"> Sipcoin &nbsp; - &nbsp; $ 1.5 </a></li>
+                    <li><div class="chip"><img src="/images/avatar.png" alt="Person" width="50" height="50"></div><a class="bit_current_value" href="javascript:void(0)" style="color:white;font-size:25px;margin-top:10px;"> $ 1234  </a></li>
+                    <li><a class="sip_current_value" href="javascript:void(0)" style="color:white;font-size:25px;margin-top:10px;"> Sipcoin &nbsp; - &nbsp; $ 1.5 </a></li>
                   button.btn.open_the_popup(type='button',style="margin-top:10px;margin-bottom:5px;")
                     .chip
                       img(src='/images/avatar.png', alt='Person', style='height:40px;width:40px;')
@@ -158,7 +180,7 @@ html(lang='en')
             br
             br
             br
-            .col-sm-12.my_card_style
+            .col-sm-12.my_card_style(style="opacity:1;")
               br
               br
               center
@@ -170,8 +192,23 @@ html(lang='en')
                   #referral_code_value.col-sm-4.boldLatto(style='color:black;')
                     h3   #{selfReferralCode}
                   .col-sm-4
-                    br
-                    button.btn.btn-primary(type='button') Share Code
+                    .row
+                      .col-sm-12
+                        .center
+                          h3(style="margin:20px;") Share Code Via
+                      .col-sm-4.col-xs-4
+                        .center
+                          a#whats_app_link(href='',target='_blank')
+                            button.btn.btn-default(type='button',data-toggle='tooltip',title='Whatsapp',data-placement='bottom',style="background-color:#EAE1D8;")
+                              img(src='/images/whatsapp.png', alt='Person', width='25', height='25')
+                      .col-sm-4.col-xs-4
+                        .center
+                          button.btn.btn-default(type='button',data-toggle='modal', data-target='#myModal_for_envitaion',style="background-color:#EAE1D8;")
+                              img(src='/images/email.png', alt='Person', width='25', height='25')
+                      .col-sm-4.col-xs-4
+                        .center
+                          button.btn.btn-default(type='button',onclick="myFunction()",data-toggle='tooltip',title='Copy link',data-placement='bottom',style="background-color:#EAE1D8;")
+                              img(src='/images/link.png', alt='Person', width='25', height='25')
                   .col-sm-12
                     hr
                   .col-sm-3.lightLatto
@@ -188,7 +225,7 @@ html(lang='en')
                     center
                       h3#no_of_referral_tokens
                         img(src='/images/sipcoin_logo2d.png', height='40px', weight='40px', style='margin-right:10px;')
-                        |  Refferals Tokens Earned &nbsp - &nbsp #{referralTokens}
+                        |  Refferals Coins Earned &nbsp - &nbsp #{referralTokens}
               br
             .col-sm-12
               br
@@ -319,12 +356,140 @@ html(lang='en')
                               center 32768
                             td#col_3
                               center 0.5
+      #footer.my_footer_class(style='margin-bottom:0px;')
+        .container
+          .row
+            br
+            .col-sm-4
+              center
+                button.btn(type='button', style='padding-top:20px;')
+                  a(href='/', style='border:none;color:white;margin-right:0px;')
+                    img(src='/images/sipcoin_logo2d.png', alt='Person', width='50', height='50')
+                button.btn(type='button', style='padding-top:20px;')
+                  a(href='/', style='text-decoration:none;color:white;font-size:30px;') SIPcoin
+            .col-sm-4
+              .row
+                .col-sm-12
+                  h3 Contact
+                .col-sm-12
+                  h4
+                    i.fa.fa-ticket.fa-1x(aria-hidden='true', style='margin-right:10px;')
+                    a(href='http://support.sipcoin.io', style='border:none;color:white;margin-right:0px;' target='_blank') Support Center
+                .col-sm-12
+            .col-sm-4
+              .row
+                br
+                .col-sm-12
+                  h3 Follow Us
+                .col-sm-12
+                  a(href='https://www.facebook.com/sipcoin/', target='_blank')
+                    img(src='/images/facebook.png', height='50px;', width='50px;', style='margin-right:15px;')
+                  a(href='https://www.instagram.com/sipcoin.io/?hl=en', target='_blank')
+                    img(src='/images/insta_1.png', height='50px;', width='50px;', style='margin-right:15px;')
+                  a(href='https://twitter.com/sipcoin_io', target='_blank')
+                    img(src='/images/twitter.png', height='50px;', width='50px;', style='margin-right:15px;')
+                  a(href='https://goo.gl/e37G3Z', target='_blank')
+                    img(src='/images/Slack.png', height='50px;', width='50px;', style='margin-right:15px;')
+            .col-sm-12
+              hr
+            .col-sm-12
+              center
+                h4 © Copyright SIPcoin.io 2017
+            .col-sm-12
+              br
+
+
     script.
       $(function(){
       $(document).on('click',".button_hey_logout",function(){
       $("#btn-logout").click();
       });
+      var refferal_value='http://sipcoin.io/signup?ref%3D#{selfReferralCode}';
+      $("#whats_app_link").attr('href','https://web.whatsapp.com//send?text='+refferal_value);
+      console.log(refferal_value);
       })
+
+      function myFunction(){
+      var refferal_value='http://sipcoin.io/signup?ref='+'#{selfReferralCode}';
+      console.log(refferal_value);
+      var dummy = $('<input>').val(refferal_value).appendTo('body').select()
+      document.execCommand('copy')
+      }
+
+      $(document).ready(function(){
+      $('[data-toggle="tooltip"]').tooltip();
+      });
+
+      $("#add_people").click(function(){
+      $("#mail_not_correct").css('display','none');
+      $("#success_mail").css('display','none');
+      var email_value=$("#email_entry").val();
+      var re = /^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+      var value=re.test(email_value);
+      if(value==true)
+      {
+        var data_for_the_chip='<div class="chip" style="margin:10px;"><div class="name" style="display:inline;">'+email_value+'</div><span class="closebtn" style="margin-left:10px;" onclick="this.parentElement.remove()">&times;</span> </div>';
+        $("#add_people_data").append(data_for_the_chip);
+        $("#message").css('display','none');
+        $("#email_entry").val('');
+      }else {
+      $("#message").css('display','block');
+      }
+      });
+
+      function send_email(){
+      var array_email=[];
+      console.log($(".chip").find(".name"));
+      var email_data=$(".chip").find(".name");
+      for(var i=0;i<email_data.length;i++)
+      {
+      array_email.push(email_data[i].innerHTML);
+      }
+      setTimeout(function(){
+      console.log(array_email);
+
+      if(array_email.length==0)
+      {
+        $("#mail_not_correct").css('display','block');
+        console.log("Please Enter one email address");
+      }else{
+      var refferal_value='http://sipcoin.io/signup?ref='+'#{selfReferralCode}';
+      var object_of_email={"value":array_email,"link":refferal_value};
+      console.log(object_of_email);
+      $.ajax({
+      type: 'POST',
+      crossOrigin:true,
+      data: JSON.stringify(object_of_email),
+      contentType: 'application/json',
+      url: '/email_send',
+      success: function(result) {
+      console.log(result);
+      if(result.val==1)
+      {
+      $("#success_mail").css('display','block');
+      $("#add_people_data").empty();
+      }
+      },
+      error:function(err){
+      console.log(err);
+      }
+      });
+      }
+      },1000);
+      }
+
+      $('#myModal_for_envitaion').on('hidden.bs.modal', function () {
+        $("#add_people_data").empty();
+        $("#email_entry").val();
+        $("#mail_not_correct").css('display','none');
+        $("#success_mail").css('display','none');
+        $("#message").css('display','none');
+      })
+
+
+
+
+
 
       var data_for_the_popover='<div class="container"> <div class="row"> <div class="col-sm-2" style="background-color:#222222;color:white;padding-left: 0px;padding-right: 0px;"> <div class="row"> <div class="col-sm-12" style="color:white;padding:20px;font-family:lato_bold,open-serif;"> <center><h5 style="font-size:17px;color:white;">#{user.email} </h5> </center> </div> <div class="col-sm-12"> <br> </div> <div class="col-sm-12 hover_change_back"> <h5 style="font-size:20px;font-family:lato_light;"> <a href="/account" style="color:white;text-decoration:none;"> <i style="padding-right:3px;padding-left:10px;"class="fa fa-cogs" aria-hidden="true"></i> Account Settings </a> </h5> </div> <div class="col-sm-12"> <hr> </div> <div  class="col-sm-12 hover_change_back button_hey_logout"> <h5 style="font-size:20px;font-family:lato_light;"> <i style="padding-right:12px;padding-left:10px;" class="fa fa-power-off" aria-hidden="true"></i>Log out </h5> </div> </div> <br> </div> </div> </div>';
       $(function(){
@@ -336,6 +501,10 @@ html(lang='en')
       function closeNav() {
       document.getElementById("mySidenav").style.width = "0";
       }
+      $("#mySidenav").mouseleave(function(){
+      document.getElementById("mySidenav").style.width = "0";
+      });
+
 
 include modals/alert
 include modals/confirm

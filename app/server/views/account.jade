@@ -1,56 +1,123 @@
-
 // preset form values if we receive a userdata object //
 - user = typeof(udata) != 'undefined' ? udata : { }
 // store the userId on the client side in a hidden input field //
 input(type='hidden', value= user._id)#userId
 
+nav.navbar.navbar-inverse.navbar-fixed-top
+  .container-fluid
+    .navbar-header
+      button.navbar-toggle(style='margin-top:15px;', type='button', data-toggle='collapse', data-target='#myNavbar')
+        span.icon-bar
+        span.icon-bar
+        span.icon-bar
+      a(href='/', style='border:none;color:white;margin:20px;')
+        img(src='/images/sipcoin_logo2d.png', alt='Person',style='height:40px;width:40px;')
+      a(href='/', style='text-decoration:none;color:white;font-size:30px;maring-top:20px;') SIPcoin
+    #myNavbar.collapse.navbar-collapse
+      ul.nav.navbar-nav.navbar-right
+        button.btn(type='button',style="margin-top:10px;margin-bottom:5px;")
+          .chip(style='font-size:18px;')
+            img(src='/images/coin.png', alt='Person',style='height:40px;width:40px;')
+            |    $ #{USD}
+        button.btn(type='button',style="margin-top:10px;margin-bottom:5px;")
+          .chip(style='font-size:18px;')
+            img(src='/images/sipcoin_logo2d.png', alt='Person', style='height:40px;width:40px;')
+            |    $ #{SIP}
+        //
+          <li><div class="chip"><img src="/images/avatar.png" alt="Person" width="96" height="96"></div><a class="bit_current_value" href="javascript:void(0)" style="color:white;font-size:25px;margin-top:10px;"> $ 1234  </a></li>
+          <li><a class="sip_current_value" href="javascript:void(0)" style="color:white;font-size:25px;margin-top:10px;"> Sipcoin &nbsp; - &nbsp; $ 1.5 </a></li>
+br
+br
+br
+br
 #account-form-container.center-vertical
-	form(method="post")#account-form.form-horizontal.well
-		h2
-		h6#sub1 Please tell us a little about yourself.
-		hr
-		.form-group
-			label.control-label.col-sm-3 Name
-			.col-sm-9
-				input.form-control#name-tf(type='text', name='name', value= user.name)
+  .row
+    .col-lg-6.col-lg-offset-3
+      form#account-form.form-horizontal.well(method='post')
+        h2
+        h6#sub1 Please tell us a little about yourself.
+        hr
+        .form-group
+          label.control-label.col-sm-3 Name
+          .col-sm-9
+            input#name-tf.form-control(type='text', name='name', value=user.name)
+        .form-group
+          label.control-label.col-sm-3 Email
+          .col-sm-9
+            input#email-tf.form-control(type='text', name='email', value=user.email)
+        .form-group
+          label.control-label.col-sm-3 Location
+          .col-sm-9
+            select.form-control#country-list(name='country')
+               each item in countries
+                option(selected=item.name == user.country)= item.name
+        #referral-tf.form-group
+          label.control-label.col-sm-3 Referral Code
+          .col-sm-9
+            input.form-control(type='text', name='referral', value=ref)
+        hr
+        h6#sub2
+        .form-group
+          label.control-label.col-sm-3 Username
+          .col-sm-9
+            input#user-tf.form-control.disabled(type='text', name='user', value=user.user)
+        .form-group
+          label.control-label.col-sm-3 Password
+          .col-sm-9
+            input#pass-tf.form-control(type='password', name='pass', value='')
+        hr
+        .form-buttons
+          center
+            .g-recaptcha(data-sitekey='6LdO6j0UAAAAAGEunSa_Fq3ZarHhFeJbPYqDyO4P')
+            br
+          center
+            button#account-form-btn1.btn.btn-warning(type='button',style="color:White;")
+            button#account-form-btn2.btn.btn-primary(type='submit',style="color:white;")
+            button#backButton.btn.btn-warning(type='button',style="color:White;")
+        .clearfix
+        br
+#footer.my_footer_class(style='margin-bottom:0px;')
+  .container
+    .row
+      br
+      .col-sm-4
+        center
+          button.btn(type='button', style='padding-top:20px;')
+            a(href='/', style='border:none;color:white;margin-right:0px;')
+              img(src='/images/sipcoin_logo2d.png', alt='Person', width='50', height='50')
+          button.btn(type='button', style='padding-top:20px;')
+            a(href='/', style='text-decoration:none;color:white;font-size:30px;') SIPcoin
+      .col-sm-4
+        .row
+          .col-sm-12
+            h3 Contact
+          .col-sm-12
+            h4
+              i.fa.fa-ticket.fa-1x(aria-hidden='true', style='margin-right:10px;')
+              a(href='http://support.sipcoin.io', style='border:none;color:white;margin-right:0px;' target='_blank') Support Center
+          .col-sm-12
+      .col-sm-4
+        .row
+          br
+          .col-sm-12
+            h3 Follow Us
+          .col-sm-12
+            a(href='https://www.facebook.com/sipcoin/', target='_blank')
+              img(src='/images/facebook.png', height='50px;', width='50px;', style='margin-right:15px;')
+            a(href='https://www.instagram.com/sipcoin.io/?hl=en', target='_blank')
+              img(src='/images/insta_1.png', height='50px;', width='50px;', style='margin-right:15px;')
+            a(href='https://twitter.com/sipcoin_io', target='_blank')
+              img(src='/images/twitter.png', height='50px;', width='50px;', style='margin-right:15px;')
+            a(href='https://goo.gl/e37G3Z', target='_blank')
+              img(src='/images/Slack.png', height='50px;', width='50px;', style='margin-right:15px;')
+      .col-sm-12
+        hr
+      .col-sm-12
+        center
+          h4 © Copyright SIPcoin.io 2017
+      .col-sm-12
+        br
 
-		.form-group
-			label.control-label.col-sm-3 Email
-			.col-sm-9
-				input.form-control#email-tf(type='text', name='email', value= user.email)
-
-		.form-group
-			label.control-label.col-sm-3 Location
-			.col-sm-9
-				select.form-control#country-list(name='country')
-					each item in countries
-						option(selected=item.name == user.country)= item.name
-
-		.form-group#referral-tf
-			label.control-label.col-sm-3 Referral Code
-			.col-sm-9
-				input.form-control(type='text', name='referral', value= '')
-		hr
-		h6#sub2
-		.form-group
-			label.control-label.col-sm-3 Username
-			.col-sm-9
-				input.form-control#user-tf(type='text', name='user', value= user.user).disabled
-
-		.form-group
-			label.control-label.col-sm-3 Password
-			.col-sm-9
-				input.form-control#pass-tf(type='password', name='pass', value='')
-
-		hr
-		.form-buttons
-			center
-				.g-recaptcha(data-sitekey='6LfXbzsUAAAAALCk_NicLha3d-KG_0GRNRxAJUMs')
-				br
-			button(type='button')#account-form-btn1.btn.btn-default
-			button(type='submit')#account-form-btn2.btn.btn-primary
-			button(type='button')#backButton.btn.btn-primary
-		.clearfix
 
 // display form errors in a custom modal window //
 script(src='https://www.google.com/recaptcha/api.js')
