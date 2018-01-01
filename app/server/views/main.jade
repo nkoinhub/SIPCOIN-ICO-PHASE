@@ -113,7 +113,7 @@ html(lang='en')
       }
   body
     #mySidenav.sidenav(style='z-index:4;')
-      a.closebtn(href='javascript:void(0)', onclick='closeNav()') Ã—
+      a.closebtn(href='javascript:void(0)', onclick='closeNav()') ×
       .Container.hey_me
         .row
           .col-sm-2.col-sm-offset-1
@@ -598,12 +598,12 @@ html(lang='en')
               hr
             .col-sm-12
               center
-                h4 Â© Copyright SIPcoin.io 2017
+                h4 © Copyright SIPcoin.io 2017
             .col-sm-12
               br
         script.
-          var stage_current=1//'#{stage}';
-          var tokens_current=1200000//sfparseFloat("#{coins}");
+          var stage_current='#{stage}';
+          var tokens_current=parseFloat("#{coins}");
           var stage_limit=3000000;
           if(stage_current == '1')
           {
