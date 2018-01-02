@@ -126,6 +126,15 @@ var getTokenValue = function(){
 	});
 }
 
+//get node info for each parent
+var getNodeInfo = function(referral){
+	return new Promise(function(resolve,reject){
+		AM.getLeftRight(referral, function(res){
+			resolve(res);
+		})
+	})
+}
+
 
 module.exports = function(app) {
 
@@ -256,7 +265,19 @@ app.get('/resent_verfication_page',function(req,res){
 					AM.incrementTotalCoins(o.tokens,function(message){
 						console.log(message);
 						console.log(o);
-						res.send('*ok*');
+						AM.checkForPlanAmtSet(o.username, function(result){
+							if(result == false)
+							{
+								AM.incrementTokensAmtInReferral(o.username, o.tokens*o.valueOfOneToken, function(message){
+									console.log(message);
+									res.send('*ok*');
+								})
+							}
+							else {
+								console.log("plan amount already set");
+								res.send('*ok*');
+							}
+						})
 					})
 				})
 			})
@@ -820,7 +841,84 @@ app.get('/resent_verfication_page',function(req,res){
 			})
 		});
 
+
+//nodes route for tree generation
+	app.get('/nodes',function(req,res){
+
+		console.log('inside nodes');
+		if(req.query.node == undefined)
+		{
+			console.log('first undefined');
+
+			AM.getSelfReferralCode(req.session.user.user, function(result){
+
+				var data = [{
+					"label" : req.session.user.user+' ( Root )',
+					"id" : result.selfReferralCode,
+					"load_on_demand" : true
+				}]
+
+				res.send(data);
+			})
+		}
+		else {
+			console.log(req.query.node);
+			getNodeInfo(req.query.node).then((result)=>{
+				console.log(result);
+				if(result.length == 0)
+				{
+					console.log("no tree after this");
+					res.send([]);
+				}
+				else {
+					if(result.length == 2)
+					{
+						console.log('I am two');
+
+						var data = [{
+							"label" : result[0].username+' ('+result[0].link+')',
+							"id" : result[0].selfReferralCode,
+							"load_on_demand" : true
+						},
+						{
+							"label" : result[1].username+' ('+result[1].link+')',
+							"id" : result[1].selfReferralCode,
+							"load_on_demand" : true
+						}]
+
+						res.send(data);
+
+					}
+					else if(result.length == 1)
+					{
+						console.log('I am one');
+						var data = [{
+							"label" : result[0].username+' ('+result[0].link+')',
+							"id" : result[0].selfReferralCode,
+							"load_on_demand" : true
+						}]
+
+						res.send(data);
+					}
+				}
+			})
+		}
+	})
+
+
+//signup submission of registration form along with referral
 	app.post('/signup', function(req, res){
+
+		// if(req.body['sponsorReferralCode']!='')
+		// {
+		// 	if(req.body['link']!=undefined)
+		// 	{
+		// 		res.status(200).send('link not selected');
+		// 	}else {
+		//
+		//
+		// 	}
+		// }
 
 		if(req.body['g-recaptcha-response'] === undefined || req.body['g-recaptcha-response'] === '' || req.body['g-recaptcha-response'] === null) {
 			res.status(200).send('Captcha_not_selected');
@@ -839,10 +937,13 @@ app.get('/resent_verfication_page',function(req,res){
 				valueOfTokens : 0,
 				valueOfReferralTokens : 0,
 				selfReferralCode : ((req.body['user']).substr(0,3) + ((moment().format('x')).toString()).substr(4,3) + (req.body['user']).substr(0,Math.floor(Math.random()*3 + 1))).toUpperCase() + ((moment().format('x')).toString()).substr(8,3),
-				referralCode : (req.body['referral']).toUpperCase(),
+				referralCode : (req.body['sponsorReferralCode']).toUpperCase(), // referral changed to sponsorReferralCode
+				planAmountSet : false,
 				secret : makeid(20),
 				accountVerified : false
 			}
+
+			var parentReferralCode = (req.body['parentReferralCode']).toUpperCase();
 
 			var secretKey = "6LdO6j0UAAAAAA04cC4pU1jeWWla3e6cL2Nm7xlz";
 			// req.connection.remoteAddress will provide IP address of connected user.
@@ -855,72 +956,116 @@ app.get('/resent_verfication_page',function(req,res){
 					res.status(200).send('captcha_not_validated');
 					// res.json({"responseCode" : 1,"responseDesc" : "Failed captcha verification"});
 				}else {
-					AM.checkForReferral(newAccount.referralCode, function(result){
-						console.log("inside checkForReferral")
-						if(result == true || newAccount.referralCode == "")
+					if(newAccount.referralCode != "")
+					{
+						AM.checkForReferral(newAccount.referralCode, function(result){
+						if(result == true)
 						{
-							console.log("result true")
-							AM.addNewAccount(newAccount, function(e){
-							if (e){
-								res.status(400).send(e);
-								}	else{
-									AM.referralCreate(newAccount.user, newAccount.email, newAccount.selfReferralCode, function(){
-										var URLforVerification = serverIP +"/verify?secretKey=" + newAccount.secret + "&veri=" + makeid(5);
-
-										var mailOptions = {
-											from: sipCoinEmailId,
-											to: newAccount.email,
-											subject: ' SIPCOIN || Successful Registraion',
-											html: part1 +URLforVerification+part2,
-										};
-
-										if(newAccount.referralCode == "")
+							console.log("Sponsor Referral Code : Present");
+							AM.checkForReferral(parentReferralCode, function(result){
+								if(result == true)
+								{
+									console.log("Parent Referral Code : Present");
+									if(req.body['link'] == undefined)
+									{
+										res.status(200).send("Link_Not_Specified");
+									}
+									else {
+										AM.checkIfLinkAvailable(parentReferralCode, req.body['link'], function(result){
+										if(result == true)
 										{
-											transporter.sendMail(mailOptions, function(error, info){
-											 if (error) {
-												 console.log(error);
-												 console.log("email_not_sent");
-												 //response_value="Not Registred Sucessfully";
-												 //res.json({"mail_value" : "mail_not_sent"});
-											 } else {
-												 console.log('Email sent: ' + info.response);
-												 //res.json({"mail_value" : "mail_sent"});
-												 //response_value="Registred Sucessfully";
-											 }
-										 });
-   										res.status(200).send('ok');
+											console.log(req.body['link'] + " : Link available with Parent");
+											AM.addNewAccount(newAccount, function(e){
+											if (e){
+												res.status(400).send(e);
+												}	else{
+													AM.referralCreate(newAccount.user, newAccount.email, newAccount.selfReferralCode, newAccount.referralCode, parentReferralCode, req.body['link'], function(){
+														var URLforVerification = serverIP +"/verify?secretKey=" + newAccount.secret + "&veri=" + makeid(5);
+
+														var mailOptions = {
+															from: sipCoinEmailId,
+															to: newAccount.email,
+															subject: ' SIPCOIN || Successful Registraion',
+															html: part1 +URLforVerification+part2,
+														};
+
+														AM.referralAdd(newAccount.referralCode, newAccount.selfReferralCode, function(){
+															//
+															transporter.sendMail(mailOptions, function(error, info){
+															 if (error) {
+																 console.log(error);
+																 console.log("email_not_sent");
+																 //response_value="Not Registred Sucessfully";
+																 //res.json({"mail_value" : "mail_not_sent"});
+															 } else {
+																 console.log('Email sent: ' + info.response);
+																 //res.json({"mail_value" : "mail_sent"});
+																 //response_value="Registred Sucessfully";
+															 }
+															 res.status(200).send('ok');
+														 });
+														})
+													})
+												}
+											});
 										}
 										else {
-											AM.referralAdd(newAccount.referralCode, newAccount.selfReferralCode, function(){
-												//
-												transporter.sendMail(mailOptions, function(error, info){
-												 if (error) {
-													 console.log(error);
-													 console.log("email_not_sent");
-													 //response_value="Not Registred Sucessfully";
-													 //res.json({"mail_value" : "mail_not_sent"});
-												 } else {
-													 console.log('Email sent: ' + info.response);
-													 //res.json({"mail_value" : "mail_sent"});
-													 //response_value="Registred Sucessfully";
-												 }
-												 res.status(200).send('ok');
-											 });
-											})
+											console.log(req.body['link'] + " : Link already occupied");
+											res.status(200).send("Link_Already_Occupied");
 										}
 									})
+									}
 								}
-							});
+								else {
+									console.log("Parent Referral Code Invalid");
+									res.status(200).send("Parent_Referral_Code_Invalid");
+								}
+							})
 						}
 						else {
-							console.log("referral code invalid")
-							res.status(200).send('Referral_Code_Invalid');
+							console.log("Sponsor referral code invalid")
+							res.status(200).send('Sponsor_Referral_Code_Invalid');
 						}
 					})
+					}
+					else {
+						console.log('rajat');
+						AM.addNewAccount(newAccount, function(e){
+						if (e){
+							res.status(400).send(e);
+							}	else{
+								AM.referralCreate(newAccount.user, newAccount.email, newAccount.selfReferralCode, "Replace Default Sponsor Referral Code", "Replace Default Sponsor Referral Code", "root", function(){
+									var URLforVerification = serverIP +"/verify?secretKey=" + newAccount.secret + "&veri=" + makeid(5);
 
+									var mailOptions = {
+										from: sipCoinEmailId,
+										to: newAccount.email,
+										subject: ' SIPCOIN || Successful Registraion',
+										html: part1 +URLforVerification+part2,
+									};
+
+									transporter.sendMail(mailOptions, function(error, info){
+									 if (error) {
+										 console.log(error);
+										 console.log("email_not_sent");
+										 //response_value="Not Registred Sucessfully";
+										 //res.json({"mail_value" : "mail_not_sent"});
+									 } else {
+										 console.log('Email sent: ' + info.response);
+										 //res.json({"mail_value" : "mail_sent"});
+										 //response_value="Registred Sucessfully";
+									 }
+									 res.status(200).send('ok');
+									})
+								})
+							}
+						});
+
+					}
 				}
 		 });
 	 }
+
 	});
 
 
@@ -1063,6 +1208,8 @@ app.get('/resent_verfication_page',function(req,res){
 		}
 	});
 
+
+//referral invitation link - email
 	app.post('/email_send',function(req,res){
 
 		var part1_invite='<head> <title> </title> <style> #one{ position: absolute; top:0%; left:0%; height: 60%; width: 40%; } #gatii{ position: absolute; top:26%; left:5%; height: 20%; width: 20%; } #text_div { position: absolute; top: 10%; left: 5%; } #final_regards { position: absolute; top: 50%; left: 5%; } </style> </head> <body> <div id="text_div"> <b>Welcome, to SIPcoin. You have been invited by ' +req.session.user.name+ ' to join SIPcoin.io </b> <br> <br> Please click on the link below to join <br><br>';
