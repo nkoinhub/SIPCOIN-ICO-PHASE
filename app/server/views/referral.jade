@@ -13,6 +13,8 @@ html(lang='en')
     script(src='/js/form-validators/accountValidator.js')
     script(src='/js/views/home.js')
     script(src='/vendor/jquery.form.min.js')
+    script(src='/js/views/tree.jquery.js')
+    link(rel='stylesheet', href='/css/jqtree.css')
     link(rel='stylesheet', href='/font-awesome/css/font-awesome.min.css')
     <link rel="apple-touch-icon" sizes="180x180" href="/images/favicons/apple-touch-icon.png">
     <link rel="icon" type="image/png" sizes="32x32" href="/images/favicons/favicon-32x32.png">
@@ -235,127 +237,12 @@ html(lang='en')
               .row
                 .col-sm-12
                   center
-                    h3.boldLatto  Referral Sytem
+                    h3.boldLatto  Your Referral Tree
                 .col-sm-12
                   br
                 .col-sm-12
-                  .table-responsive
-                    table.table
-                      thead
-                        tr
-                          th
-                            center.regularLatto Level
-                          th
-                            center.regularLatto Expected Members
-                          th
-                            center.regularLatto % Bonus
-                      tbody
-                        .center
-                          tr
-                            td#col_1
-                              center 1
-                            td#col_2
-                              center 2
-                            td#col_3
-                              center 10
-                          tr
-                            td#col_1
-                              center 2
-                            td#col_2
-                              center 4
-                            td#col_3
-                              center 4
-                          tr
-                            td#col_1
-                              center 3
-                            td#col_2
-                              center 8
-                            td#col_3
-                              center 3
-                          tr
-                            td#col_1
-                              center 4
-                            td#col_2
-                              center 16
-                            td#col_3
-                              center 3
-                          tr
-                            td#col_1
-                              center 5
-                            td#col_2
-                              center 32
-                            td#col_3
-                              center 3
-                          tr
-                            td#col_1
-                              center 6
-                            td#col_2
-                              center 64
-                            td#col_3
-                              center 2
-                          tr
-                            td#col_1
-                              center 7
-                            td#col_2
-                              center 128
-                            td#col_3
-                              center 2
-                          tr
-                            td#col_1
-                              center 8
-                            td#col_2
-                              center 256
-                            td#col_3
-                              center 2
-                          tr
-                            td#col_1
-                              center 9
-                            td#col_2
-                              center 512
-                            td#col_3
-                              center 1
-                          tr
-                            td#col_1
-                              center 10
-                            td#col_2
-                              center 1024
-                            td#col_3
-                              center 1
-                          tr
-                            td#col_1
-                              center 11
-                            td#col_2
-                              center 2048
-                            td#col_3
-                              center 1
-                          tr
-                            td#col_1
-                              center 12
-                            td#col_2
-                              center 4096
-                            td#col_3
-                              center 1
-                          tr
-                            td#col_1
-                              center 13
-                            td#col_2
-                              center 8192
-                            td#col_3
-                              center 0.5
-                          tr
-                            td#col_1
-                              center 14
-                            td#col_2
-                              center 16384
-                            td#col_3
-                              center 0.5
-                          tr
-                            td#col_1
-                              center 15
-                            td#col_2
-                              center 32768
-                            td#col_3
-                              center 0.5
+                  #tree1(data-url='/nodes')
+
       #footer.my_footer_class(style='margin-bottom:0px;')
         .container
           .row
@@ -408,6 +295,10 @@ html(lang='en')
       $("#whats_app_link").attr('href','https://web.whatsapp.com//send?text='+refferal_value);
       console.log(refferal_value);
       })
+      $('#tree1').tree({
+      dragAndDrop: true
+      });
+
 
       function myFunction(){
       var refferal_value='http://sipcoin.io/signup?ref='+'#{selfReferralCode}';

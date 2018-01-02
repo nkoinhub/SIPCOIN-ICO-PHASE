@@ -43,19 +43,69 @@ $(document).ready(function(){
 				grecaptcha.reset();
 			}
 
-			if(responseText=='Referral_Code_Invalid')
+			if(responseText=='Sponsor_Referral_Code_Invalid')
 			{
 				$('.modal-form-errors .modal-body p').text('Please correct the following problems :');
 				var ul = $('.modal-form-errors .modal-body ul');
 					ul.empty();
-					ul.append('<li> Referral Code Invalid <br> Check Your Referral Code </li>')
+					ul.append('<li>Sponsor Referral Code Invalid <br> Check Your Sponsor Referral Code </li>')
 
 				$('.modal-form-errors').modal('show');
 
 				// $('.modal-form-errors .modal-body p').text('Captch Not Validated.<br> Try Again After some time');
 				// $('.modal-form-errors').modal('show');
-				console.log('Referral_Code_Invalid');
+				console.log('Sponsor_Referral_Code_Invalid');
+				grecaptcha.reset();
+
 			}
+
+			if(responseText=='Parent_Referral_Code_Invalid')
+			{
+				$('.modal-form-errors .modal-body p').text('Please correct the following problems :');
+				var ul = $('.modal-form-errors .modal-body ul');
+					ul.empty();
+					ul.append('<li>Parent Referral Code Invalid <br> Check Your Parent Referral Code </li>')
+
+				$('.modal-form-errors').modal('show');
+
+				// $('.modal-form-errors .modal-body p').text('Captch Not Validated.<br> Try Again After some time');
+				// $('.modal-form-errors').modal('show');
+				console.log('Parent_Referral_Code_Invalid');
+				grecaptcha.reset();
+
+			}
+
+			if(responseText=='Link_Already_Occupied')
+			{
+				$('.modal-form-errors .modal-body p').text('Please correct the following problems :');
+				var ul = $('.modal-form-errors .modal-body ul');
+					ul.empty();
+					ul.append('<li>Link_Already_Occupied <br> Change your link. ( left or right ) </li>')
+
+				$('.modal-form-errors').modal('show');
+
+				// $('.modal-form-errors .modal-body p').text('Captch Not Validated.<br> Try Again After some time');
+				// $('.modal-form-errors').modal('show');
+				console.log('Link_Already_Occupied');
+				grecaptcha.reset();
+			}
+
+			if(responseText=='Link_Not_Specified')
+			{
+				$('.modal-form-errors .modal-body p').text('Please correct the following problems :');
+				var ul = $('.modal-form-errors .modal-body ul');
+					ul.empty();
+					ul.append('<li>Please select the link  ( left or right ) </li>')
+
+				$('.modal-form-errors').modal('show');
+
+				// $('.modal-form-errors .modal-body p').text('Captch Not Validated.<br> Try Again After some time');
+				// $('.modal-form-errors').modal('show');
+				console.log('Link_not_given');
+				grecaptcha.reset();
+
+			}
+
 
 			if(responseText=='ok')
 			{

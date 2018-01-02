@@ -44,10 +44,10 @@ db.open(function(e, d){
 				exports.updateSIPStageDocument()
 			},3000)
 
-			setInterval(()=>{
-				console.log("Referral System Update Executed")
-				RefSysUpdate();
-			},1000* 60 * RefSysTimer)
+			// setInterval(()=>{
+			// 	console.log("Referral System Update Executed")
+			// 	RefSysUpdate();
+			// },1000* 60 * RefSysTimer)
 		}
 	}
 });
@@ -166,6 +166,15 @@ exports.checkForReferral = function(ref, callback)
 	})
 }
 
+//check if link available
+exports.checkIfLinkAvailable = function(parentRef, link, callback)
+{
+	referrals.findOne({parentReferralCode:parentRef, link:link},function(e,res){
+		if(res == null) callback(true);
+		else callback(false);
+	})
+}
+
 exports.insertSIPStageDocument = function()
 {
 	sipStage.findOne({},function(e,res){
@@ -224,12 +233,30 @@ exports.referralAdd = function(selfCode, toBePushedCode, callback)
 	})
 }
 
-exports.referralCreate = function(username, emailid, referralCode, callback)
+
+//checking whether the plan amount is set or not based on the first investment
+exports.checkForPlanAmtSet = function(username, callback)
+{
+	accounts.findOne({user:username},function(e,res){
+		if(res.planAmountSet == true) callback(true);
+		else{
+			accounts.update({user:username},{$set:{planAmountSet:true}});
+			callback(false);
+		}
+	})
+}
+
+exports.referralCreate = function(username, emailid, selfRef, sponsorRef, parentRef, link, callback)
 {
 	var referralDoc = {
 		username : username,
 		email : emailid,
-		selfReferralCode : referralCode,
+		selfReferralCode : selfRef,
+		sponsorReferralCode : sponsorRef,//sponsorer referral code, comes from registration page
+		parentReferralCode : parentRef,//parent referral code, comes from registration page
+		link : link,//left || right || root
+		planAmt : -1,// plan amount assign after considering the first transaction
+		currentAmt : 0,
 		referred : [],
 		level : 1,
 		referredCount : 0,
@@ -272,6 +299,57 @@ exports.incrementTokens = function(username, tok, callback)
 	// 	o.tokens = o.tokens + tok;
 	// 	accounts.save(o,{safe:true}, callback("updated"));
 	// })
+}
+
+//increment tokens in referral document
+exports.incrementTokensAmtInReferral = function(username, amt, callback)
+{
+	console.log("inside referral tokens increment");
+	var planAmt;
+
+	if(amt > 10000)
+	{
+		planAmt = 10000;
+	}
+	else if(amt > 3000)
+	{
+		planAmt = 3000;
+	}
+	else if(amt > 2000)
+	{
+		planAmt = 2000;
+	}
+	else if(amt > 1000)
+	{
+		planAmt = 1000;
+	}
+	else if(amt > 500)
+	{
+		planAmt = 500;
+	}
+	else if(amt > 150)
+	{
+		planAmt = 150;
+	}
+	else {
+		planAmt = amt;
+	}
+
+	referrals.update({user:username},{$inc:{currentAmt:amt},$set:{planAmt:planAmt}},callback("currentAmt updated"));
+	//db.testing.update({case:3},{$inc:{a:5},$set:{b:5}})
+}
+
+// left right info for parent node
+exports.getLeftRight = function(ref, callback)
+{
+	referrals.find({parentReferralCode:ref}).toArray(function(e,res){
+		if(res != null) {
+			callback(res);
+		}
+		else {
+			callback(null);
+		}
+	})
 }
 
 exports.incrementRefTokens = function(username, tok, callback)
@@ -453,6 +531,14 @@ exports.getTransactions = function(username, emailid, callback)
 exports.insertTransaction = function(newData, callback)
 {
 	transactions.insert(newData);
+}
+
+//get self referral code
+exports.getSelfReferralCode = function(username, callback)
+{
+	accounts.findOne({user:username},{_id:0,selfReferralCode:1},function(e,o){
+		callback(o);
+	})
 }
 
 exports.getReferrals = function(user, emailid, callback)

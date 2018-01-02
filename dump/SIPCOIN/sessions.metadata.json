@@ -1,1 +1,0 @@
-{"options":{},"indexes":[{"v":2,"key":{"_id":1},"name":"_id_","ns":"SIPCOIN.sessions"},{"v":2,"key":{"expires":1},"name":"expires_1","expireAfterSeconds":0,"ns":"SIPCOIN.sessions"}],"uuid":"b251244ee5f7471e85360aa8153c6e7e"}

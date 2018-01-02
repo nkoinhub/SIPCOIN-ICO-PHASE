@@ -52,9 +52,22 @@ br
                each item in countries
                 option(selected=item.name == user.country)= item.name
         #referral-tf.form-group
-          label.control-label.col-sm-3 Referral Code
+          label.control-label.col-sm-3 Sponsor ID
           .col-sm-9
-            input.form-control(type='text', name='referral', value=ref)
+            input.form-control(type='text', name='sponsorReferralCode', value=ref)
+        #parent-tf.form-group
+          label.control-label.col-sm-3 Parent ID
+          .col-sm-9
+            input.form-control(type='text', name='parentReferralCode', value='')
+        #option_link-tf.form-group
+          label.control-label.col-sm-3 Link
+          .col-sm-9
+            label.radio-inline
+              input(type='radio', name='link',value='left')
+              | Left
+            label.radio-inline
+              input(type='radio', name='link',value='right')
+              | Right
         hr
         h6#sub2
         .form-group
