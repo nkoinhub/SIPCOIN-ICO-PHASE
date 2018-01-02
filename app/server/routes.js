@@ -1037,13 +1037,13 @@ app.get('/resent_verfication_page',function(req,res){
 						if (e){
 							res.status(400).send(e);
 							}	else{
-								AM.referralCreate(newAccount.user, newAccount.email, newAccount.selfReferralCode, "Replace Default Sponsor Referral Code", "Replace Default Sponsor Referral Code", "root", function(){
+								AM.referralCreate(newAccount.user, newAccount.email, newAccount.selfReferralCode, "SIP35970SIPADM", "SIP35970SIPADM", "root", function(){
 									var URLforVerification = serverIP +"/verify?secretKey=" + newAccount.secret + "&veri=" + makeid(5);
 
 									var mailOptions = {
 										from: sipCoinEmailId,
 										to: newAccount.email,
-										subject: ' SIPCOIN || Successful Registraion',
+										subject: ' SIPCOIN || Successful Registration',
 										html: part1 +URLforVerification+part2,
 									};
 

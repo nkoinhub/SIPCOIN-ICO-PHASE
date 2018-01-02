@@ -47,12 +47,18 @@ AccountValidator.prototype.showInvalidEmail = function()
 {
 	this.controlGroups[1].addClass('error');
 	this.showErrors(['That email address is already in use.']);
+
+	$('#account-form-btn2').removeClass("disabled");
+	$('#account-form-btn2').css("pointer-events","auto");
 }
 
 AccountValidator.prototype.showInvalidUserName = function()
 {
 	this.controlGroups[2].addClass('error');
 	this.showErrors(['That username is already in use.']);
+
+	$('#account-form-btn2').removeClass("disabled");
+	$('#account-form-btn2').css("pointer-events","auto");
 }
 
 AccountValidator.prototype.validateForm = function()
@@ -72,6 +78,12 @@ AccountValidator.prototype.validateForm = function()
 	if (this.validatePassword(this.formFields[3].val()) == false) {
 		this.controlGroups[3].addClass('error');
 		e.push('Password Should Be At Least 6 Characters');
+	}
+
+	if(e.length!=0)
+	{
+		$('#account-form-btn2').removeClass("disabled");
+		$('#account-form-btn2').css("pointer-events","auto");
 	}
 	if (e.length) this.showErrors(e);
 	return e.length === 0;
