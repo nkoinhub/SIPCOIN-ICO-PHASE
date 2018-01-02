@@ -1,7 +1,7 @@
 
-var sipCoinEmailId = 'coinsipbit@gmail.com';
-var sipCoinEmailPass = 'SMuley1@3';
-var serverIP = 'http://localhost:3000';
+var sipCoinEmailId = 'admin@sipcoin.io';
+var sipCoinEmailPass = 'adminadmin@123';
+var serverIP = 'http://sipcoin.io';
 var CT = require('./modules/country-list');
 var AM = require('./modules/account-manager');
 var EM = require('./modules/email-dispatcher');
@@ -11,7 +11,10 @@ var moment 		= require('moment');
 var nodemailer = require('nodemailer');
 
 var transporter = nodemailer.createTransport({
-		 service: 'gmail',
+	//	 service: 'gmail',
+		host: 'smtp.zoho.com',
+		     port: 465,
+secure: true,
 		 auth: {
 			 user: sipCoinEmailId,
 			 pass: sipCoinEmailPass
@@ -70,21 +73,21 @@ var btcCheck = function(){
 var getPublicAddress = function(TID){
 	return new Promise(function(resolve,reject){
 
-		resolve("12wedfv4rtfgb7ytf56yh98iuhggb");
+		//resolve("12wedfv4rtfgb7ytf56yh98iuhggb");
 
 		//get request to the api, then resolve the address
-		// var API = 'https://api.blockchain.info/v2/receive?';
-		// var xPub = 'xpub6D9eFNDYtCsbwd7xQdGDeQX9SejSpAFsBKRNzaViBprjXcoHs6933e9STs61Boo4P3REpeLNRXv1FW9oKWZp43PVTSD5AZbAFny9MFGHMb9';
-		// var callback = 'http%3A%2F%2Fsipcoin.io/getInvoice%3FTID%3D'+TID;
-		// var key = '09195d68-3873-4237-92fd-cdc6bda54aa4'
+		 var API = 'https://api.blockchain.info/v2/receive?';
+		 var xPub = 'xpub6D9eFNDYtCsbwd7xQdGDeQX9SejSpAFsBKRNzaViBprjXcoHs6933e9STs61Boo4P3REpeLNRXv1FW9oKWZp43PVTSD5AZbAFny9MFGHMb9';
+		 var callback = 'http%3A%2F%2Fsipcoin.io/getInvoice%3FTID%3D'+TID;
+		 var key = '09195d68-3873-4237-92fd-cdc6bda54aa4'
     //
-		// var URL = API + 'xpub=' + xPub + '&callback=' + callback + '&key=' + key;
+		 var URL = API + 'xpub=' + xPub + '&callback=' + callback + '&key=' + key;
     //
-		// request(URL, {json:true}, (err, res, body)=>{
-		// 	if(err) { return console.log(err); }
-		// 	console.log("received Address : "+body.address);
-		// 	resolve(body.address);
-		// })
+		 request(URL, {json:true}, (err, res, body)=>{
+		 	if(err) { return console.log(err); }
+		 	console.log("received Address : "+body.address);
+		 	resolve(body.address);
+		 })
 
 		// request('https://api.blockchain.info/v2/receive?xpub=xpub6D9eFNDYtCsbwd7xQdGDeQX9SejSpAFsBKRNzaViBprjXcoHs6933e9STs61Boo4P3REpeLNRXv1FW9oKWZp43PVTSD5AZbAFny9MFGHMb9&callback=http%3A%2F%2Fsipcoin.io%3Finvoice_id%3D058921123&key=09195d68-3873-4237-92fd-cdc6bda54aa4', { json: true }, (err, res, body) => {
 		// 	if (err) { return console.log(err); }
@@ -844,8 +847,9 @@ app.get('/resent_verfication_page',function(req,res){
 				accountVerified : false
 			}
 
-			var secretKey = "6LdO6j0UAAAAAA04cC4pU1jeWWla3e6cL2Nm7xlz";
-			// req.connection.remoteAddress will provide IP address of connected user.
+			//var secretKey = "6LdO6j0UAAAAAA04cC4pU1jeWWla3e6cL2Nm7xlz";
+			var secretKey = "6LfXbzsUAAAAABJ4ZCatF2KQ5C8uDVVRTTsjhP1H";			
+// req.connection.remoteAddress will provide IP address of connected user.
 			var verificationUrl = "https://www.google.com/recaptcha/api/siteverify?secret=" + secretKey + "&response=" + req.body['g-recaptcha-response'] + "&remoteip=" + req.connection.remoteAddress;
 			// Hitting GET request to the URL, Google will respond with success or error scenario.
 			request(verificationUrl,function(error,response,body) {
