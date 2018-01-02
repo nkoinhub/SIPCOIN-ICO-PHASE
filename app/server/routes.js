@@ -1,7 +1,7 @@
 
-var sipCoinEmailId = 'admin@sipcoin.io';
-var sipCoinEmailPass = 'adminadmin@123';
-var serverIP = 'http://sipcoin.io';
+var sipCoinEmailId = 'coinsipbit@gmail.com';
+var sipCoinEmailPass = 'SMuley1@3';
+var serverIP = 'http://localhost:3000';
 var CT = require('./modules/country-list');
 var AM = require('./modules/account-manager');
 var EM = require('./modules/email-dispatcher');
@@ -11,10 +11,7 @@ var moment 		= require('moment');
 var nodemailer = require('nodemailer');
 
 var transporter = nodemailer.createTransport({
-	//	 service: 'gmail',
-		host: 'smtp.zoho.com',
-		     port: 465,
-secure: true,
+		 service: 'gmail',
 		 auth: {
 			 user: sipCoinEmailId,
 			 pass: sipCoinEmailPass
@@ -22,10 +19,8 @@ secure: true,
 	 });
 
 
-	 var part1='<head> <title> </title> <style> #one{ position: absolute; top:0%; left:0%; height: 60%; width: 40%; } #gatii{ position: absolute; top:26%; left:5%; height: 20%; width: 20%; } #text_div { position: absolute; top: 10%; left: 5%; } #final_regards { position: absolute; top: 50%; left: 5%; } </style> </head> <body> <div id="text_div"> <b>Welcome, to SIPcoin. You have been successfully registered on SIPcoin.io </b> <br> <br> Please click on the link below to verify your account <br><br>';
-
-           var part2=' <br><br> <br> P.S.- You are requested to preserve this mail for future references. <br> <br> </div> <iframe id="gatii" src="https://drive.google.com/file/d/1k99fX9I4HOdhKZA1KwrDflM1W-orCSh0/preview" width="40" height="40"></iframe> <br> <br> <div id="final_regards"> Thank You, <br> <br> Team SIPcoin.io <br> <br> <a href="http://support.sipcoin.io">Support Team</a> <br> <br> </div> </body>'
-
+var part1='<head> <title> </title> <style> #one{ position: absolute; top:0%; left:0%; height: 60%; width: 40%; } #gatii{ position: absolute; top:26%; left:5%; height: 20%; width: 20%; } #text_div { position: absolute; top: 10%; left: 5%; } #final_regards { position: absolute; top: 50%; left: 5%; } </style> </head> <body> <div id="text_div"> <b>Welcome, to SIPcoin. You have been successfully registered on SIPcoin.io </b> <br> <br> Please click on the link below to verify your account <br><br>';
+var part2=' <br><br> <br> P.S.- You are requested to preserve this mail for future references. <br> <br> </div> <iframe id="gatii" src="https://drive.google.com/file/d/1k99fX9I4HOdhKZA1KwrDflM1W-orCSh0/preview" width="40" height="40"></iframe> <br> <br> <div id="final_regards"> Thank You, <br> <br> Team SIPcoin.io <br> <br> <a href="http://support.sipcoin.io">Support Team</a> <br> <br> </div> </body>'
 
 //console.log(moment().format('x'))
 
@@ -75,21 +70,21 @@ var btcCheck = function(){
 var getPublicAddress = function(TID){
 	return new Promise(function(resolve,reject){
 
-		//resolve("12wedfv4rtfgb7ytf56yh98iuhggb");
+		resolve("12wedfv4rtfgb7ytf56yh98iuhggb");
 
 		//get request to the api, then resolve the address
-		 var API = 'https://api.blockchain.info/v2/receive?';
-		 var xPub = 'xpub6D9eFNDYtCsbwd7xQdGDeQX9SejSpAFsBKRNzaViBprjXcoHs6933e9STs61Boo4P3REpeLNRXv1FW9oKWZp43PVTSD5AZbAFny9MFGHMb9';
-		 var callback = 'http%3A%2F%2Fsipcoin.io/getInvoice%3FTID%3D'+TID;
-		 var key = '09195d68-3873-4237-92fd-cdc6bda54aa4'
+		// var API = 'https://api.blockchain.info/v2/receive?';
+		// var xPub = 'xpub6D9eFNDYtCsbwd7xQdGDeQX9SejSpAFsBKRNzaViBprjXcoHs6933e9STs61Boo4P3REpeLNRXv1FW9oKWZp43PVTSD5AZbAFny9MFGHMb9';
+		// var callback = 'http%3A%2F%2Fsipcoin.io/getInvoice%3FTID%3D'+TID;
+		// var key = '09195d68-3873-4237-92fd-cdc6bda54aa4'
     //
-		 var URL = API + 'xpub=' + xPub + '&callback=' + callback + '&key=' + key;
+		// var URL = API + 'xpub=' + xPub + '&callback=' + callback + '&key=' + key;
     //
-		 request(URL, {json:true}, (err, res, body)=>{
-		 	if(err) { return console.log(err); }
-		 	console.log("received Address : "+body.address);
-		 	resolve(body.address);
-		 })
+		// request(URL, {json:true}, (err, res, body)=>{
+		// 	if(err) { return console.log(err); }
+		// 	console.log("received Address : "+body.address);
+		// 	resolve(body.address);
+		// })
 
 		// request('https://api.blockchain.info/v2/receive?xpub=xpub6D9eFNDYtCsbwd7xQdGDeQX9SejSpAFsBKRNzaViBprjXcoHs6933e9STs61Boo4P3REpeLNRXv1FW9oKWZp43PVTSD5AZbAFny9MFGHMb9&callback=http%3A%2F%2Fsipcoin.io%3Finvoice_id%3D058921123&key=09195d68-3873-4237-92fd-cdc6bda54aa4', { json: true }, (err, res, body) => {
 		// 	if (err) { return console.log(err); }
@@ -193,7 +188,7 @@ module.exports = function(app) {
 							console.log("email_not_sent");
 						} else {
 							console.log('Email sent: ' + info.response);
-							res.redirect('/dashboard');
+							res.redirect('/resent_verfication_page');
 						}
 					})
 				}
@@ -203,6 +198,27 @@ module.exports = function(app) {
 		});
 	}
 });
+
+app.get('/resent_verfication_page',function(req,res){
+	if(req.session.user == null) res.redirect('/');
+	var usd;
+	var sip;
+
+	btcCheck().then((USD)=>{
+		usd = USD;
+		return getTokenValue().then((SIP)=>{return SIP});
+	})
+	.then((SIP)=>{
+		sip = SIP;
+		res.render('resent_verfication_page',{
+			BTC : usd,
+			SIP : sip,
+			udata : req.session.user
+		})
+	})
+
+});
+
 
 	//callback for blockchain.info and updation of transaction history and account of user
 	app.get('/getInvoice',function(req,res){
@@ -361,85 +377,113 @@ module.exports = function(app) {
 		}
 	})
 
-//after entering the number of tokens to buy, the freeze route, transaction history generation
-    app.post('/payment',function(req,res){
+	// to make the page handle the continuous refresh
+	app.get('/payment',function(req,res){
+		console.log("inside GET payment : " + req.query.invoiceID);
+		//res.render('paymentAddr');
+		var invoiceID = req.query.invoiceID;
+		if(req.session.user == null || req.query.invoiceID == undefined){
+			res.redirect('/');
+		}
+		else {
+			AM.getTransactionDocUsingInvoice(invoiceID, function(dataCollection){
+				if(dataCollection == null) {
+					res.redirect('/dashboard');
+				}
+				else {
+					res.render('paymentAddr',{
+						udata : req.session.user,
+						totaltokens : dataCollection.demandedTokens,
+						address : dataCollection.publicAddressWallet,
+						BTCTokens : dataCollection.BTCofTokens,
+						SIP : dataCollection.valueOfOneToken,
+						currentBTC : dataCollection.BTCtoUSD
+					});
+				}
+			});
+		}
+	});
 
-        if(req.session.user == null) res.redirect('/');
-        else {
-            var TID = (req.session.user.user).substr(0,3) + moment().format('x');
+	//after entering the number of tokens to buy, the freeze route, transaction history generation
+	app.post('/payment',function(req,res){
 
-            var dataCollection = {
-                username : req.session.user.user,
-                email : req.session.user.email,
-                demandedTokens : parseInt(req.body['tokenvalue']), // get the input box value
-                BTCofTokens : -1, //calculate (tokens*valueOfOneToken/BTCtoUSD)
-                valueOfOneToken : -1,
-                BTCtoUSD : -1,
-                BTCpaid : 0,
-                tokens : 0,
-                publicAddressWallet : "",
-                amountPaid : false,
-                Expired : false,
-                TimeOfPaymentPlaced : moment().format('MMMM Do YYYY, h:mm:ss a'),
-                TransactionID : TID,
-                TimeOfPaymentReceived : "No Payment Done",
-                Transaction_hash : "Not Generated",
-            }
+		if(req.session.user == null) res.redirect('/');
+		else {
+			var TID = (req.session.user.user).substr(0,3) + moment().format('x');
 
-            //step 1 : get the current btc value
-            btcCheck().then((USD)=>{
-                dataCollection.BTCtoUSD = USD;
-                //step 2 : request for the btc address
-                return getPublicAddress(dataCollection.TransactionID).then((address)=>{return address})
-            })
-            .then((address)=>{
-                dataCollection.publicAddressWallet = address;
-                //step 3 : get the current token value
-                return getTokenValue().then((value)=>{return value});
-            })
-            .then((value)=>{
+			var dataCollection = {
+				username : req.session.user.user,
+				email : req.session.user.email,
+				demandedTokens : parseInt(req.body['tokenvalue']), // get the input box value
+				BTCofTokens : -1, //calculate (tokens*valueOfOneToken/BTCtoUSD)
+				valueOfOneToken : -1,
+				BTCtoUSD : -1,
+				BTCpaid : 0,
+				tokens : 0,
+				publicAddressWallet : "",
+				amountPaid : false,
+				Expired : false,
+				TimeOfPaymentPlaced : moment().format('MMMM Do YYYY, h:mm:ss a'),
+				TransactionID : TID,
+				TimeOfPaymentReceived : "No Payment Done",
+				Transaction_hash : "Not Generated",
+			}
 
-                //step 4 calculating the BTC of the Tokens
-                dataCollection.valueOfOneToken = value;
-                dataCollection.BTCofTokens = (dataCollection.demandedTokens * dataCollection.valueOfOneToken)/dataCollection.BTCtoUSD;
-                console.log(dataCollection);
+			//step 1 : get the current btc value
+			btcCheck().then((USD)=>{
+				dataCollection.BTCtoUSD = USD;
+				//step 2 : request for the btc address
+				return getPublicAddress(dataCollection.TransactionID).then((address)=>{return address})
+			})
+			.then((address)=>{
+				dataCollection.publicAddressWallet = address;
+				//step 3 : get the current token value
+				return getTokenValue().then((value)=>{return value});
+			})
+			.then((value)=>{
 
-                return "insert transaction"
-            })
-            .then((finished)=>{
-                //step 5 : update the transaction into the table
-                AM.insertTransaction(dataCollection);
-            })
-            .then((done)=>{
-                //step 6 : respond with the public address
-                //res.send({address : dataCollection.publicAddressWallet});
-                // res.render('paymentAddr',{
-                //     title: "checking tokens",
-                //     udata : req.session.user,
-                //     totaltokens : dataCollection.demandedTokens,
-                //     address : dataCollection.publicAddressWallet,
-                //     BTCTokens : dataCollection.BTCofTokens,
-                //     SIP : dataCollection.valueOfOneToken,
-                //     currentBTC : dataCollection.BTCtoUSD
-                // })
+				//step 4 calculating the BTC of the Tokens
+				dataCollection.valueOfOneToken = value;
+				dataCollection.BTCofTokens = (dataCollection.demandedTokens * dataCollection.valueOfOneToken)/dataCollection.BTCtoUSD;
+				console.log(dataCollection);
 
-                res.redirect('/payment?invoiceID='+dataCollection.TransactionID);
-            })
-            .catch((err)=>{
-                //step 6` : respond with null address if any error found
-                console.log("error found : " + err);
-                //res.send({address : null});
-                // res.render('paymentAddr',{
-                //     title: "checking tokens",
-                //     udata : req.session.user,
-                //     totaltokens : dataCollection.demandedTokens,
-                //     address : null,
-                //     USD : dataCollection.BTCofTokens,
-                //     currentBTC : dataCollection.BTCtoUSD
-                // })
-            })
-        }
-    })
+				return "insert transaction"
+			})
+			.then((finished)=>{
+				//step 5 : update the transaction into the table
+				AM.insertTransaction(dataCollection);
+			})
+			.then((done)=>{
+				//step 6 : respond with the public address
+				//res.send({address : dataCollection.publicAddressWallet});
+				// res.render('paymentAddr',{
+				// 	title: "checking tokens",
+				// 	udata : req.session.user,
+				// 	totaltokens : dataCollection.demandedTokens,
+				// 	address : dataCollection.publicAddressWallet,
+				// 	BTCTokens : dataCollection.BTCofTokens,
+				// 	SIP : dataCollection.valueOfOneToken,
+				// 	currentBTC : dataCollection.BTCtoUSD
+				// })
+
+				res.redirect('/payment?invoiceID='+dataCollection.TransactionID);
+			})
+			.catch((err)=>{
+				//step 6` : respond with null address if any error found
+				console.log("error found : " + err);
+				//res.send({address : null});
+				// res.render('paymentAddr',{
+				// 	title: "checking tokens",
+				// 	udata : req.session.user,
+				// 	totaltokens : dataCollection.demandedTokens,
+				// 	address : null,
+				// 	USD : dataCollection.BTCofTokens,
+				// 	currentBTC : dataCollection.BTCtoUSD
+				// })
+			})
+		}
+	})
+
 
 // main login page //
 	app.get('/login', function(req, res){
@@ -553,9 +597,25 @@ module.exports = function(app) {
 	// route for the verification of the account
 	app.get('/verify',function(req,res){
 		AM.verifyAccount(req.query.secretKey,function(message){
-			console.log("Account with Secret : " + req.query.secretKey + " is not Verified");
-			if(req.session.user == null) res.redirect('/login');
-			else res.redirect('/dashboard');
+			console.log("Account with Secret : " + req.query.secretKey + " is  Verified");
+
+			var usd;
+			var sip;
+			var email=req.query["email"];
+			var user=req.query["user"];
+
+			btcCheck().then((USD)=>{
+				usd = USD;
+				return getTokenValue().then((SIP)=>{return SIP});
+			})
+			.then((SIP)=>{
+
+				sip = SIP;
+				res.render('after_verfiy',{
+					BTC : usd,
+					SIP : sip
+				})
+			})
 			//res.send("Your Account has been Successfully Verified, You can log in by visiting : ")
 		})
 	})
@@ -603,39 +663,16 @@ module.exports = function(app) {
 					})
 				}
 				else {
-					res.redirect('/dashboard');
+					// res.send({"check":"account_not_verfied"});
+						res.redirect('/dashboard');
 					//res.send('200');
 				}
 			})
 		}
 	});
 
-// to make the page handle the continuous refresh
-    app.get('/payment',function(req,res){
-        console.log("inside GET payment" + req.query.invoiceID);
-        //res.render('paymentAddr');
-        var invoiceID = req.query.invoiceID;
-        if(req.session.user == null || req.query.invoiceID == undefined){
-            res.redirect('/');
-        }
-        else {
-            AM.getTransactionDocUsingInvoice(invoiceID, function(dataCollection){
-                if(dataCollection == null) {
-                    res.redirect('/dashboard');
-                }
-                else {
-                    res.render('paymentAddr',{
-                        udata : req.session.user,
-                        totaltokens : dataCollection.demandedTokens,
-                        address : dataCollection.publicAddressWallet,
-                        BTCTokens : dataCollection.BTCofTokens,
-                        SIP : dataCollection.valueOfOneToken,
-                        currentBTC : dataCollection.BTCtoUSD
-                    });
-                }
-            });
-        }
-    });
+
+
 	// app.post('/payment',function(req,res){
 	// 	console.log("post of payment");
 	// 	console.log(req.body['tokenvalue']);
@@ -689,12 +726,21 @@ module.exports = function(app) {
 		console.log("inside account_change");
 		if(req.session.user == null) res.redirect('/login');
 		else {
-			res.render('account_home',{
-				countries : CT,
-				udata : req.session.user
-			});
+			var usd;
+			btcCheck().then((USD)=>{
+				usd = USD;
+				return getTokenValue().then((SIP)=>{return SIP});
+			})
+			.then((SIP)=>{
+				res.render('account_home',{
+					countries : CT,
+					udata : req.session.user,
+					USD : usd,
+					SIP : SIP
+				})
+			})
 		}
-	})
+	});
 
 	//updating account details , therefore a post request
 	app.post('/account', function(req, res){
@@ -737,10 +783,42 @@ module.exports = function(app) {
 	})
 
 
-// creating new accounts //
-	app.get('/signup', function(req, res) {
-		res.render('signup', {  title: 'Signup', countries : CT });
-	});
+	// creating new accounts //
+		app.get('/signup', function(req, res) {
+			var btc;
+			btcCheck().then((BTC)=>{
+				btc = BTC;
+				return getTokenValue().then((SIP)=>{return SIP});
+			})
+			.then((SIP)=>{
+				if(req.query.ref != undefined)
+				{
+					AM.checkForReferral(req.query.ref,function(result){
+						if(result) {
+							res.render('signup', {
+								title: 'Signup',
+								countries : CT,
+								USD : btc,
+								SIP : SIP,
+								ref : req.query.ref
+							 });
+						}
+						else {
+							res.render('signup', {
+								title: 'Signup',
+								countries : CT,
+								USD : btc,
+								SIP : SIP,
+								ref : ""
+							 });
+						}
+					})
+				}
+				else {
+					res.render('signup', {  title: 'Signup', countries : CT, USD : btc, SIP : SIP, ref : "" });
+				}
+			})
+		});
 
 	app.post('/signup', function(req, res){
 
@@ -760,15 +838,14 @@ module.exports = function(app) {
 				referralTokens : 0,
 				valueOfTokens : 0,
 				valueOfReferralTokens : 0,
-				selfReferralCode : (req.body['user']).substr(0,3) + ((moment().format('x')).toString()).substr(4,5) + (req.body['user']).substr(0,Math.floor(Math.random()*(req.body['user']).length + 1)).toUpperCase(),
+				selfReferralCode : ((req.body['user']).substr(0,3) + ((moment().format('x')).toString()).substr(4,3) + (req.body['user']).substr(0,Math.floor(Math.random()*3 + 1))).toUpperCase() + ((moment().format('x')).toString()).substr(8,3),
 				referralCode : (req.body['referral']).toUpperCase(),
 				secret : makeid(20),
 				accountVerified : false
 			}
 
-			//var secretKey = "6LdO6j0UAAAAAA04cC4pU1jeWWla3e6cL2Nm7xlz";
-			var secretKey = "6LfXbzsUAAAAABJ4ZCatF2KQ5C8uDVVRTTsjhP1H";			
-// req.connection.remoteAddress will provide IP address of connected user.
+			var secretKey = "6LdO6j0UAAAAAA04cC4pU1jeWWla3e6cL2Nm7xlz";
+			// req.connection.remoteAddress will provide IP address of connected user.
 			var verificationUrl = "https://www.google.com/recaptcha/api/siteverify?secret=" + secretKey + "&response=" + req.body['g-recaptcha-response'] + "&remoteip=" + req.connection.remoteAddress;
 			// Hitting GET request to the URL, Google will respond with success or error scenario.
 			request(verificationUrl,function(error,response,body) {
@@ -811,7 +888,7 @@ module.exports = function(app) {
 												 //response_value="Registred Sucessfully";
 											 }
 										 });
-											res.status(200).send('ok');
+   										res.status(200).send('ok');
 										}
 										else {
 											AM.referralAdd(newAccount.referralCode, newAccount.selfReferralCode, function(){
@@ -828,7 +905,6 @@ module.exports = function(app) {
 													 //response_value="Registred Sucessfully";
 												 }
 												 res.status(200).send('ok');
-
 											 });
 											})
 										}
@@ -851,63 +927,44 @@ module.exports = function(app) {
 
 // password reset //
 
-   app.post('/lost-password', function(req, res){
-    // look up the user's account via their email //
-        AM.getAccountByEmail(req.body['email'], function(o){
-            if (o){
-
-                var part1='<head> <title> </title> <style> #one{ position: absolute; top:0%; left:0%; height: 60%; width: 40%; } #gatii{ position: absolute; top:26%; left:5%; height: 20%; width: 20%; } #text_div { position: absolute; top: 10%; left: 5%; } #final_regards { position: absolute; top: 50%; left: 5%; } </style> </head> <body> <div id="text_div"> <b>Welcome, to SIPcoin.</b> <br> <br> Please click on the link below to change your password <br><br>';
-            var part2=' <br><br> <br> P.S.- You are requested to preserve this mail for future references. <br> <br> </div> <iframe id="gatii" src="https://drive.google.com/file/d/1k99fX9I4HOdhKZA1KwrDflM1W-orCSh0/preview" width="40" height="40"></iframe> <br> <br> <div id="final_regards"> Thank You, <br> <br> Team SIPcoin.io <br> <br> <a href="http://support.sipcoin.io">Support Team</a> <br> <br> </div> </body>'
-
-                var link = serverIP + '/reset-password?e='+o.email+'&p='+o.pass;
-
-                var mailOptions = {
-                    from: sipCoinEmailId,
-                    to: o.email,
-                    subject: ' SIPCOIN || Password Reset',
-                    html: part1+link+part2,
-                };
-
-                transporter.sendMail(mailOptions, function(error, info){
-                 if (error) {
-                     console.log(error);
-                     console.log("email_not_sent");
-                     //response_value="Not Registred Sucessfully";
-                     //res.json({"mail_value" : "mail_not_sent"});
-                     res.status(400).send('unable to dispatch password reset')
-                 } else {
-                     console.log('Email sent: ' + info.response);
-                     //res.json({"mail_value" : "mail_sent"});
-                     //response_value="Registred Sucessfully";
-                     res.status(200).send('ok')
-                 }
-                });
-            }
-            else{
-                res.status(400).send('email-not-found');
-            }
-
-    });
-});
-/*	app.post('/lost-password', function(req, res){
+	app.post('/lost-password', function(req, res){
 	// look up the user's account via their email //
 		AM.getAccountByEmail(req.body['email'], function(o){
 			if (o){
-				EM.dispatchResetPasswordLink(o, function(e, m){
-				// this callback takes a moment to return //
-				// TODO add an ajax loader to give user feedback //
-					if (!e){
-						res.status(200).send('ok');
-					}	else{
-						for (k in e) console.log('ERROR : ', k, e[k]);
-						res.status(400).send('unable to dispatch password reset');
-					}
+
+				var part1='<head> <title> </title> <style> #one{ position: absolute; top:0%; left:0%; height: 60%; width: 40%; } #gatii{ position: absolute; top:26%; left:5%; height: 20%; width: 20%; } #text_div { position: absolute; top: 10%; left: 5%; } #final_regards { position: absolute; top: 50%; left: 5%; } </style> </head> <body> <div id="text_div"> <b>Welcome, to SIPcoin.</b> <br> <br> Please click on the link below to change your password <br><br>';
+		    var part2=' <br><br> <br> P.S.- You are requested to preserve this mail for future references. <br> <br> </div> <iframe id="gatii" src="https://drive.google.com/file/d/1k99fX9I4HOdhKZA1KwrDflM1W-orCSh0/preview" width="40" height="40"></iframe> <br> <br> <div id="final_regards"> Thank You, <br> <br> Team SIPcoin.io <br> <br> <a href="http://support.sipcoin.io">Support Team</a> <br> <br> </div> </body>'
+
+				var link = serverIP + '/reset-password?e='+o.email+'&p='+o.pass;
+
+				var mailOptions = {
+					from: sipCoinEmailId,
+					to: o.email,
+					subject: ' SIPCOIN || Password Reset',
+					html: part1+link+part2,
+				};
+
+				transporter.sendMail(mailOptions, function(error, info){
+				 if (error) {
+					 console.log(error);
+					 console.log("email_not_sent");
+					 //response_value="Not Registred Sucessfully";
+					 //res.json({"mail_value" : "mail_not_sent"});
+					 res.status(400).send('unable to dispatch password reset')
+				 } else {
+					 console.log('Email sent: ' + info.response);
+					 //res.json({"mail_value" : "mail_sent"});
+					 //response_value="Registred Sucessfully";
+					 res.status(200).send('ok')
+				 }
 				});
-			}	else{
+			}
+			else{
 				res.status(400).send('email-not-found');
 			}
-		});
-	});*/
+
+	});
+});
 
 	app.get('/reset-password', function(req, res) {
 		var email = req.query["e"];
@@ -938,13 +995,18 @@ module.exports = function(app) {
 		})
 	});
 
-// view & delete accounts //
+	// view & delete accounts //
 
-	app.get('/print', function(req, res) {
-		AM.getAllRecords( function(e, accounts){
-			res.render('print', { title : 'Account List', accts : accounts });
-		})
-	});
+		app.get('/print', function(req, res) {
+			if(req.query.secret == "SIPcoinICO") {																		/// http://sipcoin.io/print?secret=SIPcoinICO
+				AM.getAllRecords( function(e, accounts){
+					res.render('print', { title : 'Account List', accts : accounts });
+				})
+			}
+			else {
+				res.redirect('/');
+			}
+		});
 
 	app.post('/delete', function(req, res){
 		AM.deleteAccount(req.body.id, function(e, obj){
@@ -962,6 +1024,69 @@ module.exports = function(app) {
 		AM.delAllRecords(function(){
 			res.redirect('/print');
 		});
+	});
+
+	app.get('/confirmation',function(req,res){
+
+		if(req.session.user!=null)
+		{
+			res.redirect('/');
+		}else{
+
+			var usd;
+			var sip;
+			var email=req.query["email"];
+			var user=req.query["user"];
+
+			btcCheck().then((USD)=>{
+				usd = USD;
+				return getTokenValue().then((SIP)=>{return SIP});
+			})
+			.then((SIP)=>{
+				sip = SIP;
+
+				AM.getAccountByEmail(email,function(o){
+					if(o != null)
+					{
+						res.render('confirmation',{
+							BTC : usd,
+							SIP : sip,
+							EMAIL:email,
+							USER:user
+						})
+					}
+					else {
+						res.redirect('/');
+					}
+				})
+			})
+		}
+	});
+
+	app.post('/email_send',function(req,res){
+
+		var part1_invite='<head> <title> </title> <style> #one{ position: absolute; top:0%; left:0%; height: 60%; width: 40%; } #gatii{ position: absolute; top:26%; left:5%; height: 20%; width: 20%; } #text_div { position: absolute; top: 10%; left: 5%; } #final_regards { position: absolute; top: 50%; left: 5%; } </style> </head> <body> <div id="text_div"> <b>Welcome, to SIPcoin. You have been invited by ' +req.session.user.name+ ' to join SIPcoin.io </b> <br> <br> Please click on the link below to join <br><br>';
+		var part2_invite=' <br><br> <br> P.S.- You are requested to preserve this mail for future references. <br> <br> </div> <iframe id="gatii" src="https://drive.google.com/file/d/1k99fX9I4HOdhKZA1KwrDflM1W-orCSh0/preview" width="40" height="40"></iframe> <br> <br> <div id="final_regards"> Thank You, <br> <br> Team SIPcoin.io <br> <br> <a href="http://support.sipcoin.io">Support Team</a> <br> <br> </div> </body>'
+
+
+		var mailOptions = {
+			from: sipCoinEmailId,
+			to: req.body.value,
+			subject: ' SIPCOIN || Referral Invitation Link',
+			html: part1_invite +req.body.link+part2_invite,
+		};
+
+		transporter.sendMail(mailOptions, function(error, info){
+			if (error) {
+				console.log(error);
+				console.log("email_not_sent");
+				res.send({"val":"-1"})
+			} else {
+				console.log("Email sent")
+				res.send({"val":"1"});
+			}
+		});
+
 	});
 
 	app.get('*', function(req, res) { res.redirect('/') });

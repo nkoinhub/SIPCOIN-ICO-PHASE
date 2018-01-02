@@ -89,15 +89,6 @@ exports.getProgress = function(callback)
 	})
 }
 
-//get transac doc using invoice ID
-exports.getTransactionDocUsingInvoice = function(invoice, callback)
-{
-    transactions.findOne({TransactionID:invoice},{demandedTokens:1, publicAddressWallet:1, BTCofTokens:1, valueOfOneToken:1, BTCtoUSD:1, _id:0},function(e,res){
-        if(res != null) callback(res)
-        else callback(null);
-    })
-}
-
 exports.incrementTotalCoins = function(coins, callback)
 {
 	sipStage.update({about:"sipStage"},{$inc:{totalCoins:coins}}, callback("Incremented Coins in SIP Stage Document"));
@@ -247,6 +238,15 @@ exports.referralCreate = function(username, emailid, referralCode, callback)
 
 	referrals.insert(referralDoc, callback);
 
+}
+
+//get transac doc using invoice ID
+exports.getTransactionDocUsingInvoice = function(invoice, callback)
+{
+	transactions.findOne({TransactionID:invoice},{demandedTokens:1, publicAddressWallet:1, BTCofTokens:1, valueOfOneToken:1, BTCtoUSD:1, _id:0},function(e,res){
+		if(res != null) callback(res)
+		else callback(null);
+	})
 }
 
 exports.updateTransactionDoc = function(o, callback)

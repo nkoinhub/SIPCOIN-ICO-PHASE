@@ -1,0 +1,125 @@
+doctype html
+html(lang='en')
+  head
+    title SIPcoin
+    meta(charset='utf-8')
+    meta(name='viewport', content='width=device-width, initial-scale=1')
+    link(rel='stylesheet', href='/css/bootstrap.min.css')
+    link(rel='stylesheet', href='/font-awesome/css/font-awesome.min.css')
+    link(rel='stylesheet', href='/css/bootstrap.min.css')
+    link(rel='stylesheet', href='/css/index.css')
+    script(src='js/views/jquery.min.js')
+    script(src='js/views/bootstrap.min.js')
+    <link rel="apple-touch-icon" sizes="180x180" href="/images/favicons/apple-touch-icon.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="/images/favicons/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="/images/favicons/favicon-16x16.png">
+    <link rel="manifest" href="/images/favicons/manifest.json">
+    <link rel="mask-icon" href="favicons/safari-pinned-tab.svg" color="#5bbad5">
+  body
+    nav.navbar.navbar-inverse.navbar-fixed-top
+      .container-fluid
+        .navbar-header
+          button.navbar-toggle(style='margin-top:15px;', type='button', data-toggle='collapse', data-target='#myNavbar')
+            span.icon-bar
+            span.icon-bar
+            span.icon-bar
+          a(href='/', style='border:none;color:white;margin:20px;')
+            img(src='/images/sipcoin_logo2d.png', alt='Person', style='height:40px;width:40px;')
+          a(href='/', style='text-decoration:none;color:white;font-size:30px;maring-top:20px;') SIPcoin
+        #myNavbar.collapse.navbar-collapse
+          ul.nav.navbar-nav.navbar-right
+            button.btn(type='button', style='margin-top:10px;margin-bottom:5px;')
+              .chip(style='font-size:18px;')
+                img(src='/images/coin.png', alt='Person', style='height:40px;width:40px;')
+                |    $ #{BTC}
+            button.btn(type='button', style='margin-top:10px;margin-bottom:5px;')
+              .chip(style='font-size:18px;')
+                img(src='/images/sipcoin_logo2d.png', alt='Person', style='height:40px;width:40px;')
+                |    $ #{SIP}
+            //
+              <li><div class="chip"><img src="/images/avatar.png" alt="Person" width="96" height="96"></div><a class="bit_current_value" href="javascript:void(0)" style="color:white;font-size:25px;margin-top:10px;"> $ 1234  </a></li>
+              <li><a class="sip_current_value" href="javascript:void(0)" style="color:white;font-size:25px;margin-top:10px;"> Sipcoin &nbsp; - &nbsp; $ 1.5 </a></li>
+    #success(style='position:absolute;top:40%;left:50%;transform:translate(-50%,-50%);width:100%;')
+      br
+      br
+      br
+      br
+      br
+      br
+      br
+      br
+      br
+      br
+      br
+      br
+      br
+      br
+      .container
+        .row
+          .col-sm-6.col-sm-offset-3
+            .row
+              br
+              br
+              .col-sm-12
+                center
+                br
+              .col-sm-12
+                center
+                  h3 Your account has been verified.
+                br
+              .col-sm-12
+                center
+                  h4 Redirecting  ......
+                  br
+                  br
+                  br
+                  br
+                  br
+                  br
+                  br
+      #footer.my_footer_class(style='margin-bottom:0px;')
+       .container
+         .row
+           br
+           .col-sm-4
+             center
+               button.btn(type='button', style='padding-top:20px;')
+                 a(href='/', style='border:none;color:white;margin-right:0px;')
+                   img(src='/images/sipcoin_logo2d.png', alt='Person', width='50', height='50')
+               button.btn(type='button', style='padding-top:20px;')
+                 a(href='/', style='text-decoration:none;color:white;font-size:30px;') SIPcoin
+           .col-sm-4
+             .row
+               .col-sm-12
+                 h3 Contact
+               .col-sm-12
+                 h4
+                   i.fa.fa-ticket.fa-1x(aria-hidden='true', style='margin-right:10px;')
+                   a(href='http://support.sipcoin.io', style='border:none;color:white;margin-right:0px;' target='_blank') Support Center
+               .col-sm-12
+           .col-sm-4
+             .row
+               br
+               .col-sm-12
+                 h3 Follow Us
+               .col-sm-12
+                 a(href='https://www.facebook.com/sipcoin/', target='_blank')
+                   img(src='/images/facebook.png', height='50px;', width='50px;', style='margin-right:15px;')
+                 a(href='https://www.instagram.com/sipcoin.io/?hl=en', target='_blank')
+                   img(src='/images/insta_1.png', height='50px;', width='50px;', style='margin-right:15px;')
+                 a(href='https://twitter.com/sipcoin_io', target='_blank')
+                   img(src='/images/twitter.png', height='50px;', width='50px;', style='margin-right:15px;')
+                 a(href='https://goo.gl/e37G3Z', target='_blank')
+                   img(src='/images/Slack.png', height='50px;', width='50px;', style='margin-right:15px;')
+           .col-sm-12
+             hr
+           .col-sm-12
+             center
+               h4 © Copyright SIPcoin.io 2017
+           .col-sm-12
+             br
+
+    script.
+      setTimeout(function(){
+        window.location.href = '/login';
+      },3000);

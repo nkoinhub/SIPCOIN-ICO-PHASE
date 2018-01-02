@@ -1,6 +1,6 @@
 var emailID = "coinsipbit@gmail.com"
 var passWord = "SMuley1@3"
-var hostName = "http://sipcoin.io/"
+var hostName = "http://localhost:3000/"
 var EM = {};
 module.exports = EM;
 

@@ -41,7 +41,7 @@ html(lang='en')
       -moz-box-shadow: 4px 6px 49px -1px rgba(3,43,47,1);
       box-shadow: 4px 6px 49px -1px rgba(3,43,47,1);
       }
-      
+
       .sidenav a {
       font-family:lato_light;
       padding: 8px 8px 8px 32px;
@@ -127,13 +127,13 @@ html(lang='en')
             button#btn-logout(style='display:none')
             .container-fluid
               .navbar-header
-                button.navbar-toggle(style='margin-top:15px;', type='button', data-toggle='collapse', data-target='#myNavbar')
+                button.navbar-toggle(style='margin-top:23px;', type='button', data-toggle='collapse', data-target='#myNavbar')
                   span.icon-bar
                   span.icon-bar
                   span.icon-bar
-                a.navbar-brand(onclick='openNav()', href='#', style='margin-left:5px;color:white;padding-bottom: 43px;margin-right:15px;margin-top:5px;')
+                a.navbar-brand(onclick='openNav()', href='javascript:void(0)', style='margin-left:5px;color:white;padding-bottom: 43px;margin-right:15px;margin-top:5px;')
                   i.fa.fa-bars(aria-hidden='true',style="font-size:30px;margin-top:5px;")
-                a.navbar-brand.regularLatto(href='#', style='color:white;padding-bottom: 33px;padding-top:24px;font-size:25px;margin-top:5px;') SIPcoin
+                a.navbar-brand.regularLatto(href='/', style='color:white;padding-bottom: 33px;padding-top:24px;font-size:25px;margin-top:5px;') SIPcoin
               #myNavbar.collapse.navbar-collapse
                 ul.nav.navbar-nav.navbar-right
                   button.btn(type='button',style="margin-top:10px;margin-bottom:5px;")
@@ -145,8 +145,8 @@ html(lang='en')
                       img(src='/images/sipcoin_logo2d.png', alt='Person', style='height:40px;width:40px;')
                       |      $ #{SIP}
                   //
-                    <li><div class="chip"><img src="/images/avatar.png" alt="Person" width="50" height="50"></div><a class="bit_current_value" href="#" style="color:white;font-size:25px;margin-top:10px;"> $ 1234  </a></li>
-                    <li><a class="sip_current_value" href="#" style="color:white;font-size:25px;margin-top:10px;"> Sipcoin &nbsp; - &nbsp; $ 1.5 </a></li>
+                    <li><div class="chip"><img src="/images/avatar.png" alt="Person" width="50" height="50"></div><a class="bit_current_value" href="javascript:void(0)" style="color:white;font-size:25px;margin-top:10px;"> $ 1234  </a></li>
+                    <li><a class="sip_current_value" href="javascript:void(0)" style="color:white;font-size:25px;margin-top:10px;"> Sipcoin &nbsp; - &nbsp; $ 1.5 </a></li>
                   button.btn.open_the_popup(type='button',style="margin-top:10px;margin-bottom:5px;")
                     .chip
                       img(src='/images/avatar.png', alt='Person', style='height:40px;width:40px;')
@@ -200,6 +200,48 @@ html(lang='en')
                     // <img src="images/qr.jpg" style="height:175px;width:175px;">
                   br
               br
+      #footer.my_footer_class(style='margin-bottom:0px;')
+        .container
+          .row
+            br
+            .col-sm-4
+              center
+                button.btn(type='button', style='padding-top:20px;')
+                  a(href='/', style='border:none;color:white;margin-right:0px;')
+                    img(src='/images/sipcoin_logo2d.png', alt='Person', width='50', height='50')
+                button.btn(type='button', style='padding-top:20px;')
+                  a(href='/', style='text-decoration:none;color:white;font-size:30px;') SIPcoin
+            .col-sm-4
+              .row
+                .col-sm-12
+                  h3 Contact
+                .col-sm-12
+                  h4
+                    i.fa.fa-ticket.fa-1x(aria-hidden='true', style='margin-right:10px;')
+                    a(href='http://support.sipcoin.io', style='border:none;color:white;margin-right:0px;' target='_blank') Support Center
+                .col-sm-12
+            .col-sm-4
+              .row
+                br
+                .col-sm-12
+                  h3 Follow Us
+                .col-sm-12
+                  a(href='https://www.facebook.com/sipcoin/', target='_blank')
+                    img(src='/images/facebook.png', height='50px;', width='50px;', style='margin-right:15px;')
+                  a(href='https://www.instagram.com/sipcoin.io/?hl=en', target='_blank')
+                    img(src='/images/insta_1.png', height='50px;', width='50px;', style='margin-right:15px;')
+                  a(href='https://twitter.com/sipcoin_io', target='_blank')
+                    img(src='/images/twitter.png', height='50px;', width='50px;', style='margin-right:15px;')
+                  a(href='https://goo.gl/e37G3Z', target='_blank')
+                    img(src='/images/Slack.png', height='50px;', width='50px;', style='margin-right:15px;')
+            .col-sm-12
+              hr
+            .col-sm-12
+              center
+                h4 © Copyright SIPcoin.io 2017
+            .col-sm-12
+              br
+              
     script.
       var bitocoin_Wallet_Address= "#{address}" ;
       var bitcoin_qr_code = new QRCode(document.getElementById("bitcoin_wallet"), {
@@ -237,6 +279,10 @@ html(lang='en')
       function closeNav() {
       document.getElementById("mySidenav").style.width = "0";
       }
+      $("#mySidenav").mouseleave(function(){
+      document.getElementById("mySidenav").style.width = "0";
+      });
+
 
 include modals/alert
 include modals/confirm

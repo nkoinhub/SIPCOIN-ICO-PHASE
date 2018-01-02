@@ -83,6 +83,7 @@ h6 {
   float: right;
   margin-right: 5px;
 }
+
 #account-form-container form {
   width: 460px;
 }
@@ -90,8 +91,25 @@ h6 {
 	modal windows
 */
 .modal .modal-dialog {
-  width: 480px;
+  top:10%;
+  width: 50%;
 }
+
+
+@media all and (max-width: 700px) {
+  .modal .modal-dialog {
+    position: absolute;
+    top: 20%;
+    left: 5%;
+    width: 90%;
+
+  }
+
+
+}
+
+
+
 .modal .form-group {
   margin-bottom: 0px;
 }
