@@ -58,6 +58,115 @@ var referrals = db.collection('referrals');
 var sipStage = db.collection('SIPStage');
 var Res = db.collection('RES');
 
+
+// function to return the child node of the parent referral node
+var getChildren = function(referral)
+{
+	return new Promise(function(resolve,reject){
+		referrals.find({parentReferralCode:referral},{_id:0,selfReferralCode:1,parentReferralCode:1,sponsorReferralCode:1,link:1,username:1}).toArray(function(e,res){
+			resolve(res);
+		})
+	})
+}
+
+exports.formTreeData = function(referral, callback)
+{
+	var finalData = [];
+
+	var getEverything = function(referral)
+	{
+		getChildren(referral).then((resArray)=>{
+			if(resArray.length == 2)
+			{
+				if(resArray[0].link == "left")
+				{
+					finalData.push({
+						key : resArray[0].selfReferralCode,
+						parent : resArray[0].parentReferralCode,
+						name : resArray[0].username
+					})
+					finalData.push({
+						key : resArray[1].selfReferralCode,
+						parent : resArray[1].parentReferralCode,
+						name : resArray[1].username
+					})
+
+				}
+				else {
+					finalData.push({
+						key : resArray[1].selfReferralCode,
+						parent : resArray[1].parentReferralCode,
+						name : resArray[1].username
+					})
+					finalData.push({
+						key : resArray[0].selfReferralCode,
+						parent : resArray[0].parentReferralCode,
+						name : resArray[0].username
+					})
+				}
+				return resArray;
+			}
+			else if(resArray.length == 1)
+			{
+				if(resArray[0].link == "left")
+				{
+					finalData.push({
+						key : resArray[0].selfReferralCode,
+						parent : resArray[0].parentReferralCode,
+						name : resArray[0].username
+					})
+					finalData.push({
+						key : "Empty",
+						parent : resArray[0].parentReferralCode,
+						name : "No Child"
+					})
+
+				}
+				else
+				{
+					finalData.push({
+						key : "Empty",
+						parent : resArray[0].parentReferralCode,
+						name : "No Child"
+					})
+					finalData.push({
+						key : resArray[0].selfReferralCode,
+						parent : resArray[0].parentReferralCode,
+						name : resArray[0].username
+					})
+				}
+				return resArray;
+			}
+			else if(resArray.length == 0)
+			{
+				return resArray;
+			}
+		})
+		.then((resArray)=>{
+			if(resArray.length == 2)
+			{
+				getEverything(resArray[0].selfReferralCode);
+				getEverything(resArray[1].selfReferralCode);
+			}
+			else if(resArray.length == 1)
+			{
+				getEverything(resArray[0].selfReferralCode);
+			}
+		})
+	}
+
+	getEverything(referral);
+
+	setTimeout(function(){
+		callback(finalData);
+	},8000);
+
+}
+
+
+
+
+//get total coins available from the inital 9 million
 exports.getTotalCoinsAvailable = function(callback)
 {
 	sipStage.findOne({},function(e,res){

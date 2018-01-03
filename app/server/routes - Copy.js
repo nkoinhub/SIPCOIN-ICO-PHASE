@@ -1,5 +1,6 @@
-var sipCoinEmailId = 'coinsipbit@gmail.com';
-var sipCoinEmailPass = 'SMuley1@3';
+
+var sipCoinEmailId = 'admin@sipcoin.io';
+var sipCoinEmailPass = 'adminadmin@123';
 var serverIP = 'http://localhost:3000';
 var CT = require('./modules/country-list');
 var AM = require('./modules/account-manager');
@@ -9,14 +10,17 @@ var Promise = require("bluebird");
 var moment 		= require('moment');
 var nodemailer = require('nodemailer');
 
-
 var transporter = nodemailer.createTransport({
-		 service: 'gmail',
+	//	 service: 'gmail',
+		host: 'smtp.zoho.com',
+		     port: 465,
+secure: true,
 		 auth: {
 			 user: sipCoinEmailId,
 			 pass: sipCoinEmailPass
 		 }
 	 });
+
 
 var part1='<head> <title> </title> <style> #one{ position: absolute; top:0%; left:0%; height: 60%; width: 40%; } #gatii{ position: absolute; top:26%; left:5%; height: 20%; width: 20%; } #text_div { position: absolute; top: 10%; left: 5%; } #final_regards { position: absolute; top: 50%; left: 5%; } </style> </head> <body> <div id="text_div"> <b>Welcome, to SIPcoin. You have been successfully registered on SIPcoin.io </b> <br> <br> Please click on the link below to verify your account <br><br>';
 var part2=' <br><br> <br> P.S.- You are requested to preserve this mail for future references. <br> <br> </div> <iframe id="gatii" src="https://drive.google.com/file/d/1k99fX9I4HOdhKZA1KwrDflM1W-orCSh0/preview" width="40" height="40"></iframe> <br> <br> <div id="final_regards"> Thank You, <br> <br> Team SIPcoin.io <br> <br> <a href="http://support.sipcoin.io">Support Team</a> <br> <br> </div> </body>'
@@ -136,14 +140,6 @@ var getNodeInfo = function(referral){
 
 
 module.exports = function(app) {
-
-	//tree generation algorithm call and respond
-	app.post('/referralTree',function(req,res){
-		AM.formTreeData(req.body.root_referral, function(data){
-			console.log(data);
-			res.send(data);
-		})
-	})
 
 	//main page render
 	app.get('/',function(req,res){
@@ -813,7 +809,6 @@ app.get('/resent_verfication_page',function(req,res){
 
 	// creating new accounts //
 		app.get('/signup', function(req, res) {
-
 			var btc;
 			btcCheck().then((BTC)=>{
 				btc = BTC;
@@ -917,6 +912,17 @@ app.get('/resent_verfication_page',function(req,res){
 //signup submission of registration form along with referral
 	app.post('/signup', function(req, res){
 
+		// if(req.body['sponsorReferralCode']!='')
+		// {
+		// 	if(req.body['link']!=undefined)
+		// 	{
+		// 		res.status(200).send('link not selected');
+		// 	}else {
+		//
+		//
+		// 	}
+		// }
+
 		if(req.body['g-recaptcha-response'] === undefined || req.body['g-recaptcha-response'] === '' || req.body['g-recaptcha-response'] === null) {
 			res.status(200).send('Captcha_not_selected');
 			console.log("hey captcha not selected");
@@ -941,8 +947,6 @@ app.get('/resent_verfication_page',function(req,res){
 			}
 
 			var parentReferralCode = (req.body['parentReferralCode']).toUpperCase();
-
-			console.log("above secretKey")
 
 			var secretKey = "6LdO6j0UAAAAAA04cC4pU1jeWWla3e6cL2Nm7xlz";
 			// req.connection.remoteAddress will provide IP address of connected user.

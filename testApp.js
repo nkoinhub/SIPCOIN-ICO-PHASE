@@ -16,7 +16,7 @@ var btcCheck = function(){
 
 btcCheck().then((value)=>{
   console.log("into the then "+value);
-  return btcCheck().then((value)=>{return "into the then "+value})
+  return "hello bro"
 })
 .then((value)=>{
   console.log("into the 2nd then "+value);
