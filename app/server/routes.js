@@ -2,7 +2,7 @@
 //for production
 var sipCoinEmailId = 'admin@sipcoin.io';
 var sipCoinEmailPass = 'adminadmin@123';
-var serverIP = 'http://sipcoin.io';
+var serverIP = 'https://sipcoin.io';
 
 //for development
 // var sipCoinEmailId = 'coinsipbit@gmail.com';
