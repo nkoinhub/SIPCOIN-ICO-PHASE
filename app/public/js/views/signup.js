@@ -64,6 +64,20 @@ $(document).ready(function(){
 				console.log('Sponsor_Referral_Code_Invalid');
 			}
 
+			if(responseText=='Link_Invalid')
+			{
+				$('.modal-form-errors .modal-body p').text('Please correct the following problems :');
+				var ul = $('.modal-form-errors .modal-body ul');
+					ul.empty();
+					ul.append('<li>Link Invalid <br> Check Your Link </li>')
+
+				$('.modal-form-errors').modal('show');
+
+				// $('.modal-form-errors .modal-body p').text('Captch Not Validated.<br> Try Again After some time');
+				// $('.modal-form-errors').modal('show');
+				console.log('Link_Invalid');
+			}
+
 			if(responseText=='Parent_Referral_Code_Invalid')
 			{
 				$('.modal-form-errors .modal-body p').text('Please correct the following problems :');
