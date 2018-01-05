@@ -60,6 +60,7 @@ var Res = db.collection('RES');
 
 
 // function to return the child node of the parent referral node
+//documents are searched where the parentReferralCode is given as the referral.
 var getChildren = function(referral)
 {
 	return new Promise(function(resolve,reject){
@@ -67,6 +68,54 @@ var getChildren = function(referral)
 			resolve(res);
 		})
 	})
+}
+
+// getting the children from self node, according to new structure
+//documents are searched and then the left and right link are returned
+var getChildrenNew = function(referral, link)
+{
+	return new Promise(function(resolve,reject){
+		if(link == "left")
+		{
+			referrals.findOne({selfReferralCode:referral},{_id:0,leftLink:1},function(e,res){
+				resolve(res);
+			})
+		}
+		else if(link == "right"){
+			referrals.findOne({selfReferralCode:referral},{_id:0,rightLink:1},function(e,res){
+				resolve(res);
+			})
+		}
+	})
+}
+
+exports.findParentForNewNode = function(root, link, callback)
+{
+	var retrievalOfParent = function(root, link)
+	{
+		getChildrenNew(root,link).then((res)=>{
+			if(link == "left")
+			{
+				if(res.leftLink != null)
+				{
+					retrievalOfParent(res.leftLink, link);
+				}
+				else {
+					callback(root);
+				}
+			}
+			else if(link == "right")
+			{
+				if(res.rightLink != null)
+				{
+					retrievalOfParent(res.rightLink, link);
+				}
+				else {
+					callback(root);
+				}
+			}
+		})
+	}
 }
 
 exports.formTreeData = function(referral, callback)
@@ -330,14 +379,27 @@ exports.insertResponse = function(response, callback)
 	Res.insert(response,callback);
 }
 
-exports.referralAdd = function(selfCode, toBePushedCode, callback)
+//adds the new referral in the parent referral doc as left/right link
+exports.referralAddInParent = function(ref, toBeLinked, link, callback)
+{
+	if(link == "left")
+	{
+		referrals.update({selfReferralCode:ref},{$set:{leftLink:toBeLinked}}, callback("New Node : " + toBeLinked + "added to left of Parent Node : " + ref));
+	}
+	else {
+		referrals.update({selfReferralCode:ref},{$set:{rightLink:toBeLinked}}, callback("New Node : " + toBeLinked + "added to right of Parent Node : " + ref));
+	}
+}
+
+//adds the new referral in the sponsorer referral doc
+exports.referralAddInSponsor = function(selfCode, toBePushedCode, callback)
 {
 	referrals.findOne({selfReferralCode:selfCode},function(e,o){
 		if(o)
 		{
 			o.referred.push(toBePushedCode);
 			o.referredCount = o.referredCount + 1;
-			referrals.save(o, {safe:true}, callback);
+			referrals.save(o, {safe:true}, callback("New Referral : " + toBePushedCode + " added in sponsorer : " + selfCode));
 		}
 	})
 }
@@ -363,6 +425,8 @@ exports.referralCreate = function(username, emailid, selfRef, sponsorRef, parent
 		selfReferralCode : selfRef,
 		sponsorReferralCode : sponsorRef,//sponsorer referral code, comes from registration page
 		parentReferralCode : parentRef,//parent referral code, comes from registration page
+		leftLink : null,
+		rightLink : null,
 		link : link,//left || right || root
 		planAmt : -1,// plan amount assign after considering the first transaction
 		currentAmt : 0,
