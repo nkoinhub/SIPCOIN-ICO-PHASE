@@ -49,6 +49,6 @@ $(document).ready(function(){
 	$('.g-recaptcha').remove();
   $('#account-form-btn1').remove();
 	$('#referral-tf').remove();
-	$("#parent-tf").remove();
+	//$("#parent-tf").remove();
 	$("#option_link-tf").remove();
 });

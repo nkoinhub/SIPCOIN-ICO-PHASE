@@ -55,10 +55,10 @@ br
           label.control-label.col-sm-3 Sponsor ID
           .col-sm-9
             input.form-control(type='text', name='sponsorReferralCode', value=ref)
-        #parent-tf.form-group
-          label.control-label.col-sm-3 Parent ID
-          .col-sm-9
-            input.form-control(type='text', name='parentReferralCode', value='')
+        //- #parent-tf.form-group
+        //-   label.control-label.col-sm-3 Parent ID
+        //-   .col-sm-9
+        //-     input.form-control(type='text', name='parentReferralCode', value='')
         #option_link-tf.form-group
           label.control-label.col-sm-3 Link
           .col-sm-9
@@ -81,8 +81,9 @@ br
         hr
         .form-buttons
           center
-            .g-recaptcha(data-sitekey='6LdO6j0UAAAAAGEunSa_Fq3ZarHhFeJbPYqDyO4P') 
-            //6LfXbzsUAAAAALCk_NicLha3d-KG_0GRNRxAJUMs
+            .g-recaptcha(data-sitekey='6LfXbzsUAAAAALCk_NicLha3d-KG_0GRNRxAJUMs') 
+            //production - 6LfXbzsUAAAAALCk_NicLha3d-KG_0GRNRxAJUMs
+            //development - 6LdO6j0UAAAAAGEunSa_Fq3ZarHhFeJbPYqDyO4P
             br
           center
             button#account-form-btn1.btn.btn-warning(type='button',style="color:White;")

@@ -91,9 +91,11 @@ var getChildrenNew = function(referral, link)
 
 exports.findParentForNewNode = function(root, link, callback)
 {
+	console.log("Find Parent For New Node Called");
 	var retrievalOfParent = function(root, link)
 	{
 		getChildrenNew(root,link).then((res)=>{
+			console.log(res);
 			if(link == "left")
 			{
 				if(res.leftLink != null)
@@ -101,6 +103,7 @@ exports.findParentForNewNode = function(root, link, callback)
 					retrievalOfParent(res.leftLink, link);
 				}
 				else {
+					console.log("callback called with parent found : " +root);
 					callback(root);
 				}
 			}
@@ -111,11 +114,13 @@ exports.findParentForNewNode = function(root, link, callback)
 					retrievalOfParent(res.rightLink, link);
 				}
 				else {
+					console.log("callback called with parent found : " +root);
 					callback(root);
 				}
 			}
 		})
 	}
+	retrievalOfParent(root,link);
 }
 
 exports.formTreeData = function(referral, callback)
@@ -384,10 +389,10 @@ exports.referralAddInParent = function(ref, toBeLinked, link, callback)
 {
 	if(link == "left")
 	{
-		referrals.update({selfReferralCode:ref},{$set:{leftLink:toBeLinked}}, callback("New Node : " + toBeLinked + "added to left of Parent Node : " + ref));
+		referrals.update({selfReferralCode:ref},{$set:{leftLink:toBeLinked}}, callback("New Node : " + toBeLinked + " added to left of Parent Node : " + ref));
 	}
 	else {
-		referrals.update({selfReferralCode:ref},{$set:{rightLink:toBeLinked}}, callback("New Node : " + toBeLinked + "added to right of Parent Node : " + ref));
+		referrals.update({selfReferralCode:ref},{$set:{rightLink:toBeLinked}}, callback("New Node : " + toBeLinked + " added to right of Parent Node : " + ref));
 	}
 }
 
