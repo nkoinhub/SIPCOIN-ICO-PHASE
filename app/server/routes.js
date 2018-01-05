@@ -1029,7 +1029,7 @@ app.get('/resent_verfication_page',function(req,res){
 												var mailOptions = {
 													from: sipCoinEmailId,
 													to: newAccount.email,
-													subject: 'SIPCOIN || Successful Registraion',
+													subject: 'SIPCOIN || Successful Registration',
 													html: part1 +URLforVerification+part2,
 												};
 
