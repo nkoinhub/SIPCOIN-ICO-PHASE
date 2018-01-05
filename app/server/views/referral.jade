@@ -338,7 +338,7 @@ html(lang='en')
       url: '/referralTree',
       success: function(result) {
       console.log(result);
-      result.unshift({key:'#{selfReferralCode}',name:'#{user.name}'});
+      result.unshift({key:'#{selfReferralCode}',name:'#{user.user}'});
       console.log(result);
       document.getElementsByClassName('loader')[0].style.display="none";
       model.nodeDataArray=result;
