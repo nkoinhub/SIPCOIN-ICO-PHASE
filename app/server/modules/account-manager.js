@@ -678,6 +678,11 @@ exports.getAccountByEmail = function(email, callback)
 	accounts.findOne({email:email}, function(e, o){ callback(o); });
 }
 
+exports.getAccountBySecret = function(secret, callback)
+{
+	accounts.findOne({secret:secret}, function(e, o){ callback(o); });
+}
+
 exports.validateResetLink = function(email, passHash, callback)
 {
 	accounts.find({ $and: [{email:email, pass:passHash}] }, function(e, o){
@@ -721,13 +726,6 @@ exports.getSelfReferralCode = function(username, callback)
 
 exports.getReferrals = function(user, emailid, callback)
 {
-	// referrals.find({user:username,email:emailid}).toArray(
-	// 	function(e,res) {
-	// 		if(e) callback(e)
-	// 		else callback(null,res);
-	// 	}
-	// )
-
 	referrals.findOne({username:user, email:emailid},{_id:0},function(e,o){
 		console.log(o);
 		if(o) callback(null, o);

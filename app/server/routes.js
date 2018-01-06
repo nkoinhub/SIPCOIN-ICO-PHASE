@@ -8,6 +8,7 @@ var serverIP = 'https://sipcoin.io';
 // var sipCoinEmailId = 'coinsipbit@gmail.com';
 // var sipCoinEmailPass = 'SMuley1@3';
 // var serverIP = 'http://localhost:3000';
+
 var CT = require('./modules/country-list');
 var AM = require('./modules/account-manager');
 var EM = require('./modules/email-dispatcher');
@@ -18,12 +19,12 @@ var nodemailer = require('nodemailer');
 
 
 //for production
-var transporter = nodemailer.createTransport({
-	//	 service: 'gmail',
+var transporter = nodemailer.createTransport(
+	{
 		host: 'smtp.zoho.com',
-		     port: 465,
-secure: true,
-		 auth: {
+		port: 465,
+		secure: true,
+		auth: {
 			 user: sipCoinEmailId,
 			 pass: sipCoinEmailPass
 		 }
@@ -121,13 +122,15 @@ var getPublicAddress = function(TID){
 	});
 }
 
-var checkBalance = function(address){
-	return new Promise(function(resolve,reject){
-		//check for balance on the given address and resolve the balance
-		resolve("1234")
-	})
+//template for mail sending
+
+var sendMailTemplate = function(Purpose, Subject, ){
+
+
 }
 
+
+//get transaction doc with the given invoice id
 var getTransactionDoc = function(TID){
 	return new Promise(function(resolve,reject){
 		AM.getTransaction(TID, function(o){
@@ -649,10 +652,36 @@ app.get('/resent_verfication_page',function(req,res){
 		AM.verifyAccount(req.query.secretKey,function(message){
 			console.log("Account with Secret : " + req.query.secretKey + " is  Verified");
 
+
 			var usd;
 			var sip;
 			var email=req.query["email"];
 			var user=req.query["user"];
+
+
+			AM.getAccountBySecret(req.query.secretKey, function(o){
+				var string = "Username : " + o.user + "<br>Sponsor Code : "+ o.selfReferralCode + "<br>Sponsor Link : " + serverIP + "/signup?ref=" + o.selfReferralCode;
+				//send mail with account details to the user-------------------------------------------------------------------------------------------------------------------------
+				var part1='<head> <title> </title> <style> #one{ position: absolute; top:0%; left:0%; height: 60%; width: 40%; } #gatii{ position: absolute; top:26%; left:5%; height: 20%; width: 20%; } #text_div { position: absolute; top: 10%; left: 5%; } #final_regards { position: absolute; top: 50%; left: 5%; } </style> </head> <body> <div id="text_div"> <b>Welcome, to SIPcoin.</b> <br><br>Thank You for registering at SIPcoin.io. Below are your account details:- <br> <br>' + string + '<br><br>';
+				var part2='P.S.- Your password security is our utmost priority, only you know it. <br> In case you do not know your password or you have forgotten it, you can visit:- <a href="'+serverIP+'/login">SIPcoin Login Page</a> <br> Select the option "Forgot Password" and proceed. <br></div> <iframe id="gatii" src="https://drive.google.com/file/d/1k99fX9I4HOdhKZA1KwrDflM1W-orCSh0/preview" width="40" height="40"></iframe> <br> <div id="final_regards">'
+				var part3='Thank You, <br> <br> Team SIPcoin.io <br> <br><a href="http://support.sipcoin.io">Support Team</a> <br> <br> </div> </body>'
+
+				var mailOptions = {
+					from: sipCoinEmailId,
+					to: o.email,
+					subject: ' SIPCOIN || Account Details',
+					html: part1+part2+part3,
+				};
+
+				transporter.sendMail(mailOptions, function(error, info){
+				 if (error) {
+					 console.log("Email Not Send : "+error);
+				 } else {
+					 console.log('Email sent: ' + info.response);
+				 }
+				});
+				//-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+			})
 
 			btcCheck().then((USD)=>{
 				usd = USD;
@@ -1000,7 +1029,7 @@ app.get('/resent_verfication_page',function(req,res){
 												var mailOptions = {
 													from: sipCoinEmailId,
 													to: newAccount.email,
-													subject: 'SIPCOIN || Successful Registraion',
+													subject: 'SIPCOIN || Successful Registration',
 													html: part1 +URLforVerification+part2,
 												};
 
@@ -1034,25 +1063,60 @@ app.get('/resent_verfication_page',function(req,res){
 
 					else {
 
-						AM.findParentForNewNode("SIP35970SIPADM", "right", function(parentNode){
+						//dont remove this portion of code, can be used for inital user creation - for e.g. ADMIN, without the need of sponsor code and without looking for parent referral code
+						// AM.addNewAccount(newAccount, function(e){
+						// if (e){
+						// 	res.status(400).send(e);
+						// 	}	else{
+						// 		AM.referralCreate(newAccount.user, newAccount.email, newAccount.selfReferralCode, "SIP35970SIPADM", "SIP35970SIPADM", "root", function(){
+						// 			var URLforVerification = serverIP +"/verify?secretKey=" + newAccount.secret + "&veri=" + makeid(5);
+            //
+						// 			var mailOptions = {
+						// 				from: sipCoinEmailId,
+						// 				to: newAccount.email,
+						// 				subject: ' SIPCOIN || Successful Registration',
+						// 				html: part1 +URLforVerification+part2,
+						// 			};
+            //
+						// 			transporter.sendMail(mailOptions, function(error, info){
+						// 			 if (error) {
+						// 				 console.log(error);
+						// 				 console.log("email_not_sent");
+						// 				 //response_value="Not Registred Sucessfully";
+						// 				 //res.json({"mail_value" : "mail_not_sent"});
+						// 			 } else {
+						// 				 console.log('Email sent: ' + info.response);
+						// 				 //res.json({"mail_value" : "mail_sent"});
+						// 				 //response_value="Registred Sucessfully";
+						// 			 }
+						// 			 res.status(200).send('ok');
+						// 			})
+						// 		})
+						// 	}
+						// });
+
+						//var adminRef = "RCH146RC511";	//development //admin of test computer
+						var adminRef = "SIP35970SIPADM"; //production //admin of server
+
+						AM.findParentForNewNode(adminRef, "right", function(parentNode){
 							console.log("Parent Node found for New Node : " + parentNode);
 
 							AM.addNewAccount(newAccount, function(e){
 							if (e){
 								res.status(400).send(e);
 								}	else{
-									AM.referralCreate(newAccount.user, newAccount.email, newAccount.selfReferralCode,  "SIP35970SIPADM", parentNode, "right", function(){
+									AM.referralCreate(newAccount.user, newAccount.email, newAccount.selfReferralCode,  adminRef, parentNode, "right", function(){
 										var URLforVerification = serverIP +"/verify?secretKey=" + newAccount.secret + "&veri=" + makeid(5);
 
 										var mailOptions = {
 											from: sipCoinEmailId,
 											to: newAccount.email,
-											subject: 'SIPCOIN || Successful Registraion',
+											subject: 'SIPCOIN || Successful Registration',
 											html: part1 +URLforVerification+part2,
 										};
 
 										AM.referralAddInParent(parentNode, newAccount.selfReferralCode, "right", function(message){console.log(message)});
-										AM.referralAddInSponsor( "SIP35970SIPADM", newAccount.selfReferralCode, function(message){console.log(message)});
+										AM.referralAddInSponsor( adminRef, newAccount.selfReferralCode, function(message){console.log(message)});
 
 										transporter.sendMail(mailOptions, function(error, info){
 											if (error) {
