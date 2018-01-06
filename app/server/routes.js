@@ -1,14 +1,6 @@
+console.log("========================= NODE ENVIRONMENT : " + process.env.NODE_ENV + "============================\n")
 
-//for production
-var sipCoinEmailId = 'admin@sipcoin.io';
-var sipCoinEmailPass = 'adminadmin@123';
-var serverIP = 'https://sipcoin.io';
-
-//for development
-// var sipCoinEmailId = 'coinsipbit@gmail.com';
-// var sipCoinEmailPass = 'SMuley1@3';
-// var serverIP = 'http://localhost:3000';
-
+//===================== required files ============================================
 var CT = require('./modules/country-list');
 var AM = require('./modules/account-manager');
 var EM = require('./modules/email-dispatcher');
@@ -16,37 +8,34 @@ var request = require('request');
 var Promise = require("bluebird");
 var moment 		= require('moment');
 var nodemailer = require('nodemailer');
+var config = require('config');
+//=================================================================================
+
+//=====================config file access==========================================
+var Credentials = config.get('Credentials');
+var Server = config.get('Server');
+var Transporter = config.get('Transporter');
+var Captcha = config.get('Captcha');
+var Referral = config.get('Referral');
+
+var sipCoinEmailId = Credentials.sipCoinEmailId;
+var sipCoinEmailPass = Credentials.sipCoinEmailPass;
+var serverIP = Server.IP;
+var captchaSecret = Captcha.key;
+var adminSponsorCode = Referral.Admin;
+//=================================================================================
+//=================================================================================
+
+//transporter for nodemailer, check config file for dev / prod configurations
+var transporter = nodemailer.createTransport(Transporter);
 
 
-//for production
-var transporter = nodemailer.createTransport(
-	{
-		host: 'smtp.zoho.com',
-		port: 465,
-		secure: true,
-		auth: {
-			 user: sipCoinEmailId,
-			 pass: sipCoinEmailPass
-		 }
-	 });
-
-//for development
-// var transporter = nodemailer.createTransport({
-// 		 service: 'gmail',
-// 		 auth: {
-// 			 user: sipCoinEmailId,
-// 			 pass: sipCoinEmailPass
-// 		 }
-// 	 });
-
-
-
+//===================== Part of HTML for Email Verification - Go to POST /signup ========================================================================
 var part1='<head> <title> </title> <style> #one{ position: absolute; top:0%; left:0%; height: 60%; width: 40%; } #gatii{ position: absolute; top:26%; left:5%; height: 20%; width: 20%; } #text_div { position: absolute; top: 10%; left: 5%; } #final_regards { position: absolute; top: 50%; left: 5%; } </style> </head> <body> <div id="text_div"> <b>Welcome, to SIPcoin. You have been successfully registered on SIPcoin.io </b> <br> <br> Please click on the link below to verify your account <br><br>';
 var part2=' <br><br> <br> P.S.- You are requested to preserve this mail for future references. <br> <br> </div> <iframe id="gatii" src="https://drive.google.com/file/d/1k99fX9I4HOdhKZA1KwrDflM1W-orCSh0/preview" width="40" height="40"></iframe> <br> <br> <div id="final_regards"> Thank You, <br> <br> Team SIPcoin.io <br> <br> <a href="http://support.sipcoin.io">Support Team</a> <br> <br> </div> </body>'
+//===============================================================================================================================================
 
-//console.log(moment().format('x'))
 
-//var URLforVerification = "http://localhost:3000/verify?secretKey=" + newAccount.secret + "&veri=" + makeid(5);
 
 var makeid = function(lengthReqd) {
   var text = "";
@@ -92,41 +81,26 @@ var btcCheck = function(){
 var getPublicAddress = function(TID){
 	return new Promise(function(resolve,reject){
 
-		//resolve("12wedfv4rtfgb7ytf56yh98iuhggb");
+		if(process.env.NODE_ENV == "production")
+		{
+			var API = 'https://api.blockchain.info/v2/receive?';
+			var xPub = 'xpub6D9eFNDYtCsbwd7xQdGDeQX9SejSpAFsBKRNzaViBprjXcoHs6933e9STs61Boo4P3REpeLNRXv1FW9oKWZp43PVTSD5AZbAFny9MFGHMb9';
+			var callback = 'http%3A%2F%2Fsipcoin.io/getInvoice%3FTID%3D'+TID;
+			var key = '09195d68-3873-4237-92fd-cdc6bda54aa4'
 
-		//get request to the api, then resolve the address
-		 var API = 'https://api.blockchain.info/v2/receive?';
-		 var xPub = 'xpub6D9eFNDYtCsbwd7xQdGDeQX9SejSpAFsBKRNzaViBprjXcoHs6933e9STs61Boo4P3REpeLNRXv1FW9oKWZp43PVTSD5AZbAFny9MFGHMb9';
-		 var callback = 'http%3A%2F%2Fsipcoin.io/getInvoice%3FTID%3D'+TID;
-		 var key = '09195d68-3873-4237-92fd-cdc6bda54aa4'
-    //
-		 var URL = API + 'xpub=' + xPub + '&callback=' + callback + '&key=' + key;
-    //
-		 request(URL, {json:true}, (err, res, body)=>{
-		 	if(err) { return console.log(err); }
-		 	console.log("received Address : "+body.address);
-		 	resolve(body.address);
-		 })
+			var URL = API + 'xpub=' + xPub + '&callback=' + callback + '&key=' + key;
 
-		// request('https://api.blockchain.info/v2/receive?xpub=xpub6D9eFNDYtCsbwd7xQdGDeQX9SejSpAFsBKRNzaViBprjXcoHs6933e9STs61Boo4P3REpeLNRXv1FW9oKWZp43PVTSD5AZbAFny9MFGHMb9&callback=http%3A%2F%2Fsipcoin.io%3Finvoice_id%3D058921123&key=09195d68-3873-4237-92fd-cdc6bda54aa4', { json: true }, (err, res, body) => {
-		// 	if (err) { return console.log(err); }
-		// 	console.log(body.address);
-		// 	resolve(body.address);
-		// });
+			request(URL, {json:true}, (err, res, body)=>{
+				if(err) { return console.log(err); }
+				console.log("received Address : "+body.address);
+				resolve(body.address);
+			})
+		}
+		else {
+			resolve("12wedfv4rtfgb7ytf56yh98iuhggb");
+		}
 
-		// request('https://api.blockchain.info/v2/receive?xpub=xpub6D9eFNDYtCsbwd7xQdGDeQX9SejSpAFsBKRNzaViBprjXcoHs6933e9STs61Boo4P3REpeLNRXv1FW9oKWZp43PVTSD5AZbAFny9MFGHMb9&callback=http%3A%2F%2Fsipcoin.io%3Finvoice_id%3D058921123&key=09195d68-3873-4237-92fd-cdc6bda54aa4', { json: true }, (err, res, body) => {
-		// 	if (err) { return console.log(err); }
-		// 	console.log(body.address);
-		// 	resolve(body.address);
-		// });
 	});
-}
-
-//template for mail sending
-
-var sendMailTemplate = function(Purpose, Subject, ){
-
-
 }
 
 
@@ -507,32 +481,11 @@ app.get('/resent_verfication_page',function(req,res){
 				AM.insertTransaction(dataCollection);
 			})
 			.then((done)=>{
-				//step 6 : respond with the public address
-				//res.send({address : dataCollection.publicAddressWallet});
-				// res.render('paymentAddr',{
-				// 	title: "checking tokens",
-				// 	udata : req.session.user,
-				// 	totaltokens : dataCollection.demandedTokens,
-				// 	address : dataCollection.publicAddressWallet,
-				// 	BTCTokens : dataCollection.BTCofTokens,
-				// 	SIP : dataCollection.valueOfOneToken,
-				// 	currentBTC : dataCollection.BTCtoUSD
-				// })
-
 				res.redirect('/payment?invoiceID='+dataCollection.TransactionID);
 			})
 			.catch((err)=>{
 				//step 6` : respond with null address if any error found
 				console.log("error found : " + err);
-				//res.send({address : null});
-				// res.render('paymentAddr',{
-				// 	title: "checking tokens",
-				// 	udata : req.session.user,
-				// 	totaltokens : dataCollection.demandedTokens,
-				// 	address : null,
-				// 	USD : dataCollection.BTCofTokens,
-				// 	currentBTC : dataCollection.BTCtoUSD
-				// })
 			})
 		}
 	})
@@ -750,24 +703,7 @@ app.get('/resent_verfication_page',function(req,res){
 		}
 	});
 
-
-
-	// app.post('/payment',function(req,res){
-	// 	console.log("post of payment");
-	// 	console.log(req.body['tokenvalue']);
-	// 	if(req.session.user == null){
-	// 		res.redirect('/');
-	// 	}else {
-	// 		res.render('paymentAddr',{
-	// 			title: "checking tokens",
-	// 			udata : req.session.user,
-	// 			totaltokens : req.body['tokenvalue']
-	// 		})
-	// 	}
-	// });
-
-
-
+// changing the account settings, thus a POST on dashboard
 	app.post('/dashboard', function(req, res){
 		if (req.session.user == null){
 			res.redirect('/');
@@ -993,11 +929,8 @@ app.get('/resent_verfication_page',function(req,res){
 
 			//var parentReferralCode = (req.body['parentReferralCode']).toUpperCase();
 
-			//var secretKey = "6LdO6j0UAAAAAA04cC4pU1jeWWla3e6cL2Nm7xlz"; // for development
-      var secretKey = "6LfXbzsUAAAAABJ4ZCatF2KQ5C8uDVVRTTsjhP1H"; //for production
-
 	// req.connection.remoteAddress will provide IP address of connected user.
-			var verificationUrl = "https://www.google.com/recaptcha/api/siteverify?secret=" + secretKey + "&response=" + req.body['g-recaptcha-response'] + "&remoteip=" + req.connection.remoteAddress;
+			var verificationUrl = "https://www.google.com/recaptcha/api/siteverify?secret=" + captchaSecret + "&response=" + req.body['g-recaptcha-response'] + "&remoteip=" + req.connection.remoteAddress;
 			// Hitting GET request to the URL, Google will respond with success or error scenario.
 			request(verificationUrl,function(error,response,body) {
 				body = JSON.parse(body);
@@ -1063,7 +996,7 @@ app.get('/resent_verfication_page',function(req,res){
 
 					else {
 
-						//dont remove this portion of code, can be used for inital user creation - for e.g. ADMIN, without the need of sponsor code and without looking for parent referral code
+						//============================dont remove this portion of code, can be used for inital user creation - for e.g. ADMIN, without the need of sponsor code and without looking for parent referral code
 						// AM.addNewAccount(newAccount, function(e){
 						// if (e){
 						// 	res.status(400).send(e);
@@ -1095,17 +1028,14 @@ app.get('/resent_verfication_page',function(req,res){
 						// 	}
 						// });
 
-						//var adminRef = "RCH146RC511";	//development //admin of test computer
-						var adminRef = "SIP35970SIPADM"; //production //admin of server
-
-						AM.findParentForNewNode(adminRef, "right", function(parentNode){
+						AM.findParentForNewNode(adminSponsorCode, "right", function(parentNode){
 							console.log("Parent Node found for New Node : " + parentNode);
 
 							AM.addNewAccount(newAccount, function(e){
 							if (e){
 								res.status(400).send(e);
 								}	else{
-									AM.referralCreate(newAccount.user, newAccount.email, newAccount.selfReferralCode,  adminRef, parentNode, "right", function(){
+									AM.referralCreate(newAccount.user, newAccount.email, newAccount.selfReferralCode,  adminSponsorCode, parentNode, "right", function(){
 										var URLforVerification = serverIP +"/verify?secretKey=" + newAccount.secret + "&veri=" + makeid(5);
 
 										var mailOptions = {
@@ -1116,7 +1046,7 @@ app.get('/resent_verfication_page',function(req,res){
 										};
 
 										AM.referralAddInParent(parentNode, newAccount.selfReferralCode, "right", function(message){console.log(message)});
-										AM.referralAddInSponsor( adminRef, newAccount.selfReferralCode, function(message){console.log(message)});
+										AM.referralAddInSponsor(adminSponsorCode, newAccount.selfReferralCode, function(message){console.log(message)});
 
 										transporter.sendMail(mailOptions, function(error, info){
 											if (error) {

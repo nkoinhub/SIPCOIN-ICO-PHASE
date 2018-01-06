@@ -292,7 +292,7 @@ html(lang='en')
                 .col-sm-12
                   h4
                     i.fa.fa-ticket.fa-1x(aria-hidden='true', style='margin-right:10px;')
-                    a(href='https://support.sipcoin.io', style='border:none;color:white;margin-right:0px;' target='_blank') Support Center
+                    a(href='http://support.sipcoin.io', style='border:none;color:white;margin-right:0px;' target='_blank') Support Center
                 .col-sm-12
             .col-sm-4
               .row
@@ -338,7 +338,7 @@ html(lang='en')
       url: '/referralTree',
       success: function(result) {
       console.log(result);
-      result.unshift({key:'#{selfReferralCode}',name:'#{user.user}'});
+      result.unshift({key:'#{selfReferralCode}',name:'#{user.name}'});
       console.log(result);
       document.getElementsByClassName('loader')[0].style.display="none";
       model.nodeDataArray=result;
@@ -353,14 +353,14 @@ html(lang='en')
       $(document).on('click',".button_hey_logout",function(){
       $("#btn-logout").click();
       });
-      var refferal_value='https://sipcoin.io/signup?ref%3D#{selfReferralCode}';
+      var refferal_value='http://sipcoin.io/signup?ref%3D#{selfReferralCode}';
       $("#whats_app_link").attr('href','https://web.whatsapp.com//send?text='+refferal_value);
       console.log(refferal_value);
       })
 
 
       function myFunction(){
-      var refferal_value='https://sipcoin.io/signup?ref='+'#{selfReferralCode}';
+      var refferal_value='http://sipcoin.io/signup?ref='+'#{selfReferralCode}';
       console.log(refferal_value);
       var dummy = $('<input>').val(refferal_value).appendTo('body').select()
       document.execCommand('copy')
@@ -403,7 +403,7 @@ html(lang='en')
         $("#mail_not_correct").css('display','block');
         console.log("Please Enter one email address");
       }else{
-      var refferal_value='https://sipcoin.io/signup?ref='+'#{selfReferralCode}';
+      var refferal_value='http://sipcoin.io/signup?ref='+'#{selfReferralCode}';
       var object_of_email={"value":array_email,"link":refferal_value};
       console.log(object_of_email);
       $.ajax({
