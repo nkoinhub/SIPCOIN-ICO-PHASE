@@ -23,6 +23,7 @@ var sipCoinEmailPass = Credentials.sipCoinEmailPass;
 var serverIP = Server.IP;
 var captchaSecret = Captcha.key;
 var adminSponsorCode = Referral.Admin;
+
 //=================================================================================
 //=================================================================================
 
@@ -547,8 +548,8 @@ app.get('/resent_verfication_page',function(req,res){
 			}	else{
 				req.session.user = o;
 				if (req.body['remember-me'] == 'true'){
-					res.cookie('user', o.user, { maxAge: 900000 });
-					res.cookie('pass', o.pass, { maxAge: 900000 });
+					res.cookie('user', o.user, { maxAge: 100000 });
+					res.cookie('pass', o.pass, { maxAge: 100000 });
 				}
 				res.status(200).send(o);
 			}
@@ -726,8 +727,8 @@ app.get('/resent_verfication_page',function(req,res){
 						req.session.user = o;
 						// update the user's login cookies if they exists //
 						if (req.cookies.user != undefined && req.cookies.pass != undefined){
-							res.cookie('user', o.user, { maxAge: 900000 });
-							res.cookie('pass', o.pass, { maxAge: 900000 });
+							res.cookie('user', o.user, { maxAge: 100000 });
+							res.cookie('pass', o.pass, { maxAge: 100000 });
 						}
 						res.status(200).send('ok');
 					}
@@ -780,8 +781,8 @@ app.get('/resent_verfication_page',function(req,res){
 						req.session.user = o;
 						// update the user's login cookies if they exists //
 						if (req.cookies.user != undefined && req.cookies.pass != undefined){
-							res.cookie('user', o.user, { maxAge: 900000 });
-							res.cookie('pass', o.pass, { maxAge: 900000 });
+							res.cookie('user', o.user, { maxAge: 100000 });
+							res.cookie('pass', o.pass, { maxAge: 100000 });
 						}
 						res.status(200).send('ok');
 					}
