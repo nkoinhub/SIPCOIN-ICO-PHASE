@@ -1,3 +1,5 @@
+process.env.NODE_ENV = "production";
+
 console.log("========================= NODE ENVIRONMENT : " + process.env.NODE_ENV + "============================\n")
 
 //===================== required files ============================================
@@ -1155,17 +1157,17 @@ app.get('/resent_verfication_page',function(req,res){
 			}
 		});
 
-	app.post('/delete', function(req, res){
-		AM.deleteAccount(req.body.id, function(e, obj){
-			if (!e){
-				res.clearCookie('user');
-				res.clearCookie('pass');
-				req.session.destroy(function(e){ res.status(200).send('ok'); });
-			}	else{
-				res.status(400).send('record not found');
-			}
-	    });
-	});
+	// app.post('/delete', function(req, res){
+	// 	AM.deleteAccount(req.body.id, function(e, obj){
+	// 		if (!e){
+	// 			res.clearCookie('user');
+	// 			res.clearCookie('pass');
+	// 			req.session.destroy(function(e){ res.status(200).send('ok'); });
+	// 		}	else{
+	// 			res.status(400).send('record not found');
+	// 		}
+	//     });
+	// });
 
 	app.get('/reset', function(req, res) {
 		AM.delAllRecords(function(){
@@ -1238,6 +1240,94 @@ app.get('/resent_verfication_page',function(req,res){
 
 	});
 
-	app.get('*', function(req, res) { res.redirect('/') });
+
+  //=======================================================================================================================================================================
+  //=======================================================================================================================================================================
+  //================================================================ ADMIN PANEL CONFIGURATIONS ===========================================================================
+  //=======================================================================================================================================================================
+
+//route for addding coins
+app.get('/addAmount',function(req,res){
+  if(req.query.username)
+  {
+    console.log("Conditioned addAmount : Redirected after Post")
+    var username = req.query.username;
+    var tokens = req.query.tokens;
+    var total = req.query.total;
+    var message = "# Username : "+username + "\n\n# Updated with Coins : "+tokens + "\n\n# Total Coins : "+total;
+
+    res.render('addCoin',{
+      message:message
+    });
+  }
+  else {
+    console.log("Simple addAmount : First Load")
+    res.render('addCoin');
+  }
+})
+
+//add tokens of already registered user
+app.post('/addAmount',function(req,res){
+  var username = req.body['username'];
+  var tokens = parseFloat(req.body['tokens']);
+  var USD = parseFloat(req.body['USD']);
+  var tokenValue = parseFloat(req.body['tokenValue']);
+
+  var TID = (username).substr(0,3) + moment().format('x');
+
+  var dataCollection = {
+    username : username,
+    email : "",
+    demandedTokens : tokens, // get the input box value
+    BTCofTokens : (tokens*tokenValue)/USD, //calculate (tokens*valueOfOneToken/BTCtoUSD)
+    valueOfOneToken : tokenValue,
+    BTCtoUSD : USD,
+    BTCpaid : (tokens*tokenValue)/USD,
+    tokens : tokens,
+    publicAddressWallet : "Direct Payment to Wallet",
+    amountPaid : true,
+    Expired : true,
+    TimeOfPaymentPlaced : moment().format('MMMM Do YYYY, h:mm:ss a'),
+    TransactionID : TID,
+    TimeOfPaymentReceived : moment().format('MMMM Do YYYY, h:mm:ss a'),
+    Transaction_hash : "Offline Payment",
+  }
+
+  var data = {
+    BTCvalue : (tokens*tokenValue)/USD,
+    transaction_hash : "Offline Payment",
+    address : "Direct Payment to Wallet",
+    TID : TID
+  }
+
+  AM.getAccountByUsername(username, function(result){
+    if(result != null)
+    {
+      console.log("ADMIN PANEL : ACCOUNT FOUND FOR THE USERNAME");
+      AM.insertResponse(data, function(){console.log(data);})
+      AM.incrementTokens(username, tokens, function(message){console.log("Tokens Updated : " + username + " :: " + tokens)});
+      AM.incrementTotalCoins(tokens, function(message){console.log(message + " :: " + tokens)});
+      AM.getDataForResend(username, function(account){dataCollection.email=account.email;AM.insertTransaction(dataCollection);});
+      res.redirect('/addAmount?username='+username+"&tokens="+tokens+"&total="+parseFloat(result.tokens)+parseFloat(tokens));
+    }
+    else {
+      console.log("ADMIN PANEL ERROR : ACCOUNT NOT FOUND FOR THE USERNAME")
+      res.render('addCoin',{message:"Invalid Entry, Check Username"});
+    }
+  })
+
+
+
+
+})
+
+//statistics for admin panel
+app.get('/adminPanel',function(req,res){
+
+})
+
+//redirect to main page if wrong routes tried
+app.get('*', function(req, res) { res.redirect('/') });
+
 
 };
