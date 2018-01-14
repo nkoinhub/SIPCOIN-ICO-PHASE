@@ -552,6 +552,20 @@ exports.updateTokenValueOfUserInDB = function(username, emailid, tokenvalue, cal
 	})
 }
 
+//get account by Username
+exports.getAccountByUsername = function(username, callback)
+{
+	accounts.findOne({user:username},function(e,o){
+		if(o)
+		{
+			callback(o);
+		}
+		else {
+			callback(null);
+		}
+	})
+}
+
 exports.getAccount = function(username, emailid, callback)
 {
 	accounts.findOne({user:username,email:emailid},function(e,o){

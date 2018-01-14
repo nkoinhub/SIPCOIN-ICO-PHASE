@@ -1,0 +1,33 @@
+doctype html
+html(lang='en')
+  head
+    meta(charset='utf-8')
+    meta(http-equiv='X-UA-Compatible', content='IE=edge')
+    meta(name='viewport', content='width=device-width, initial-scale=1')
+    title Admin Panel
+    link(rel='stylesheet', href='https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css')
+    script(src='https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js')
+    script(src='https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js')
+    style(type='text/css').
+      .coin-update{
+      margin: 20px;
+      }
+  body
+    .coin-update
+      form(action='/addAmount', method='post')
+        .form-group
+          label(for='username') Username
+          input#inputUsername.form-control(type='text', name='username', placeholder='Username', required='')
+        .form-group
+          label(for='tokens') Coins
+          input#inputTokens.form-control(type='number', name='tokens', step='0.01', placeholder='Coins', required='')
+        .form-group
+          label(for='USD') Bitcoin in USD
+          input#inputUSD.form-control(type='number', name='USD', step='0.01', placeholder='Bitcoin Value in USD', required='')
+        .form-group
+          label(for='tokenValue') Token Value
+          input#inputTokenValue.form-control(type='number', name='tokenValue', step='0.01', placeholder='Token Value', required='')
+        button.btn.btn-primary(type='submit') Submit
+  script.
+    var messageResponse = !{JSON.stringify(message)};
+    alert(messageResponse)

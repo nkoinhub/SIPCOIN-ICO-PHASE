@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Admin Panel</title>
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+<style type="text/css">
+    .coin-update{
+    	margin: 20px;
+    }
+</style>
+</head>
+<body>
+<div class="coin-update">
+    <form action="/addAmount" method="post">
+
+        <div class="form-group">
+            <label for="username">Username</label>
+            <input type="text" class="form-control" id="inputUsername" name="username" placeholder="Username" required>
+        </div>
+
+        <div class="form-group">
+            <label for="tokens">Tokens</label>
+            <input type="number" class="form-control" id="inputTokens" name="tokens" placeholder="Tokens" required>
+        </div>
+
+        <div class="form-group">
+            <label for="USD">Bitcoin in USD</label>
+            <input type="number" class="form-control" id="inputUSD" name="USD" placeholder="Bitcoin Value in USD" required>
+        </div>
+
+        <div class="form-group">
+            <label for="tokenValue">Token Value</label>
+            <input type="number" class="form-control" id="inputTokenValue" name="tokenValue" placeholder="Token Value" required>
+        </div>
+
+        <button type="submit" class="btn btn-primary">Submit</button>
+    </form>
+</div>
+</body>
+</html>
