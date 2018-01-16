@@ -1,0 +1,349 @@
+doctype html
+html(lang='en')
+  head
+    title SIPcoin
+    meta(charset='utf-8')
+    meta(name='viewport', content='width=device-width, initial-scale=1')
+    link(rel='stylesheet', href='/css/bootstrap.min.css')
+    link(rel='stylesheet', href='/css/index.css')
+    link(rel='stylesheet', href='/css/style.css')
+    script(src='js/views/jquery.min.js')
+    script(src='js/views/bootstrap.min.js')
+    link(rel='stylesheet prefetch', href='/css/Raleway.css')
+    link(rel='stylesheet prefetch', href='/css/animate.min.css')
+    <link rel="apple-touch-icon" sizes="180x180" href="/images/favicons/apple-touch-icon.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="/images/favicons/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="/images/favicons/favicon-16x16.png">
+    <link rel="manifest" href="/images/favicons/manifest.json">
+    <link rel="mask-icon" href="favicons/safari-pinned-tab.svg" color="#5bbad5">
+    <meta name="theme-color" content="#ffffff">
+
+    style.
+      body {
+      position: relative;
+      color: black;
+      }
+      ul.nav-pills {
+      top: 20%;
+      position: fixed;
+      z-index:5;
+      }
+      div.col-sm-9 div {
+      height: 670px;
+      font-size: 28px;
+      margin-bottom:50px;
+      margin-top:50px;
+      }
+      th{
+      font-size: 15px;
+      border-bottom: 1px solid #ccc;
+      padding: 2px;
+      }
+      td{
+      font-size: 15px;
+      border-left:1px solid #ccc;
+      padding: 8px;
+      border-right:1px solid #ccc;
+      border-bottom: 1px solid #ccc;
+      }
+      #section1 {color: black; background-color: white;}
+      #section2 {color: black; background-color: black;}
+      #section3 {color: black; background-color: white;}
+      #section41 {color: black; background-color: #00bcd4;}
+      #section42 {color: black; background-color: #009688;}
+      @media screen and (max-width: 810px) {
+      #section1, #section2, #section3, #section41, #section42  {
+      margin-left: 150px;
+      }
+      }
+  body(data-spy='scroll', data-target='#myScrollspy', data-offset='20')
+
+  #first_frame
+    .container
+      .row
+        br
+        br
+        br
+        nav.navbar.navbar-inverse.navbar-fixed-top
+          .container-fluid
+            .navbar-header
+              button.navbar-toggle(style='margin-top:15px;', type='button', data-toggle='collapse', data-target='#myNavbar')
+                span.icon-bar
+                span.icon-bar
+                span.icon-bar
+              button.btn(type='button', style="margin-top:10px;margin-bottom:5px;")
+                a(href='/', style='border:none;color:white;margin-right:0px;')
+                  img(src='/images/sipcoin_logo2d.png', alt='Person', style='height:40px;width:40px;')
+              button.btn(type='button', style="margin-top:10px;margin-bottom:5px;")
+                a(href='/', style='text-decoration:none;color:white;font-size:30px;') SIPcoin
+            #myNavbar.collapse.navbar-collapse
+              ul.nav.navbar-nav.navbar-right
+                button.btn(type='button')
+                  .chip(style='font-size:18px;')
+                    img(src='/images/coin.png', alt='Person', style='height:40px;width:40px;')
+                    |    $ #{USD}
+                button.btn(type='button',style="margin-top:10px;margin-bottom:5px;")
+                  .chip(style='font-size:18px;')
+                    img(src='/images/sipcoin_logo2d.png', alt='Person', style='height:40px;width:40px;')
+                    |  $ #{SIP}
+                a(href='/about_us',style='text-decoration:none;color:white;margin-right:15px;margin-left:10px;')
+                  img(src='/images/about.png', alt='Person', style='height:40px;width:40px;margin-right:10px;')
+                  |  About Us
+                a(href='/login',style='text-decoration:none;color:white;margin-right:15px;margin-left:10px;')
+                  img(src='/images/avatar.png', alt='Person', style='height:40px;width:40px;margin-right:10px;')
+                  |  Login / Register
+    .container
+      .row
+        nav#myScrollspy.col-sm-3
+          ul.nav.nav-pills.nav-stacked
+            li.active
+              a(href='#section1') Introduction
+            li
+              a(href='#section2') About Us
+            li
+              a(href='#section3') How it works
+            li
+              a(href='#section4') The SIP Mission
+            li
+              a(href='#section5') SIP Vision
+            li
+              a(href='#section6') SIP Services
+            li
+              a(href='#section7') How to Stake SIP
+            li
+              a(href='#section8') How to Lend SIP
+            li
+              a(href='#section9') Trade & Mining
+        .col-sm-9
+          #section1
+            #image_data(style='position:absolute;top:2%;left:0%;')
+              img(src='/images/sip.png', height='300px', width='300px')
+            #text_data(style='position:absolute;top:1%;left:40%;height:5%;width:60%;')
+              .row(style='margin:0;padding:20px;')
+                .col-sm-12(style='margin:0;font-size:20px;line-height:200%;')
+                  h1(style='margin:0;padding:0;') SIPcoin
+                  |               SIPcoin is here to help you with the crypto currency revolution with its AI based Smart Investment Platform (SIP).  Our open source decentralized system is designed to make the process of trading, staking, mining and investing much easier.  It’s transparent to all users from everywhere and educates its community allowing you the possibility of the stable income and financial freedom.
+          #section2
+            #myCarousel.carousel.slide(data-ride='carousel')
+              ol.carousel-indicators
+                li.active(data-target='#myCarousel', data-slide-to='0')
+                li(data-target='#myCarousel', data-slide-to='1')
+                li(data-target='#myCarousel', data-slide-to='2')
+                li(data-target='#myCarousel', data-slide-to='3')
+              .carousel-inner
+                .item.active
+                  img(src='/images/1.jpg', alt='Chicago', style='width:100%;height:100%;')
+                  .carousel-caption
+                .item
+                  img(src='/images/2.jpg', alt='Chicago', style='width:100%;')
+                  .carousel-caption
+                .item
+                  img(src='/images/3.jpg', alt='New York', style='width:100%;')
+                  .carousel-caption
+                .item
+                  img(src='/images/4.jpg', alt='New York', style='width:100%;')
+                  .carousel-caption
+              // Left and right controls
+              a.left.carousel-control(href='#myCarousel', data-slide='prev')
+                span.glyphicon.glyphicon-chevron-left
+                span.sr-only Previous
+              a.right.carousel-control(href='#myCarousel', data-slide='next')
+                span.glyphicon.glyphicon-chevron-right
+                span.sr-only Next
+          #section3
+            .row
+              .col-sm-12
+                br
+                br
+                p(style='text-align:left;font-size:25px;line-height:200%;')
+                  | How it Works
+                p(style='text-align:left;font-size:20px;line-height:200%;')
+                  | SIPcoin draws its value from the combine average value of the top ten coins currently trending and it gives you holistic approach to the digital currency market but protects you from volatility and inheriting individual coins
+                br
+                p(style='text-align:left;font-size:20px;line-height:200%;')
+                  | The funds generated through ICO would be pooled to invest in the top ten highly traded coins as the value of holdings grows or falls so will the value of sip coin in equal proportion however if the value of any one or two of the currency’s fall disproportionately  the pooled value of the other coins will still sustain  the value of the Sipcoin a globally unique mechanism this not only help mitigate investor risk but also make investment itself more affordable since the Sipcoin are priced much more reasonably as compare to other coins
+          #section4
+            br
+            br
+            p(style='text-align:left;font-size:25px;line-height:200%;')
+            | SIP Mission
+            p(style='text-align:left;font-size:20px;line-height:200%;')
+              | Nimble and innovative, SIP is perpetually on the hunt for fresh technologies that will help serve people better. Apart from security, we offer flexibility in the investment channels, that makes us attractive to a great number of potential investors.
+            p(style='text-align:left;font-size:20px;line-height:200%;')
+              | At SIP, we are a young and innovative company and hold the intrinsic standards of crypto currencies in high regard - the principles of anonymity and decentralization. We aim to minimize bureaucracy and build an easy-to-use, full-proof platform for the people.
+            p
+            p(style='text-align:left;font-size:30px;line-height:100%;')  The SIP Objective
+            p(style='text-align:left;font-size:20px;line-height:200%;')
+              | Sipcoin aims to be the best alternative to Bitcoin and Ethereum, the popular crypto currencies of the present day. You can buy, sell, and trade Sipcoins on the SIP exchange.
+              | Democracy is woven into the very fabric of our thinking.
+            p(style='text-align:left;font-size:20px;line-height:200%;')
+              | Having a solid and strong technical foundation drives our strategy. In the final analysis, we, at SIP want SIPcoin to be Easy-to-use, secure cryptocurrency for the people.
+          #section5
+            br
+            br
+            br
+            p(style='text-align:left;font-size:30px;line-height:200%;') SIP Vision
+            p(style='text-align:left;font-size:20px;line-height:200%;')
+              | Our ultimate vision is to create an exchange for the people owned by the people which also provides profit to the people; because we believe our profit is our investors profit too.
+          #section6
+            br
+            br
+            br
+            p(style='text-align:left;font-size:25px;line-height:200%;')
+              | Staking
+            p
+            p(style='text-align:left;font-size:20px;line-height:200%;')
+              | Receive fix 15% monthly on staking of SIP for one year and fix 20% monthly on staking Sipcoins for eighteen months
+            p(style='text-align:left;font-size:25px;line-height:200%;') Lending
+            p(style='text-align:left;font-size:20px;line-height:200%;') Lend your Sipcoins and earn daily profits through our AI based trading Bots
+            p(style='text-align:left;font-size:25px;line-height:200%;') Mining
+            p(style='text-align:left;font-size:20px;line-height:200%;')
+              | Earn mining (CPU / GPU) rewards for SIP mining by downloading the SIP mining software from the mining pool
+            p(style='text-align:left;font-size:25px;line-height:200%;') Trading
+            p(style='text-align:left;font-size:20px;line-height:200%;') Trade your SIP coins on the SIP exchange to earn margin points
+          #section7
+            br
+            p(style='text-align:left;font-size:25px;line-height:100%;margin-top:50px;') Staking
+            p(style='text-align:left;font-size:20px;line-height:200%;')
+              | Two plans of diverse durations available.
+              | All ICO participants will be able to select a staking plan on March 2, 2018 when the customer portal will go live.
+              | A 15% flat interest will be paid on a prorate basis for holding coins till March 2, 2018
+            p(style='text-align:left;font-size:25px;line-height:100%;') Staking SIP
+            p(style='text-align:left;font-size:20px;line-height:200%;')
+              ul
+                li(style='text-align:left;font-size:20px;line-height:200%;') Deposit BTC to your unique wallet in SIP
+                li(style='text-align:left;font-size:20px;line-height:200%;') Use your BTC balance to buy SIP coins
+                li(style='text-align:left;font-size:20px;line-height:200%;') Stake your SIP coins within the SIP customer portal and select staking plan
+                li(style='text-align:left;font-size:20px;line-height:200%;') Your staking interests will be credited to the USD wallet once every month
+                li(style='text-align:left;font-size:20px;line-height:100%;') You can convert the USD to SIP coins and start trading
+            p
+              center
+                table
+                  col(width='300')
+                  col(width='300')
+                  thead
+                    tr
+                      th(colspan='2')
+                        center(style='font-size:20px;') Staking Plans
+                  tbody
+                    tr
+                      td 12 Months Plan
+                      td 18 Months Plan
+                    tr
+                      td Coins free for trading after 12 months
+                      td Coins free for trading after 18 months
+                    tr
+                      td Monthly payout
+                      td Monthly payout
+                    tr
+                      td 15% fixed
+                      td 20% fixed
+          #section8
+            br
+            p(style='text-align:left;font-size:25px;line-height:100%;margin-top:70px;') Lending
+            p(style='text-align:left;font-size:20px;line-height:200%;') Four lending plans are available
+            p(style='text-align:left;font-size:20px;line-height:200%;') Minimum $10 is necessary for reinvestment
+            p
+              table
+                col(width='300')
+                col(width='300')
+                col(width='300')
+                col(width='300')
+                thead
+                  tr
+                    th(colspan='4')
+                      center(style='font-size:20px;') Lending Plans
+                  tr
+                    th Lend $100 to $1,000
+                    th Lend $1,010 to $10,000
+                    th Lend $10,010 to $50,000
+                    th Lend $50,010 to $100,000
+                tbody
+                  tr
+                    td Up to 42% monthly
+                    td Up to 42% monthly + 0.10% fixed daily
+                    td Up to 42% monthly + 0.15% fixed daily
+                    td Up to 42% monthly + 0.20% fixed daily
+                  tr
+                    td Capital release after 8 months
+                    td Capital release after 7 months
+                    td Capital release after 5 months
+                    td Capital release after 4 months
+            p(style='text-align:left;font-size:25px;line-height:100%;') How to lend Sipcoin
+            p(style='text-align:left;font-size:20px;line-height:200%;')
+              ul
+                li(style='text-align:left;font-size:20px;line-height:200%;') Deposit BTC to your unique wallet in SIP
+                li(style='text-align:left;font-size:20px;line-height:200%;') Use your BTC balance to buy SIP coins
+                li(style='text-align:left;font-size:20px;line-height:200%;') Lend your SIP coins on our lending platform and start earning daily interests
+                li(style='text-align:left;font-size:20px;line-height:200%;')
+                  | Your lending amount in USD will start earning interest from the same day with a daily AI based trading output and fixed return
+          #section9
+            br
+            br
+            br
+            p(style='text-align:left;font-size:25px;line-height:200%;') Trading Sipcoins includes:
+            p
+              ul
+                li(style='text-align:left;font-size:20px;line-height:200%;') Deposit BTC to your unique wallet in SIP.
+                li(style='text-align:left;font-size:20px;line-height:200%;') Use your BTC balance to buy SIP coins.
+                li(style='text-align:left;font-size:20px;line-height:200%;') Trade SIP coins in the SIP exchange.
+            p(style='text-align:left;font-size:25px;line-height:200%;') Mining Sipcoins includes:
+            p
+              ul
+                li(style='text-align:left;font-size:20px;line-height:200%;') SIP coins will be available for mining via CPU and GPU at a later date
+                li(style='text-align:left;font-size:20px;line-height:200%;')
+                  | Download the SIP miner from the mining pool and configure the miner for pool mining.
+                li(style='text-align:left;font-size:20px;line-height:200%;') Use your CPU / GPU computation power to contribute to validate transactions.
+                li(style='text-align:left;font-size:20px;line-height:200%;') Earn mining rewards in the form of SIP coins.
+
+      #footer.my_footer_class(style='margin-bottom:0px;width:117%;margin-left:-10%;')
+          .container
+            .row
+              br
+              .col-sm-4
+                center
+              .col-sm-3
+                .row
+                  .col-sm-12
+                    h3 Contact
+                  .col-sm-12
+                    h4
+                      i.fa.fa-ticket.fa-1x(aria-hidden='true', style='margin-right:10px;')
+                      a(href='http://support.sipcoin.io', style='border:none;color:white;margin-right:0px;' target='_blank') Support Center
+                  .col-sm-12
+              .col-sm-5
+                .row
+                  .col-sm-12
+                    h3 Follow Us
+                  .col-sm-12
+                    a(href='https://www.facebook.com/sipcoin/', target='_blank')
+                      img(src='/images/facebook.png', height='50px;', width='50px;', style='margin-right:15px;')
+                    a(href='https://www.instagram.com/sipcoin.io/?hl=en', target='_blank')
+                      img(src='/images/insta_1.png', height='50px;', width='50px;', style='margin-right:15px;')
+                    a(href='https://twitter.com/sipcoin_io', target='_blank')
+                      img(src='/images/twitter.png', height='50px;', width='50px;', style='margin-right:15px;')
+                    a(href='https://goo.gl/e37G3Z', target='_blank')
+                      img(src='/images/Slack.png', height='50px;', width='50px;', style='margin-right:15px;')
+                    a(href='/about_us',style='text-decoration:none;color:white;margin-right:15px;margin-left:10px;')
+                      img(src='/images/about.png', alt='Person', style='height:40px;width:40px;margin-right:10px;')
+                      |  About Us
+              .col-sm-12
+                hr
+              .col-sm-12
+                center
+                  h4 © Copyright SIPcoin.io 2017
+              .col-sm-12
+                br
+
+    script.
+      $("a").on('click', function(event) {
+      if (this.hash !== "") {
+      event.preventDefault();
+      var hash = this.hash;
+      $('html, body').animate({
+      scrollTop: $(hash).offset().top
+      }, 500, function(){
+      window.location.hash = hash;
+      });
+      }
+      });

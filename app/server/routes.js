@@ -147,6 +147,25 @@ module.exports = function(app) {
 		})
 	})
 
+
+  app.get('/about_us',function(req,res){
+
+    var usd,sip;
+
+    btcCheck().then((USD)=>{
+      usd = USD;
+      return getTokenValue().then((SIP)=>{return SIP});
+    })
+    .then((SIP)=>{
+      sip = SIP;
+
+      res.render('about_us',{
+        USD : usd,
+        SIP : sip
+      })
+    })
+  });
+
 	//main page render
 	app.get('/',function(req,res){
 		if(req.session.user != null) res.redirect('/dashboard');

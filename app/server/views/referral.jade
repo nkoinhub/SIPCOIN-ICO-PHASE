@@ -6,6 +6,7 @@ html(lang='en')
     meta(name='viewport', content='width=device-width, initial-scale=1')
     link(rel='stylesheet', href='/css/bootstrap.min.css')
     link(rel='stylesheet', href='/css/index.css')
+    link(rel='stylesheet', href='/css/red.css')
     link(rel='stylesheet', href='/css/mate_icon.css')
     script(src='/js/views/jquery_2.min.js')
     script(src='/js/views/bootstrap.min.js')
@@ -13,7 +14,6 @@ html(lang='en')
     script(src='/js/form-validators/accountValidator.js')
     script(src='/js/views/home.js')
     script(src='/vendor/jquery.form.min.js')
-    script(src='/js/views/jo.js')
     link(rel='stylesheet', href='/font-awesome/css/font-awesome.min.css')
     <link rel="apple-touch-icon" sizes="180x180" href="/images/favicons/apple-touch-icon.png">
     <link rel="icon" type="image/png" sizes="32x32" href="/images/favicons/favicon-32x32.png">
@@ -23,6 +23,305 @@ html(lang='en')
     <meta name="theme-color" content="#ffffff">
 
     style.
+
+      body{
+        height:1200px;
+      }
+
+      .popover{
+        text-align: left;
+        background-color:#222222;
+        z-index: 3;
+        color: white;
+      }
+
+      .popover.right .arrow:after {
+        border-right-color: #222222;
+        margin: 0;
+      }
+
+      #root_tree{
+        position: absolute;
+        top: 10%;
+        left: 50%;
+        width: 5%;
+        height: 10%;
+        transform: translate(-50%,-50%);
+        background-image: url('images/avatar_1.png');
+        background-size: 100% 100%;
+        cursor: pointer;
+      }
+
+      #line_straight_row_one{
+        border-top: 2px solid black;
+        border-left: 2px solid black;
+        border-right: 2px solid black;
+        border-radius:4px;
+        position: absolute;
+        top: 17.5%;
+        left: 50%;
+        width: 50%;
+        height: 5%;
+        transform: translate(-50%,0);
+      }
+
+
+      #first_node_row_one{
+        position: absolute;
+        top: 25%;
+        height:10%;
+        width: 5%;
+        left: 25%;
+        transform: translate(-50%,0);
+        background-image: url('images/avatar_2.png');
+        background-size: 100% 100%;
+        cursor: pointer;
+
+      }
+
+      #second_node_row_one{
+        position: absolute;
+        top: 25%;
+        height: 10%;
+        width: 5%;
+        left: 75%;
+        transform: translate(-50%,0);
+        background-image: url('images/avatar_2.png');
+        background-size: 100% 100%;
+        cursor: pointer;
+      }
+
+      #line_straight_row_two_one{
+        border-top: 2px solid black;
+        border-left: 2px solid black;
+        border-right: 2px solid black;
+        border-radius: 4px;
+        position: absolute;
+        top: 37.5%;
+        left: 24%;
+        width: 23%;
+        height: 5%;
+        transform: translate(-50%,0);
+      }
+
+      #line_straight_row_two_two{
+        border-radius: 4px;
+        border-top: 2px solid black;
+        border-left: 2px solid black;
+        border-right: 2px solid black;
+        position: absolute;
+        top: 37.5%;
+        left: 75.5%;
+        width: 24%;
+        height: 5%;
+        transform: translate(-50%,0);
+      }
+
+      #line_straight_row_three_one{
+        border-radius: 4px;
+        border-top: 2px solid black;
+        border-left: 2px solid black;
+        border-right: 2px solid black;
+        position: absolute;
+        top: 58%;
+        left: 12.5%;
+        width: 10%;
+        height: 5%;
+        transform: translate(-50%,0);
+      }
+
+      #line_straight_row_three_two{
+        border-radius: 4px;
+        border-top: 2px solid black;
+        border-left: 2px solid black;
+        border-right: 2px solid black;
+        position: absolute;
+        top: 58%;
+        left: 35.5%;
+        width: 10%;
+        height: 5%;
+        transform: translate(-50%,0);
+      }
+
+      #line_straight_row_three_third{
+        border-radius: 4px;
+        border-top: 2px solid black;
+        border-left: 2px solid black;
+        border-right: 2px solid black;
+        position: absolute;
+        top: 58%;
+        left: 63.5%;
+        width: 10%;
+        height: 5%;
+        transform: translate(-50%,0);
+      }
+
+      #line_straight_row_three_fourth{
+        border-radius: 4px;
+        border-top: 2px solid black;
+        border-left: 2px solid black;
+        border-right: 2px solid black;
+        position: absolute;
+        top: 58%;
+        left: 87.5%;
+        width: 10%;
+        height: 5%;
+        transform: translate(-50%,0);
+      }
+
+
+      #first_node_row_two{
+        position: absolute;
+        width: 5%;
+        height: 10%;
+        top:45%;
+        left:12.5%;
+        transform: translate(-50%,0);
+        background-image: url('images/avatar.png');
+        background-size: 100% 100%;
+        cursor: pointer;
+      }
+
+      #first_node_row_four{
+        position: absolute;
+        width: 5%;
+        height: 10%;
+        top:65%;
+        left:7.5%;
+        transform: translate(-50%,0);
+        background-image: url('images/new.png');
+        background-size: 100% 100%;
+        cursor: pointer;
+
+      }
+
+
+      #second_node_row_four{
+        position: absolute;
+        width: 5%;
+        height: 10%;
+        top:65%;
+        left:17.5%;
+        transform: translate(-50%,0);
+        background-image: url('images/new.png');
+        background-size: 100% 100%;
+        cursor: pointer;
+      }
+
+      #second_node_row_two{
+        position: absolute;
+        width: 5%;
+        height: 10%;
+        top:45%;
+        left:35.5%;
+        transform: translate(-50%,0);
+        background-image: url('images/avatar.png');
+        background-size: 100% 100%;
+        cursor: pointer;
+      }
+
+      #third_node_row_four{
+        position: absolute;
+        width: 5%;
+        height: 10%;
+        top:65%;
+        left:30.5%;
+        transform: translate(-50%,0);
+        background-image: url('images/new.png');
+        background-size: 100% 100%;
+        cursor: pointer;
+      }
+
+      #fourth_node_row_four{
+        position: absolute;
+        width: 5%;
+        height: 10%;
+        top:65%;
+        left:40.5%;
+        transform: translate(-50%,0);
+        background-image: url('images/new.png');
+        background-size: 100% 100%;
+        cursor: pointer;
+      }
+
+
+      #third_node_row_two{
+        position: absolute;
+        width: 5%;
+        height: 10%;
+
+        top:45%;
+        left:63.5%;
+        transform: translate(-50%,0);
+        background-image: url('images/avatar.png');
+        background-size: 100% 100%;
+        cursor: pointer;
+      }
+
+      #fifth_node_row_four{
+        position: absolute;
+        width: 5%;
+        height: 10%;
+        top:65%;
+        left:58.5%;
+        transform: translate(-50%,0);
+        background-image: url('images/new.png');
+        background-size: 100% 100%;
+        cursor: pointer;
+      }
+
+      #sixth_node_row_four{
+        position: absolute;
+        width: 5%;
+        height: 10%;
+        top:65%;
+        left:68.5%;
+        transform: translate(-50%,0);
+        background-image: url('images/new.png');
+        background-size: 100% 100%;
+        cursor: pointer;
+      }
+
+
+      #fourth_node_row_two{
+        position: absolute;
+        width: 5%;
+        height: 10%;
+
+        top:45%;
+        left:87.5%;
+        transform: translate(-50%,0);
+        background-image: url('images/avatar.png');
+        background-size: 100% 100%;
+        cursor: pointer;
+
+      }
+
+      #seventh_node_row_four{
+        position: absolute;
+        width: 5%;
+        height: 10%;
+        top:65%;
+        left:82.5%;
+        transform: translate(-50%,0);
+        background-image: url('images/new.png');
+        background-size: 100% 100%;
+        cursor: pointer;
+
+      }
+
+      #eight_node_row_four{
+        position: absolute;
+        width: 5%;
+        height: 10%;
+        top:65%;
+        left:92.5%;
+        transform: translate(-50%,0);
+        background-image: url('images/new.png');
+        background-size: 100% 100%;
+        cursor: pointer;
+      }
+
       .table>tbody>tr>td, .table>tbody>tr>th, .table>tfoot>tr>td, .table>tfoot>tr>th, .table>thead>tr>td, .table>thead>tr>th{
       border-top:none;
       font-family:lato_light;
@@ -72,6 +371,26 @@ html(lang='en')
       .sidenav {padding-top: 15px;}
       .sidenav a {font-size: 18px;}
       }
+      .loader {
+      border: 16px solid #f3f3f3;
+      border-radius: 50%;
+      border-top: 16px solid #3498db;
+      width: 70px;
+      height: 70px;
+      -webkit-animation: spin 2s linear infinite; /* Safari */
+      animation: spin 2s linear infinite;
+      }
+
+      @-webkit-keyframes spin {
+      0% { -webkit-transform: rotate(0deg); }
+      100% { -webkit-transform: rotate(360deg); }
+      }
+
+      @keyframes spin {
+      0% { transform: rotate(0deg); }
+      100% { transform: rotate(360deg); }
+      }
+
   body
   - user = typeof(udata) != 'undefined' ? udata : { }
 
@@ -175,6 +494,7 @@ html(lang='en')
                     .chip
                       img(src='/images/avatar.png', alt='Person', style='height:40px;width:40px;')
                       |                       #{user.name}
+
       div(style='margin-left:10px; margin-right:10px;')
         .container
           .row
@@ -235,19 +555,17 @@ html(lang='en')
               br
               .row
                 .col-sm-12
-                  br
-                .col-sm-12(style="height:50%;")
-                  #hide_it_please(style='border-bottom:1px dashed;left:20%;;width:720px; height:100px; background-color: white;z-index:100;position:absolute;text-align:center;font-family:lato_bold;font-size:20px;')
-                    | Your Referral Tree
-                  #myDiagramDiv(style='left:20%;width:820px; height:700px; background-color: white;position:absolute;')
-                  <div class="loader" style="position:absolute;left:47%;top:30%;"></div>
-                  br
-                  br
-                  br
-                  br
-                  br
-                  br
-                  br
+                  center(style="font-size:20px;margin-bottom:10px;")
+                    | Your Refferal Tree
+                .col-sm-2.col-sm-offset-1
+                  a#go_back_home(onclick="get_further('go_home')",style="display:none;text-decoration:none;cursor:pointer;")
+                    i.fa.fa-home(aria-hidden='true')
+                    |  &nbsp Go Home
+                .col-sm-2
+                  a#go_back_link(onclick="get_further('no_number')",style="display:none;text-decoration:none;cursor:pointer;")
+                    i.fa.fa-arrow-left(aria-hidden='true')
+                    |  &nbsp Go back
+                .col-sm-12(style="height:40%;")
                   br
                   br
                   br
@@ -268,68 +586,150 @@ html(lang='en')
                   br
                   br
                   br
-                  br
-                  br
-                  br
-                  br
-                  br
+                  .loader_div(style="z-index:10;display:block;position:absolute;top:0%;left:0%;height:100%;width:100%;")
+                    .loader(style="position:absolute;top:40%;left:47%;")
+                  #main_screen(style='position:absolute;top:0%;left:0%;height:100%;width:100%;display:none;')
+                    #root_tree(onclick='get_further(0)')
+                      center
+                        h5.name(style='margin-top:69px;width:100%;')
+                    #line_straight_row_one
+                    #row_two
+                      #first_node_row_one(onclick='get_further(1)')
+                        center
+                          h5.name(style='margin-top:69px;')
+                      #second_node_row_one(onclick='get_further(2)')
+                        center
+                          h5.name(style='margin-top:69px;')
+                    #line_straight_row_two_one
+                    #line_straight_row_two_two
+                    #row_three
+                      #first_node_row_two(onclick='get_further(3)')
+                        center
+                          h5.name(style='margin-top:69px;')
+                      #second_node_row_two(onclick='get_further(4)')
+                        center
+                          h5.name(style='margin-top:69px;')
+                      #third_node_row_two(onclick='get_further(5)')
+                        center
+                          h5.name(style='margin-top:69px;')
+                      #fourth_node_row_two(onclick='get_further(6)')
+                        center
+                          h5.name(style='margin-top:69px;')
+                    #line_straight_row_three_one
+                    #line_straight_row_three_two
+                    #line_straight_row_three_third
+                    #line_straight_row_three_fourth
+                    #row_four
+                      #first_node_row_four(onclick='get_further(7)')
+                        center
+                          h5.name(style='margin-top:69px;')
+                      #second_node_row_four(onclick='get_further(8)')
+                        center
+                          h5.name(style='margin-top:69px;')
+                      #third_node_row_four(onclick='get_further(9)')
+                        center
+                          h5.name(style='margin-top:69px;')
+                      #fourth_node_row_four(onclick='get_further(10)')
+                        center
+                          h5.name(style='margin-top:69px;')
+                      #fifth_node_row_four(onclick='get_further(11)')
+                        center
+                          h5.name(style='margin-top:69px;')
+                      #sixth_node_row_four(onclick='get_further(12)')
+                        center
+                          h5.name(style='margin-top:69px;')
+                      #seventh_node_row_four(onclick='get_further(13)')
+                        center
+                          h5.name(style='margin-top:69px;')
+                      #eight_node_row_four(onclick='get_further(14)')
+                        center
+                          h5.name(style='margin-top:69px;')
 
-      #footer.my_footer_class(style='margin-bottom:0px;')
-        .container
-          .row
-            br
-            .col-sm-4
-              center
-                button.btn(type='button', style='padding-top:20px;')
-                  a(href='/', style='border:none;color:white;margin-right:0px;')
-                    img(src='/images/sipcoin_logo2d.png', alt='Person', width='50', height='50')
-                button.btn(type='button', style='padding-top:20px;')
-                  a(href='/', style='text-decoration:none;color:white;font-size:30px;') SIPcoin
-            .col-sm-4
-              .row
-                .col-sm-12
-                  h3 Contact
-                .col-sm-12
-                  h4
-                    i.fa.fa-ticket.fa-1x(aria-hidden='true', style='margin-right:10px;')
-                    a(href='http://support.sipcoin.io', style='border:none;color:white;margin-right:0px;' target='_blank') Support Center
-                .col-sm-12
-            .col-sm-4
-              .row
-                br
-                .col-sm-12
-                  h3 Follow Us
-                .col-sm-12
-                  a(href='https://www.facebook.com/sipcoin/', target='_blank')
-                    img(src='/images/facebook.png', height='50px;', width='50px;', style='margin-right:15px;')
-                  a(href='https://www.instagram.com/sipcoin.io/?hl=en', target='_blank')
-                    img(src='/images/insta_1.png', height='50px;', width='50px;', style='margin-right:15px;')
-                  a(href='https://twitter.com/sipcoin_io', target='_blank')
-                    img(src='/images/twitter.png', height='50px;', width='50px;', style='margin-right:15px;')
-                  a(href='https://goo.gl/e37G3Z', target='_blank')
-                    img(src='/images/Slack.png', height='50px;', width='50px;', style='margin-right:15px;')
-            .col-sm-12
-              hr
-            .col-sm-12
-              center
-                h4 © Copyright SIPcoin.io 2017
-            .col-sm-12
-              br
+
+
 
 
     script.
+      function reinitialise(){
+      $("#root_tree").css('background-image','url("images/avatar_1.png")');
 
-      var $$ = go.GraphObject.make;
-      var myDiagram =$$(go.Diagram, "myDiagramDiv",{"undoManager.isEnabled":false,initialContentAlignment:go.Spot.Center,layout: $$(go.TreeLayout,{ angle: 90, layerSpacing: 35 })});
-      myDiagram.isReadOnly = true;
-      myDiagram.nodeTemplate =$$(go.Node,"Horizontal",{background: "#44CCFF"},$$(go.TextBlock,"Default Text",{ margin: 12, stroke: "white", font: "bold 16px sans-serif" },new go.Binding("text", "name")));
+      $("#first_node_row_one").css('background-image','url("images/avatar_2.png")');
 
-      myDiagram.linkTemplate =$$(go.Link,{ routing: go.Link.Orthogonal, corner: 5 },$$(go.Shape, { strokeWidth: 3, stroke: "#555" }));
+      $("#second_node_row_one").css('background-image','url("images/avatar_2.png")');
 
-      var model = $$(go.TreeModel);
+      $("#first_node_row_two").css('background-image','url("images/avatar.png")');
 
+      $("#second_node_row_two").css('background-image','url("images/avatar.png")');
+
+      $("#third_node_row_two").css('background-image','url("images/avatar.png")');
+
+      $("#fourth_node_row_two").css('background-image','url("images/avatar.png")');
+
+      $("#first_node_row_four").css('background-image','url("images/new.png")');
+
+      $("#second_node_row_four").css('background-image','url("images/new.png")');
+
+      $("#third_node_row_four").css('background-image','url("images/new.png")');
+
+      $("#fourth_node_row_four").css('background-image','url("images/new.png")');
+
+      $("#fifth_node_row_four").css('background-image','url("images/new.png")');
+
+      $("#sixth_node_row_four").css('background-image','url("images/new.png")');
+
+      $("#seventh_node_row_four").css('background-image','url("images/new.png")');
+
+      $("#eight_node_row_four").css('background-image','url("images/new.png")');
+
+      $('#root_tree').popover('destroy');
+      $('#first_node_row_one').popover('destroy');
+      $('#second_node_row_one').popover('destroy');
+      $('#first_node_row_two').popover('destroy');
+      $('#second_node_row_two').popover('destroy');
+      $('#third_node_row_two').popover('destroy');
+      $('#fourth_node_row_two').popover('destroy');
+      $('#first_node_row_four').popover('destroy');
+      $('#second_node_row_four').popover('destroy');
+      $('#third_node_row_four').popover('destroy');
+      $('#fourth_node_row_four').popover('destroy');
+      $('#fifth_node_row_four').popover('destroy');
+      $('#sixth_node_row_four').popover('destroy');
+      $('#seventh_node_row_four').popover('destroy');
+      $('#eight_node_row_four').popover('destroy');
+
+      $("#first_node_row_one").css('display','block');
+      $("#second_node_row_one").css('display','block');
+      $("#first_node_row_two").css('display','block');
+      $("#second_node_row_two").css('display','block');
+      $("#third_node_row_two").css('display','block');
+      $("#fourth_node_row_two").css('display','block');
+      $("#first_node_row_four").css('display','block');
+      $("#second_node_row_four").css('display','block');
+      $("#third_node_row_four").css('display','block');
+      $("#fourth_node_row_four").css('display','block');
+      $("#fifth_node_row_four").css('display','block');
+      $("#sixth_node_row_four").css('display','block');
+      $("#seventh_node_row_four").css('display','block');
+      $("#eight_node_row_four").css('display','block');
+
+      $("#line_straight_row_two_one").css('display','block');
+      $("#line_straight_row_two_two").css('display','block');
+      $("#line_straight_row_three_one").css('display','block');
+      $("#line_straight_row_three_two").css('display','block');
+      $("#line_straight_row_three_third").css('display','block');
+      $("#line_straight_row_three_fourth").css('display','block');
+
+      }
+
+      var data_for_further=[];
+      var main_array=[{key:'#{selfReferralCode}',name:'#{user.user}'}];
+      var node_1=[];
 
       var input_data={"root_referral":'#{selfReferralCode}'};
+
+      var main_home_data='#{selfReferralCode}';
+      var variable_data_array=[];
+
       $.ajax({
       type: 'POST',
       crossOrigin:true,
@@ -338,15 +738,574 @@ html(lang='en')
       url: '/referralTree',
       success: function(result) {
       console.log(result);
-      result.unshift({key:'#{selfReferralCode}',name:'#{user.name}'});
-      console.log(result);
-      document.getElementsByClassName('loader')[0].style.display="none";
-      model.nodeDataArray=result;
-      myDiagram.model = model;
+      node_1=result;
+      return_me_the_promise().then(function(main_data){
+          console.log(main_data);
+          make_the_popover(main_data);
+          data_for_further=main_data;
+          main_array=main_data;
+      })
+
+      //console.log(result);
+      //console.log('#{user.user}');
       },error:function(err){
       console.log(err);
       }
       });
+
+        function get_further(get_id){
+
+        var length_data=variable_data_array.length;
+
+         if(get_id=="go_home")
+         {
+             $("#go_back_link").css('display','none');
+             $("#go_back_home").css('display','none');
+
+             $('.loader_div').css('display','block');
+             $('#main_screen').css('display','none');
+
+             var input_data={"root_referral":variable_data_array[0]["key"]};
+
+             console.log(input_data);
+             // console.log(main_array);
+               reinitialise();
+               $.ajax({
+               type: 'POST',
+               crossOrigin:true,
+               data: JSON.stringify(input_data),
+               contentType: 'application/json',
+               url: '/referralTree',
+               success: function(result) {
+               console.log(result);
+               node_1=result;
+               main_array=[variable_data_array[0]];
+               variable_data_array=[];
+               console.log(variable_data_array.length);
+               console.log(variable_data_array);
+
+               if(variable_data_array.length==0)
+               {
+                  $("#go_back_link").css('display','none');
+                  $("#go_back_home").css('display','none');
+
+               }
+               else
+               {
+                 $("#go_back_link").css('display','block');
+                 $("#go_back_home").css('display','block');
+               }
+
+               console.log(main_array);
+               return_me_the_promise().then(function(main_data){
+                   console.log(main_data);
+                   make_the_popover(main_data);
+                   data_for_further=main_data;
+                   main_array=main_data;
+               })
+
+               //console.log(result);
+               //console.log('#{user.user}');
+               },error:function(err){
+               console.log(err);
+               }
+               });
+
+
+         }else  if(get_id==0)
+         {
+          console.log('nothing_will_happen');
+         }else  if(get_id=='no_number')
+         {
+
+         $("#go_back_link").css('display','none');
+         $("#go_back_home").css('display','none');
+
+         $('.loader_div').css('display','block');
+         $('#main_screen').css('display','none');
+
+         var input_data={"root_referral":variable_data_array[length_data-1]["key"]};
+
+         console.log(input_data);
+         // console.log(main_array);
+           reinitialise();
+           $.ajax({
+           type: 'POST',
+           crossOrigin:true,
+           data: JSON.stringify(input_data),
+           contentType: 'application/json',
+           url: '/referralTree',
+           success: function(result) {
+           console.log(result);
+           node_1=result;
+           main_array=[variable_data_array[length_data-1]];
+           variable_data_array.splice(length_data-1,1);
+           console.log(variable_data_array.length);
+           console.log(variable_data_array);
+
+           if(variable_data_array.length==0)
+           {
+              $("#go_back_link").css('display','none');
+              $("#go_back_home").css('display','none');
+
+           }
+           else
+           {
+           $("#go_back_link").css('display','block');
+           $("#go_back_home").css('display','block');
+
+           }
+
+           console.log(main_array);
+           return_me_the_promise().then(function(main_data){
+               console.log(main_data);
+               make_the_popover(main_data);
+               data_for_further=main_data;
+               main_array=main_data;
+           })
+
+           //console.log(result);
+           //console.log('#{user.user}');
+           },error:function(err){
+           console.log(err);
+           }
+           });
+
+         }else{
+
+         $("#go_back_link").css('display','none');
+         $("#go_back_home").css('display','none');
+
+         console.log(main_array[get_id]["key"]);
+
+         if(main_array[get_id]["key"]!='Empty')
+         {
+           $('.loader_div').css('display','block');
+           $('#main_screen').css('display','none');
+
+           var input_data={"root_referral":main_array[get_id]["key"]};
+
+           variable_data_array.push({"key":main_array[0]["key"],name:data_for_further[0]["name"],parent:data_for_further[0]["parent"]});
+           console.log("variable data : "+variable_data_array[0]["key"]);
+           console.log(input_data);
+           // console.log(main_array);
+             reinitialise();
+             $.ajax({
+             type: 'POST',
+             crossOrigin:true,
+             data: JSON.stringify(input_data),
+             contentType: 'application/json',
+             url: '/referralTree',
+             success: function(result) {
+             console.log(result);
+             node_1=result;
+             main_array=[{key:data_for_further[get_id]["key"],name:data_for_further[get_id]["name"],parent:data_for_further[get_id]["parent"]}];
+             return_me_the_promise().then(function(main_data){
+                 console.log(main_data);
+                 make_the_popover(main_data);
+                 data_for_further=main_data;
+                 main_array=main_data;
+                 $("#go_back_link").css('display','block');
+                 $("#go_back_home").css('display','block');
+
+
+             })
+
+             //console.log(result);
+             //console.log('#{user.user}');
+             },error:function(err){
+             console.log(err);
+             }
+             });
+
+         }else{
+           console.log("Node empty");
+         }
+
+         }
+
+        }
+
+        function make_the_popover(main_data){
+
+                 console.log(main_data);
+                 var output_data=main_data;
+
+                 for(var i=0;i<output_data.length;i++)
+                 {
+                   var get_names=$(".name");
+                   get_names[i].innerHTML=output_data[i].name;
+                   //var value="hey_there";
+                   var user_name="<h4> <center>"+output_data[i].name+"</center></h4>";
+                   //var normal_name="<h5 style='display:inline;padding:10px;font-size:12px;'> Name - </h5>"+"Rajat Rawat"+"<br>";
+                   //var left_people="<h5 style='display:inline;padding:10px;font-size:12px;'> Left People - </h5>"+"2345"+"<br>";
+                   //var right_people="<h5 style='display:inline;padding:10px;font-size:12px;'> Right People -  </h5>"+"1004"+"<br>";
+                   var self_refferal_code="<h5 style='display:inline;padding:10px;font-size:12px;'> Self Referral Code - </h5>"+output_data[i].key+"<br>";
+                   var parent_refferal_code="<h5 style='display:inline;padding:10px;font-size:12px;'> Parent ID - </h5>"+output_data[i].parent+"<br>";
+                   //var Income_code="<h5 style='display:inline;padding:10px;font-size:12px;'> Income - </h5>"+"10000"+"<br>";
+                   var final_data="<div style='font-size:12px;'>"+user_name+"<center><hr style='width:80%;'></center>"+self_refferal_code+parent_refferal_code+"<br></div>";
+
+                   if(i==0)
+                   {
+                     if(output_data[i].name=='No Child' || output_data[i].name=='Empty')
+                     {
+                        $("#root_tree").css('background-image','url("images/avatar_no.png")');
+                        //document.getElementById('root_tree').removeAttribute("onclick");
+                     }else {
+                        console.log("I am in");
+                        console.log(final_data);
+                        final_data="<div style='font-size:12px;'>"+user_name+"<center><hr style='width:80%;'></center>"+self_refferal_code+"<br></div>";
+
+                       $("#root_tree").popover({content: final_data, html: true,trigger: "hover",placement:"bottom"});
+                     }
+
+                   }
+
+                   if(i==1)
+                   {
+                     if(output_data[i].name=='No Child' || output_data[i].name=='Empty')
+                     {
+                        $("#first_node_row_one").css('background-image','url("images/avatar_no.png")');
+                        //document.getElementById('first_node_row_one').removeAttribute("onclick");
+                     }else {
+                       $("#first_node_row_one").popover({content: final_data, html: true,trigger: "hover",placement:"bottom"});
+                     }
+
+                   }
+
+                   if(i==2)
+                   {
+
+                     if(output_data[i].name=='No Child' || output_data[i].name=='Empty')
+                     {
+                        $("#second_node_row_one").css('background-image','url("images/avatar_no.png")');
+                        //document.getElementById('second_node_row_one').removeAttribute("onclick");
+                     }else {
+                       $("#second_node_row_one").popover({content: final_data, html: true,trigger: "hover",placement:"bottom"});
+                     }
+                  }
+
+                   if(i==3)
+                   {
+                     if(output_data[i].name=='No Child' || output_data[i].name=='Empty')
+                     {
+                        $("#first_node_row_two").css('background-image','url("images/avatar_no.png")');
+                        //document.getElementById('first_node_row_two').removeAttribute("onclick");
+                     }else {
+                       $("#first_node_row_two").popover({content: final_data, html: true,trigger: "hover",placement:"bottom"});
+                     }
+
+                   }
+
+                   if(i==4)
+                   {
+                     if(output_data[i].name=='No Child' || output_data[i].name=='Empty')
+                     {
+                        $("#second_node_row_two").css('background-image','url("images/avatar_no.png")');
+                        //document.getElementById('second_node_row_two').removeAttribute("onclick");
+                     }else {
+                       $("#second_node_row_two").popover({content: final_data, html: true,trigger: "hover",placement:"bottom"});
+                     }
+
+                   }
+
+                   if(i==5)
+                   {
+                     if(output_data[i].name=='No Child' || output_data[i].name=='Empty')
+                     {
+                        $("#third_node_row_two").css('background-image','url("images/avatar_no.png")');
+                        //document.getElementById('third_node_row_two').removeAttribute("onclick");
+                     }else {
+                       $("#third_node_row_two").popover({content: final_data, html: true,trigger: "hover",placement:"bottom"});
+                     }
+
+                   }
+
+                   if(i==6)
+                   {
+
+                     if(output_data[i].name=='No Child' || output_data[i].name=='Empty')
+                     {
+                        $("#fourth_node_row_two").css('background-image','url("images/avatar_no.png")');
+                        //document.getElementById('fourth_node_row_two').removeAttribute("onclick");
+                     }else {
+                       $("#fourth_node_row_two").popover({content: final_data, html: true,trigger: "hover",placement:"bottom"});
+                     }
+                   }
+
+                   if(i==7)
+                   {
+                     if(output_data[i].name=='No Child' || output_data[i].name=='Empty')
+                     {
+                        $("#first_node_row_four").css('background-image','url("images/avatar_no.png")');
+                        //document.getElementById('first_node_row_four').removeAttribute("onclick");
+                     }else {
+                       $("#first_node_row_four").popover({content: final_data, html: true,trigger: "hover",placement:"bottom"});
+                     }
+                   }
+
+                   if(i==8)
+                   {
+                     if(output_data[i].name=='No Child' || output_data[i].name=='Empty')
+                     {
+                        $("#second_node_row_four").css('background-image','url("images/avatar_no.png")');
+                        //document.getElementById('second_node_row_four').removeAttribute("onclick");
+                     }else {
+                       $("#second_node_row_four").popover({content: final_data, html: true,trigger: "hover",placement:"bottom"});
+                     }
+
+                   }
+
+                   if(i==9)
+                   {
+                     if(output_data[i].name=='No Child' || output_data[i].name=='Empty')
+                     {
+                        $("#third_node_row_four").css('background-image','url("images/avatar_no.png")');
+                        //document.getElementById('third_node_row_four').removeAttribute("onclick");
+                     }else {
+                       $("#third_node_row_four").popover({content: final_data, html: true,trigger: "hover",placement:"bottom"});
+                     }
+                   }
+
+                   if(i==10)
+                   {
+
+                     if(output_data[i].name=='No Child' || output_data[i].name=='Empty')
+                     {
+                        $("#fourth_node_row_four").css('background-image','url("images/avatar_no.png")');
+                        //document.getElementById('fourth_node_row_four').removeAttribute("onclick");
+                     }else {
+                       $("#fourth_node_row_four").popover({content: final_data, html: true,trigger: "hover",placement:"bottom"});
+                     }
+                   }
+
+                   if(i==11)
+                   {
+                     if(output_data[i].name=='No Child' || output_data[i].name=='Empty')
+                     {
+                        $("#fifth_node_row_four").css('background-image','url("images/avatar_no.png")');
+                        //document.getElementById('fifth_node_row_four').removeAttribute("onclick");
+                     }else {
+                       $("#fifth_node_row_four").popover({content: final_data, html: true,trigger: "hover",placement:"bottom"});
+                     }
+                   }
+
+                   if(i==12)
+                   {
+                     if(output_data[i].name=='No Child' || output_data[i].name=='Empty')
+                     {
+                        $("#sixth_node_row_four").css('background-image','url("images/avatar_no.png")');
+                        //document.getElementById('sixth_node_row_four').removeAttribute("onclick");
+                     }else {
+                       $("#sixth_node_row_four").popover({content: final_data, html: true,trigger: "hover",placement:"bottom"});
+                     }
+                   }
+
+                   if(i==13)
+                   {
+                     if(output_data[i].name=='No Child' || output_data[i].name=='Empty')
+                     {
+                        $("#seventh_node_row_four").css('background-image','url("images/avatar_no.png")');
+                        //document.getElementById('seventh_node_row_four').removeAttribute("onclick");
+                     }else {
+                       $("#seventh_node_row_four").popover({content: final_data, html: true,trigger: "hover",placement:"bottom"});
+                     }
+
+                   }
+
+                   if(i==14)
+                   {
+                     if(output_data[i].name=='No Child' || output_data[i].name=='Empty')
+                     {
+                        $("#eight_node_row_four").css('background-image','url("images/avatar_no.png")');
+                        //document.getElementById('eight_node_row_four').removeAttribute("onclick");
+                     }else {
+                       $("#eight_node_row_four").popover({content: final_data, html: true,trigger: "hover",placement:"bottom"});
+                     }
+
+                   }
+
+                   $('.loader_div').css('display','none');
+                   $('#main_screen').css('display','block');
+                }
+
+                if(output_data[1].name=='No Child' || output_data[1].name=='Empty'){
+
+                $("#first_node_row_two").css('display','none');
+                $("#second_node_row_two").css('display','none');
+                $("#first_node_row_four").css('display','none');
+                $("#second_node_row_four").css('display','none');
+                $("#third_node_row_four").css('display','none');
+                $("#fourth_node_row_four").css('display','none');
+                $("#line_straight_row_two_one").css('display','none');
+                $("#line_straight_row_three_one").css('display','none');
+                $("#line_straight_row_three_two").css('display','none');
+                }
+
+                if(output_data[2].name=='No Child' || output_data[2].name=='Empty')
+                {
+                $("#third_node_row_two").css('display','none');
+                $("#fourth_node_row_two").css('display','none');
+                $("#fifth_node_row_four").css('display','none');
+                $("#sixth_node_row_four").css('display','none');
+                $("#seventh_node_row_four").css('display','none');
+                $("#eight_node_row_four").css('display','none');
+                $("#line_straight_row_two_two").css('display','none');
+                $("#line_straight_row_three_third").css('display','none');
+                $("#line_straight_row_three_fourth").css('display','none');
+
+                }
+
+                if(output_data[3].name=='No Child' || output_data[3].name=='Empty')
+                {
+                  $("#first_node_row_four").css('display','none');
+                  $("#second_node_row_four").css('display','none');
+                  $("#line_straight_row_three_one").css('display','none');
+
+                }
+
+                if(output_data[4].name=='No Child' || output_data[4].name=='Empty')
+                {
+                  $("#third_node_row_four").css('display','none');
+                  $("#fourth_node_row_four").css('display','none');
+                  $("#line_straight_row_three_two").css('display','none');
+
+                }
+
+                if(output_data[5].name=='No Child' || output_data[5].name=='Empty')
+                {
+                  $("#fifth_node_row_four").css('display','none');
+                  $("#sixth_node_row_four").css('display','none');
+                  $("#line_straight_row_three_third").css('display','none');
+                }
+
+                if(output_data[6].name=='No Child' || output_data[6].name=='Empty')
+                {
+                  $("#seventh_node_row_four").css('display','none');
+                  $("#eight_node_row_four").css('display','none');
+                  $("#line_straight_row_three_fourth").css('display','none');
+                }
+
+           }
+
+
+
+          function return_me_the_promise(){
+
+            var willIGetNewPhone = new Promise(
+              function (resolve, reject) {
+                var iterations=0;
+
+                console.log(create_new_main_data(main_array,iterations));
+
+                function create_new_main_data(main_array,iterations){
+
+                  key=main_array[iterations]["key"];
+                  console.log(main_array);
+
+                  if(iterations==7)
+                  {
+                    resolve(main_array);
+                  }else {
+                    iterations=iterations+1;
+                    get_my_array().then(function(result_from_prom){
+                      console.log(result_from_prom);
+                      console.log(iterations);
+
+
+                      if(Object.keys(result_from_prom["left_link"]).length!=0 && Object.keys(result_from_prom["right_link"]).length!=0)
+                      {
+                        main_array.push(result_from_prom["left_link"]);
+                        main_array.push(result_from_prom["right_link"]);
+                        console.log(main_array);
+                        create_new_main_data(main_array,iterations);
+                      }
+
+                      if(Object.keys(result_from_prom["left_link"]).length!=0 && Object.keys(result_from_prom["right_link"]).length==0)
+                      {
+                          main_array.push(result_from_prom["left_link"]);
+                          main_array.push({"key":"Empty","parent":key,"name":"No Child"});
+                          create_new_main_data(main_array,iterations);
+                      }
+
+                      if(Object.keys(result_from_prom["left_link"]).length==0 && Object.keys(result_from_prom["right_link"]).length!=0)
+                      {
+                          main_array.push({"key":"Empty","parent":key,"name":"No Child"});
+                          main_array.push(result_from_prom["right_link"]);
+                          create_new_main_data(main_array,iterations);
+                      }
+
+                      if(Object.keys(result_from_prom["left_link"]).length==0 && Object.keys(result_from_prom["right_link"]).length==0)
+                      {
+                        main_array.push({"key":"Empty","parent":key,"name":"No Child"});
+                        main_array.push({"key":"Empty","parent":key,"name":"No Child"});
+                        create_new_main_data(main_array,iterations);
+                      }
+
+                    });
+
+                  }
+
+                }
+
+                // main_array.push(find_left_right(main_array[i]["key"]));
+                // console.log(main_array);
+
+               function get_my_array(){
+
+                var getting_the_two_values = new Promise(
+                    function (resolve, reject) {
+                      var temp_array=[];
+                      var left_link={};
+                      var right_link={};
+                      var counter=0;;
+                      console.log(key);
+
+                      if(node_1.length==0)
+                      {
+
+                          temp_array={left_link,right_link};
+                          resolve(temp_array);
+                      }else{
+
+                        for(var j=0;j<node_1.length;j++)
+                        {
+                          if(node_1[j]["parent"]==key)
+                          {
+                            counter=counter+1;
+                            if(counter==1)
+                            {
+                              left_link=node_1[j];
+                            }
+
+                            if(counter==2)
+                            {
+                              right_link=node_1[j];
+                              temp_array={left_link,right_link};
+                              resolve(temp_array);
+                              break;
+                            }
+                          }
+
+                          if(j==node_1.length-1)
+                          {   console.log("hey");
+                              temp_array={left_link,right_link};
+                              resolve(temp_array);
+                          }
+                        }
+
+                      }
+
+                    });
+
+              return getting_the_two_values;
+              }
+            }
+           );
+
+           return willIGetNewPhone;
+         }
+
 
 
       $(function(){
@@ -436,12 +1395,7 @@ html(lang='en')
         $("#message").css('display','none');
       })
 
-
-
-
-
-
-      var data_for_the_popover='<div class="container"> <div class="row"> <div class="col-sm-2" style="background-color:#222222;color:white;padding-left: 0px;padding-right: 0px;"> <div class="row"> <div class="col-sm-12" style="color:white;padding:20px;font-family:lato_bold,open-serif;"> <center><h5 style="font-size:17px;color:white;">#{user.email} </h5> </center> </div> <div class="col-sm-12"> <br> </div> <div class="col-sm-12 hover_change_back"> <h5 style="font-size:20px;font-family:lato_light;"> <a href="/account" style="color:white;text-decoration:none;"> <i style="padding-right:3px;padding-left:10px;"class="fa fa-cogs" aria-hidden="true"></i> Account Settings </a> </h5> </div> <div class="col-sm-12"> <hr> </div> <div  class="col-sm-12 hover_change_back button_hey_logout"> <h5 style="font-size:20px;font-family:lato_light;"> <i style="padding-right:12px;padding-left:10px;" class="fa fa-power-off" aria-hidden="true"></i>Log out </h5> </div> </div> <br> </div> </div> </div>';
+      var data_for_the_popover='<div class="container" style="background-color:#222222;"> <div class="row"> <div class="col-sm-2" style="background-color:#222222;color:white;padding-left: 0px;padding-right: 0px;"> <div class="row"> <div class="col-sm-12" style="color:white;padding:20px;font-family:lato_bold,open-serif;"> <center><h5 style="font-size:17px;color:white;">#{user.email} </h5> </center> </div> <div class="col-sm-12"> <br> </div> <div class="col-sm-12 hover_change_back"> <h5 style="font-size:20px;font-family:lato_light;"> <a href="/account" style="color:white;text-decoration:none;"> <i style="padding-right:3px;padding-left:10px;"class="fa fa-cogs" aria-hidden="true"></i> Account Settings </a> </h5> </div> <div class="col-sm-12"> <hr> </div> <div  class="col-sm-12 hover_change_back button_hey_logout"> <h5 style="font-size:20px;font-family:lato_light;"> <i style="padding-right:12px;padding-left:10px;" class="fa fa-power-off" aria-hidden="true"></i>Log out </h5> </div> </div> <br> </div> </div> </div>';
       $(function(){
       $('.open_the_popup').popover({content:data_for_the_popover ,placement: "bottom",html: true,trigger: "focus"});
       })
