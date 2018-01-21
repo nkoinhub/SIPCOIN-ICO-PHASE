@@ -706,8 +706,9 @@ exports.validateResetLink = function(email, passHash, callback)
 
 exports.getAllRecords = function(callback)
 {
-	accounts.find({},{_id:0}).toArray(
+	accounts.find({},{_id:0,email:0,tokens:0,pass:0,referralTokens:0,valueOfTokens:0,selfReferralCode:0,referralCode:0,secret:0,accountVerified:0,planAmountSet:0}).toArray(
 		function(e, res) {
+			console.log(res);
 		if (e) callback(e)
 		else callback(null, res)
 	});
