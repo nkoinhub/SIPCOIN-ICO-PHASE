@@ -116,6 +116,7 @@ html(lang='en')
     #first_frame
       .container
         .row
+          button#btn-logout(style='display:none')
           br
           br
           br
@@ -134,11 +135,11 @@ html(lang='en')
                   button.btn(type='button',style="margin-top:10px;margin-bottom:5px;")
                     .chip(style='font-size:18px;')
                       img(src='/images/coin.png', alt='Person',style='height:40px;width:40px;')
-                      |   $ #{btcValue}
+                      |   $ #{currentBTC}
                   button.btn(type='button',style="margin-top:10px;margin-bottom:5px;")
                     .chip(style='font-size:18px;')
                       img(src='/images/sipcoin_logo2d.png', alt='Person', style='height:40px;width:40px;')
-                      |  $ #{sipValue}
+                      |  $ #{SIP}
                   //
                     <li><div class="chip"><img src="/images/avatar.png" alt="Person" width="50" height="50"></div><a class="bit_current_value" href="javascript:void(0)" style="color:white;font-size:25px;margin-top:10px;"> $ 1234  </a></li>
                     <li><a class="sip_current_value" href="javascript:void(0)" style="color:white;font-size:25px;margin-top:10px;"> Sipcoin &nbsp; - &nbsp; $ 1.5 </a></li>
@@ -156,38 +157,37 @@ html(lang='en')
               center
                 .row
                   .col-sm-12
-                    h3.boldLatto Withdraw Your Referral Coins
+                    h3.boldLatto Withdrawal Successful
                 hr(style="border-top:1px solid black;")
               .row
-                .col-sm-5(style='height:300px;background-color:#d0d3c5;margin-left:14px;margin-right:14px;border-radius:5px;')
-                  center
-                    br
-                    br
-                    br
-                    h2.regularLatto Referral Coins
-                    hr(style="border-top:1px solid black;")
-                    h3#targer_here.lightLatto(style='color:black;font-size:30px;')
-                      | $ #{accountDetails.referralTokens}
-                  br
-                  br
-                .col-sm-6
-                  center
-                    br
-                    button#btn-logout(style='display:none')
-                    form(method='post', action='/withdrawl')
-                      input#ex3.form-control.input-lg.lightLatto(style='background:#222222;color:white;',onkeypress="return isNumber(event)" ,name='CoinsWithdrawl', placeholder='Enter number of coins')
-                      br
+                .col-sm-12(style='height:280px;border-radius:5px;')
+                  .row
+                    .col-sm-4.col-sm-offset-2
+                      h4.regularLatto Transaction ID
+                    .col-sm-3
+                      h4.regularLatto #{TID}
+                  .row
+                    .col-sm-4.col-sm-offset-2
+                      h4.regularLatto Amount Withrawal
+                    .col-sm-3
+                      h4.regularLatto #{coinDemanded}
+                  .row
+                    .col-sm-4.col-sm-offset-2
+                      h4.regularLatto BTC Wallet Address
+                    .col-sm-3
+                      h4.regularLatto #{address}
+                  .row
+                    .col-sm-4.col-sm-offset-2
+                      h4.regularLatto Amount paid in BTC
+                    .col-sm-3
+                      h4.regularLatto #{BTCToPay}
+                  hr(style="border-top:1px solid black;")
+                  .row
+                    .col-sm-12
                       center
-                        br
-                        h4.regularLatto Amount of Coins in BTC
-                        hr(style="border-top:1px solid black;")
-                        h1#targetBTC.lightLatto(style='color:black;font-size:25px;') BTC 0.0000000000
-                      br
-                      input#ex4.form-control.input-lg.regularLatto(style='background:white;color:black;',name='btc_wallet_address', placeholder='Enter BTC Wallet Address')
-                      br
-                      input#NXT.btn.button_style.btn-primary.btn-md(type='submit',onclick='return isEmpty();', style='background-color: #08708a;')
-              br
-              br
+                        h4.regularLatto You will get this amount in your BTC Wallet Address in 4-6 hours.
+                    br
+                  br
       #footer.my_footer_class(style='margin-bottom:0px;')
         .container
           .row
