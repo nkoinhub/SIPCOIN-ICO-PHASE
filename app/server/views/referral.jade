@@ -47,7 +47,7 @@ html(lang='en')
         width: 5%;
         height: 10%;
         transform: translate(-50%,-50%);
-        background-image: url('images/avatar_1.png');
+        background-image: url('images/avatar_1_red.png');
         background-size: 100% 100%;
         cursor: pointer;
       }
@@ -73,7 +73,7 @@ html(lang='en')
         width: 5%;
         left: 25%;
         transform: translate(-50%,0);
-        background-image: url('images/avatar_2.png');
+        background-image: url('images/avatar_2_red.png');
         background-size: 100% 100%;
         cursor: pointer;
 
@@ -86,7 +86,7 @@ html(lang='en')
         width: 5%;
         left: 75%;
         transform: translate(-50%,0);
-        background-image: url('images/avatar_2.png');
+        background-image: url('images/avatar_2_red.png');
         background-size: 100% 100%;
         cursor: pointer;
       }
@@ -177,7 +177,7 @@ html(lang='en')
         top:45%;
         left:12.5%;
         transform: translate(-50%,0);
-        background-image: url('images/avatar.png');
+        background-image: url('images/avatar_red.png');
         background-size: 100% 100%;
         cursor: pointer;
       }
@@ -189,7 +189,7 @@ html(lang='en')
         top:65%;
         left:7.5%;
         transform: translate(-50%,0);
-        background-image: url('images/new.png');
+        background-image: url('images/new_red.png');
         background-size: 100% 100%;
         cursor: pointer;
 
@@ -203,7 +203,7 @@ html(lang='en')
         top:65%;
         left:17.5%;
         transform: translate(-50%,0);
-        background-image: url('images/new.png');
+        background-image: url('images/new_red.png');
         background-size: 100% 100%;
         cursor: pointer;
       }
@@ -215,7 +215,7 @@ html(lang='en')
         top:45%;
         left:35.5%;
         transform: translate(-50%,0);
-        background-image: url('images/avatar.png');
+        background-image: url('images/avatar_red.png');
         background-size: 100% 100%;
         cursor: pointer;
       }
@@ -227,7 +227,7 @@ html(lang='en')
         top:65%;
         left:30.5%;
         transform: translate(-50%,0);
-        background-image: url('images/new.png');
+        background-image: url('images/new_red.png');
         background-size: 100% 100%;
         cursor: pointer;
       }
@@ -239,7 +239,7 @@ html(lang='en')
         top:65%;
         left:40.5%;
         transform: translate(-50%,0);
-        background-image: url('images/new.png');
+        background-image: url('images/new_red.png');
         background-size: 100% 100%;
         cursor: pointer;
       }
@@ -253,7 +253,7 @@ html(lang='en')
         top:45%;
         left:63.5%;
         transform: translate(-50%,0);
-        background-image: url('images/avatar.png');
+        background-image: url('images/avatar_red.png');
         background-size: 100% 100%;
         cursor: pointer;
       }
@@ -265,7 +265,7 @@ html(lang='en')
         top:65%;
         left:58.5%;
         transform: translate(-50%,0);
-        background-image: url('images/new.png');
+        background-image: url('images/new_red.png');
         background-size: 100% 100%;
         cursor: pointer;
       }
@@ -277,7 +277,7 @@ html(lang='en')
         top:65%;
         left:68.5%;
         transform: translate(-50%,0);
-        background-image: url('images/new.png');
+        background-image: url('images/new_red.png');
         background-size: 100% 100%;
         cursor: pointer;
       }
@@ -287,14 +287,12 @@ html(lang='en')
         position: absolute;
         width: 5%;
         height: 10%;
-
         top:45%;
         left:87.5%;
         transform: translate(-50%,0);
-        background-image: url('images/avatar.png');
+        background-image: url('images/avatar_red.png');
         background-size: 100% 100%;
         cursor: pointer;
-
       }
 
       #seventh_node_row_four{
@@ -304,10 +302,9 @@ html(lang='en')
         top:65%;
         left:82.5%;
         transform: translate(-50%,0);
-        background-image: url('images/new.png');
+        background-image: url('images/new_red.png');
         background-size: 100% 100%;
         cursor: pointer;
-
       }
 
       #eight_node_row_four{
@@ -317,7 +314,7 @@ html(lang='en')
         top:65%;
         left:92.5%;
         transform: translate(-50%,0);
-        background-image: url('images/new.png');
+        background-image: url('images/new_red.png');
         background-size: 100% 100%;
         cursor: pointer;
       }
@@ -393,7 +390,6 @@ html(lang='en')
 
   body
   - user = typeof(udata) != 'undefined' ? udata : { }
-
     #myModal_for_envitaion.modal.fade(role='dialog')
       .modal-dialog
         .modal-content
@@ -546,7 +542,7 @@ html(lang='en')
                     center
                       h3#no_of_referral_tokens
                         img(src='/images/sipcoin_logo2d.png', height='40px', weight='40px', style='margin-right:10px;')
-                        |  Refferals Coins Earned &nbsp - &nbsp #{referralTokens}
+                        |  Referral Commission Earned &nbsp - &nbsp #{referralTokens}
               br
             .col-sm-12
               br
@@ -651,35 +647,35 @@ html(lang='en')
 
     script.
       function reinitialise(){
-      $("#root_tree").css('background-image','url("images/avatar_1.png")');
+      $("#root_tree").css('background-image','url("images/avatar_1_red.png")');
 
-      $("#first_node_row_one").css('background-image','url("images/avatar_2.png")');
+      $("#first_node_row_one").css('background-image','url("images/avatar_2_red.png")');
 
-      $("#second_node_row_one").css('background-image','url("images/avatar_2.png")');
+      $("#second_node_row_one").css('background-image','url("images/avatar_2_red.png")');
 
-      $("#first_node_row_two").css('background-image','url("images/avatar.png")');
+      $("#first_node_row_two").css('background-image','url("images/avatar_red.png")');
 
-      $("#second_node_row_two").css('background-image','url("images/avatar.png")');
+      $("#second_node_row_two").css('background-image','url("images/avatar_red.png")');
 
-      $("#third_node_row_two").css('background-image','url("images/avatar.png")');
+      $("#third_node_row_two").css('background-image','url("images/avatar_red.png")');
 
-      $("#fourth_node_row_two").css('background-image','url("images/avatar.png")');
+      $("#fourth_node_row_two").css('background-image','url("images/avatar_red.png")');
 
-      $("#first_node_row_four").css('background-image','url("images/new.png")');
+      $("#first_node_row_four").css('background-image','url("images/new_red.png")');
 
-      $("#second_node_row_four").css('background-image','url("images/new.png")');
+      $("#second_node_row_four").css('background-image','url("images/new_red.png")');
 
-      $("#third_node_row_four").css('background-image','url("images/new.png")');
+      $("#third_node_row_four").css('background-image','url("images/new_red.png")');
 
-      $("#fourth_node_row_four").css('background-image','url("images/new.png")');
+      $("#fourth_node_row_four").css('background-image','url("images/new_red.png")');
 
-      $("#fifth_node_row_four").css('background-image','url("images/new.png")');
+      $("#fifth_node_row_four").css('background-image','url("images/new_red.png")');
 
-      $("#sixth_node_row_four").css('background-image','url("images/new.png")');
+      $("#sixth_node_row_four").css('background-image','url("images/new_red.png")');
 
-      $("#seventh_node_row_four").css('background-image','url("images/new.png")');
+      $("#seventh_node_row_four").css('background-image','url("images/new_red.png")');
 
-      $("#eight_node_row_four").css('background-image','url("images/new.png")');
+      $("#eight_node_row_four").css('background-image','url("images/new_red.png")');
 
       $('#root_tree').popover('destroy');
       $('#first_node_row_one').popover('destroy');
@@ -928,6 +924,29 @@ html(lang='en')
 
         function make_the_popover(main_data){
 
+                function check_for_red_ness(data_item,index)
+                {
+                    console.log("data_item : "+data_item+ " index : "+index );
+                    console.log(output_data[index].planAmt);
+                    if(output_data[index].planAmt>0)
+                    {
+                        console.log('hey');
+                        if(index==0)
+                        {
+                            $("#"+data_item).css('background-image','url("images/avatar_1.png")');
+                        }else if(index>=1 && index<=2)
+                        {
+                          $("#"+data_item).css('background-image','url("images/avatar_2.png")');
+                        }else if(index>=3 && index<=6)
+                        {
+                          $("'#"+data_item).css('background-image','url("images/avatar.png")');
+                        }else if(index>=7 && index<=14)
+                        {
+                          $("'#"+data_item).css('background-image','url("images/new.png")');
+                        }
+                    }
+                }
+
                  console.log(main_data);
                  var output_data=main_data;
 
@@ -938,12 +957,12 @@ html(lang='en')
                    //var value="hey_there";
                    var user_name="<h4> <center>"+output_data[i].name+"</center></h4>";
                    //var normal_name="<h5 style='display:inline;padding:10px;font-size:12px;'> Name - </h5>"+"Rajat Rawat"+"<br>";
-                   //var left_people="<h5 style='display:inline;padding:10px;font-size:12px;'> Left People - </h5>"+"2345"+"<br>";
-                   //var right_people="<h5 style='display:inline;padding:10px;font-size:12px;'> Right People -  </h5>"+"1004"+"<br>";
+                   var left_people="<h5 style='display:inline;padding:10px;font-size:12px;'> Left Count - </h5>"+output_data[i].leftCount+"<br>";
+                   var right_people="<h5 style='display:inline;padding:10px;font-size:12px;'> Right Count -  </h5>"+output_data[i].rightCount+"<br>";
                    var self_refferal_code="<h5 style='display:inline;padding:10px;font-size:12px;'> Self Referral Code - </h5>"+output_data[i].key+"<br>";
                    var parent_refferal_code="<h5 style='display:inline;padding:10px;font-size:12px;'> Parent ID - </h5>"+output_data[i].parent+"<br>";
                    //var Income_code="<h5 style='display:inline;padding:10px;font-size:12px;'> Income - </h5>"+"10000"+"<br>";
-                   var final_data="<div style='font-size:12px;'>"+user_name+"<center><hr style='width:80%;'></center>"+self_refferal_code+parent_refferal_code+"<br></div>";
+                   var final_data="<div style='font-size:12px;'>"+user_name+"<center><hr style='width:80%;'></center>"+self_refferal_code+parent_refferal_code+left_people+right_people+"<br></div>";
 
                    if(i==0)
                    {
@@ -954,8 +973,8 @@ html(lang='en')
                      }else {
                         console.log("I am in");
                         console.log(final_data);
-                        final_data="<div style='font-size:12px;'>"+user_name+"<center><hr style='width:80%;'></center>"+self_refferal_code+"<br></div>";
-
+                        final_data="<div style='font-size:12px;'>"+user_name+"<center><hr style='width:80%;'></center>"+self_refferal_code+left_people+right_people+"<br></div>";
+                        check_for_red_ness('root_tree',0);
                        $("#root_tree").popover({content: final_data, html: true,trigger: "hover",placement:"bottom"});
                      }
 
@@ -968,6 +987,7 @@ html(lang='en')
                         $("#first_node_row_one").css('background-image','url("images/avatar_no.png")');
                         //document.getElementById('first_node_row_one').removeAttribute("onclick");
                      }else {
+                       check_for_red_ness('first_node_row_one',1);
                        $("#first_node_row_one").popover({content: final_data, html: true,trigger: "hover",placement:"bottom"});
                      }
 
@@ -981,6 +1001,7 @@ html(lang='en')
                         $("#second_node_row_one").css('background-image','url("images/avatar_no.png")');
                         //document.getElementById('second_node_row_one').removeAttribute("onclick");
                      }else {
+                       check_for_red_ness('second_node_row_one',2);
                        $("#second_node_row_one").popover({content: final_data, html: true,trigger: "hover",placement:"bottom"});
                      }
                   }
@@ -992,7 +1013,8 @@ html(lang='en')
                         $("#first_node_row_two").css('background-image','url("images/avatar_no.png")');
                         //document.getElementById('first_node_row_two').removeAttribute("onclick");
                      }else {
-                       $("#first_node_row_two").popover({content: final_data, html: true,trigger: "hover",placement:"bottom"});
+                      check_for_red_ness('first_node_row_two',3);
+                      $("#first_node_row_two").popover({content: final_data, html: true,trigger: "hover",placement:"bottom"});
                      }
 
                    }
@@ -1004,6 +1026,7 @@ html(lang='en')
                         $("#second_node_row_two").css('background-image','url("images/avatar_no.png")');
                         //document.getElementById('second_node_row_two').removeAttribute("onclick");
                      }else {
+                       check_for_red_ness('second_node_row_two',4);
                        $("#second_node_row_two").popover({content: final_data, html: true,trigger: "hover",placement:"bottom"});
                      }
 
@@ -1016,6 +1039,7 @@ html(lang='en')
                         $("#third_node_row_two").css('background-image','url("images/avatar_no.png")');
                         //document.getElementById('third_node_row_two').removeAttribute("onclick");
                      }else {
+                       check_for_red_ness('third_node_row_two',5);
                        $("#third_node_row_two").popover({content: final_data, html: true,trigger: "hover",placement:"bottom"});
                      }
 
@@ -1029,6 +1053,7 @@ html(lang='en')
                         $("#fourth_node_row_two").css('background-image','url("images/avatar_no.png")');
                         //document.getElementById('fourth_node_row_two').removeAttribute("onclick");
                      }else {
+                       check_for_red_ness('fourth_node_row_two',6);
                        $("#fourth_node_row_two").popover({content: final_data, html: true,trigger: "hover",placement:"bottom"});
                      }
                    }
@@ -1040,6 +1065,7 @@ html(lang='en')
                         $("#first_node_row_four").css('background-image','url("images/avatar_no.png")');
                         //document.getElementById('first_node_row_four').removeAttribute("onclick");
                      }else {
+                       check_for_red_ness('first_node_row_four',7);
                        $("#first_node_row_four").popover({content: final_data, html: true,trigger: "hover",placement:"bottom"});
                      }
                    }
@@ -1051,6 +1077,7 @@ html(lang='en')
                         $("#second_node_row_four").css('background-image','url("images/avatar_no.png")');
                         //document.getElementById('second_node_row_four').removeAttribute("onclick");
                      }else {
+                       check_for_red_ness('second_node_row_four',8);
                        $("#second_node_row_four").popover({content: final_data, html: true,trigger: "hover",placement:"bottom"});
                      }
 
@@ -1063,6 +1090,7 @@ html(lang='en')
                         $("#third_node_row_four").css('background-image','url("images/avatar_no.png")');
                         //document.getElementById('third_node_row_four').removeAttribute("onclick");
                      }else {
+                       check_for_red_ness('third_node_row_four',9);
                        $("#third_node_row_four").popover({content: final_data, html: true,trigger: "hover",placement:"bottom"});
                      }
                    }
@@ -1075,6 +1103,7 @@ html(lang='en')
                         $("#fourth_node_row_four").css('background-image','url("images/avatar_no.png")');
                         //document.getElementById('fourth_node_row_four').removeAttribute("onclick");
                      }else {
+                       check_for_red_ness('fourth_node_row_four',10);
                        $("#fourth_node_row_four").popover({content: final_data, html: true,trigger: "hover",placement:"bottom"});
                      }
                    }
@@ -1086,6 +1115,7 @@ html(lang='en')
                         $("#fifth_node_row_four").css('background-image','url("images/avatar_no.png")');
                         //document.getElementById('fifth_node_row_four').removeAttribute("onclick");
                      }else {
+                       check_for_red_ness('fifth_node_row_four',11);
                        $("#fifth_node_row_four").popover({content: final_data, html: true,trigger: "hover",placement:"bottom"});
                      }
                    }
@@ -1097,6 +1127,7 @@ html(lang='en')
                         $("#sixth_node_row_four").css('background-image','url("images/avatar_no.png")');
                         //document.getElementById('sixth_node_row_four').removeAttribute("onclick");
                      }else {
+                       check_for_red_ness('sixth_node_row_four',12);
                        $("#sixth_node_row_four").popover({content: final_data, html: true,trigger: "hover",placement:"bottom"});
                      }
                    }
@@ -1108,6 +1139,7 @@ html(lang='en')
                         $("#seventh_node_row_four").css('background-image','url("images/avatar_no.png")');
                         //document.getElementById('seventh_node_row_four').removeAttribute("onclick");
                      }else {
+                       check_for_red_ness('seventh_node_row_four',13);
                        $("#seventh_node_row_four").popover({content: final_data, html: true,trigger: "hover",placement:"bottom"});
                      }
 
@@ -1120,6 +1152,7 @@ html(lang='en')
                         $("#eight_node_row_four").css('background-image','url("images/avatar_no.png")');
                         //document.getElementById('eight_node_row_four').removeAttribute("onclick");
                      }else {
+                       check_for_red_ness('eight_node_row_four',14);
                        $("#eight_node_row_four").popover({content: final_data, html: true,trigger: "hover",placement:"bottom"});
                      }
 

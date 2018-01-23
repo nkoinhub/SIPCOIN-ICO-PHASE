@@ -5,16 +5,15 @@ html(lang='en')
     meta(charset='utf-8')
     meta(name='viewport', content='width=device-width, initial-scale=1')
     link(rel='stylesheet', href='/css/bootstrap.min.css')
-    link(rel='stylesheet', href='/css/index_1.css')
+    link(rel='stylesheet', href='/css/index.css')
     link(rel='stylesheet', href='/css/mate_icon.css')
     script(src='/js/views/jquery.min.js')
     script(src='/js/views/bootstrap.min.js')
-    script(src='/js/views/home.js')
-    link(rel='stylesheet', href='/font-awesome/css/font-awesome.min.css')
-    script(src='/js/views/jquery.datatables.min.js')
+    script(src='/js/views/countUp.js')
     script(src='/js/controllers/homeController.js')
+    script(src='/js/views/home.js')
     script(src='/js/form-validators/accountValidator.js')
-    link(rel='stylesheet', href='/css/jquery.datatables.min.css')
+    link(rel='stylesheet', href='/font-awesome/css/font-awesome.min.css')
     <link rel="apple-touch-icon" sizes="180x180" href="/images/favicons/apple-touch-icon.png">
     <link rel="icon" type="image/png" sizes="32x32" href="/images/favicons/favicon-32x32.png">
     <link rel="icon" type="image/png" sizes="16x16" href="/images/favicons/favicon-16x16.png">
@@ -23,26 +22,6 @@ html(lang='en')
     <meta name="theme-color" content="#ffffff">
 
     style.
-      tr {
-      background-color: none;
-      color: black;
-      border: none;
-      }
-      th{
-      color: black;
-      background-color: none;
-      }
-      table{
-      background-color: none;
-      border: none;
-      }
-      tfoot{
-      border: none;
-      }
-      th{
-      background-color: none;
-      border: none;
-      }
       .sidenav {
       color:white;
       height: 100%;
@@ -59,6 +38,7 @@ html(lang='en')
       -moz-box-shadow: 4px 6px 49px -1px rgba(3,43,47,1);
       box-shadow: 4px 6px 49px -1px rgba(3,43,47,1);
       }
+
       .sidenav a {
       padding: 8px 8px 8px 32px;
       text-decoration: none;
@@ -76,37 +56,6 @@ html(lang='en')
       transition:1s;
       background-color:#11a8ab;
       }
-      table{
-      font-size: 16px;
-      }
-      input[type=search] {
-      padding: 12px 20px;
-      margin: 8px 0;
-      display: inline-block;
-      border: 1px solid #ccc;
-      border-radius: 4px;
-      box-sizing: border-box;
-      }
-      select {
-      padding: 10px 10px;
-      margin: 8px ;
-      display: inline-block;
-      border: 1px solid #ccc;
-      border-radius: 4px;
-      box-sizing: border-box;
-      }
-      label{
-      padding:0px;
-      }
-      .table-bordered>tbody>tr>td, .table-bordered>tbody>tr>th, .table-bordered>tfoot>tr>th, .table-bordered>thead>tr>td, .table-bordered>thead>tr>th {
-      border: 0px solid #ddd;
-      }
-      .table-bordered>tfoot>tr>th {
-      border-top: 1px solid black;
-      }
-      .table-bordered>thead>tr>th {
-      border-bottom: 1px solid black;
-      }
       .sidenav .closebtn {
       position: absolute;
       top: 0;
@@ -119,7 +68,7 @@ html(lang='en')
       .sidenav a {font-size: 18px;}
       }
   body
-    - user = typeof(udata) != 'undefined' ? udata : { }
+  - user = typeof(udata) != 'undefined' ? udata : { }
     #mySidenav.sidenav(style='z-index:1234;')
       a.closebtn(href='javascript:void(0)', onclick='closeNav()') ×
       .Container.hey_me
@@ -130,7 +79,7 @@ html(lang='en')
               center
           .col-sm-8.col-sm-offset-1
             h3
-              center.regularLatto  SIPcoin
+              center.boldLatto  SIPcoin
           .col-sm-10.col-sm-offset-1
             hr
           .col-sm-12
@@ -142,15 +91,15 @@ html(lang='en')
           .col-sm-12
             br
           .col-sm-12
-            a(href='/addAmount')
-              i.fa.fa-plus-circle(aria-hidden='true')
-              |  &nbsp Add Coins
+            a(href='/referral')
+              i.fa.fa-handshake-o(aria-hidden='true')
+              |  &nbsp Referrals
           .col-sm-12
             br
           .col-sm-12
-            a(href='/print?secret=SIPcoinICO')
+            a(href='/transaction')
               i.fa.fa-list-alt(aria-hidden='true')
-              |  &nbsp User list
+              |  &nbsp Transaction List
           .col-sm-12
             br
           .col-sm-12
@@ -167,56 +116,79 @@ html(lang='en')
     #first_frame
       .container
         .row
+          button#btn-logout(style='display:none')
           br
           br
           br
           nav.navbar.navbar-inverse.navbar-fixed-top
-            button#btn-logout(style='display:none')
             .container-fluid
               .navbar-header
-                button.navbar-toggle(style='margin-top:23px;', type='button', data-toggle='collapse', data-target='#myNavbar')
+                button.navbar-toggle(style='margin-top:22px;', type='button', data-toggle='collapse', data-target='#myNavbar')
                   span.icon-bar
                   span.icon-bar
                   span.icon-bar
                 a.navbar-brand(onclick='openNav()', href='javascript:void(0)', style='margin-left:5px;color:white;padding-bottom: 43px;margin-right:15px;margin-top:5px;')
                   i.fa.fa-bars(aria-hidden='true',style="font-size:30px;margin-top:5px;")
-                a.navbar-brand(href='/', style='color:white;padding-bottom: 33px;padding-top:24px;font-size:25px;margin-top:5px;') SIPcoin Admin Panel
+                a.navbar-brand.boldLatto(href='javascript:void(0)', style='color:white;padding-bottom: 33px;padding-top:24px;font-size:25px;margin-top:5px;') SIPcoin
               #myNavbar.collapse.navbar-collapse
                 ul.nav.navbar-nav.navbar-right
                   button.btn(type='button',style="margin-top:10px;margin-bottom:5px;")
                     .chip(style='font-size:18px;')
                       img(src='/images/coin.png', alt='Person',style='height:40px;width:40px;')
-                      |  $ #{BTC}
+                      |   $ #{currentBTC}
                   button.btn(type='button',style="margin-top:10px;margin-bottom:5px;")
                     .chip(style='font-size:18px;')
                       img(src='/images/sipcoin_logo2d.png', alt='Person', style='height:40px;width:40px;')
-                      |   $ #{SIP}
+                      |  $ #{SIP}
                   //
-                    <li><div class="chip"><img src="/images/avatar.png" alt="Person" width="50" height="50"></div><a class="bit_current_value" href="#" style="color:white;font-size:25px;margin-top:10px;"> $ 1234  </a></li>
-                    <li><a class="sip_current_value" href="#" style="color:white;font-size:25px;margin-top:10px;"> Sipcoin &nbsp; - &nbsp; $ 1.5 </a></li>
+                    <li><div class="chip"><img src="/images/avatar.png" alt="Person" width="50" height="50"></div><a class="bit_current_value" href="javascript:void(0)" style="color:white;font-size:25px;margin-top:10px;"> $ 1234  </a></li>
+                    <li><a class="sip_current_value" href="javascript:void(0)" style="color:white;font-size:25px;margin-top:10px;"> Sipcoin &nbsp; - &nbsp; $ 1.5 </a></li>
                   button.btn.open_the_popup(type='button',style="margin-top:10px;margin-bottom:5px;")
                     .chip
                       img(src='/images/avatar.png', alt='Person', style='height:40px;width:40px;')
                       |                       #{user.name}
       div(style='margin-left:10px; margin-right:10px;')
-        br
         .container
           .row
             br
-            .col-sm-12.my_card_style(style='background-color:white;')
+            br
+            #step_one.col-sm-8.col-sm-offset-2.my_card_style_2
+              br
+              center
+                .row
+                  .col-sm-12
+                    h3.boldLatto Withdrawal Successful
+                hr(style="border-top:1px solid black;")
               .row
-                .col-sm-12
-                  center
-                    h3.boldLatto(style='color:black;')  User History
+                .col-sm-12(style='height:280px;border-radius:5px;')
+                  .row
+                    .col-sm-4.col-sm-offset-2
+                      h4.regularLatto Transaction ID
+                    .col-sm-3
+                      h4.regularLatto #{TID}
+                  .row
+                    .col-sm-4.col-sm-offset-2
+                      h4.regularLatto Amount Withrawal
+                    .col-sm-3
+                      h4.regularLatto #{coinDemanded}
+                  .row
+                    .col-sm-4.col-sm-offset-2
+                      h4.regularLatto BTC Wallet Address
+                    .col-sm-3
+                      h4.regularLatto #{address}
+                  .row
+                    .col-sm-4.col-sm-offset-2
+                      h4.regularLatto Amount paid in BTC
+                    .col-sm-3
+                      h4.regularLatto #{BTCToPay}
+                  hr(style="border-top:1px solid black;")
+                  .row
+                    .col-sm-12
+                      center
+                        h4.regularLatto You will get this amount in your BTC Wallet Address in 4-6 hours.
                     br
-                .col-sm-12.lightLatto
-                  #hey_one.table-responsive
-              br
-              br
-              br
-              br
-              br
-      #footer.my_footer_class(style='margin-bottom:0px;background-color:#222222;')
+                  br
+      #footer.my_footer_class(style='margin-bottom:0px;')
         .container
           .row
             br
@@ -262,33 +234,75 @@ html(lang='en')
             .col-sm-12
               br
 
-
     script.
-      $(document).ready(function(){
-      $("#tblReportResultsDemographics_wrapper").remove();
-      $("#hey_one").append('<table style="border:none;" id="tblReportResultsDemographics" class="table table-striped table-bordered" width="100%"> <thead> <tr> <th>Name</th> <th>Country</th> <th>User</th> <th>Date</th></tr> </thead> <tfoot> <tr> <th>Name</th> <th>Country</th> <th>User</th> <th>Date</th></tr> </tfoot> </table>');
-      var oTblReport = $("#tblReportResultsDemographics")
-      //
+      var count_for_dots=0;
+      function isNumber(evt) {
+      evt = (evt) ? evt : window.event;
+      var charCode = (evt.which) ? evt.which : evt.keyCode;
+      if (charCode > 31 && (charCode < 48 || charCode > 57) && charCode==46) {
+      return false;
+      }
+      return true;
+      }
 
-      var tr = '!{accts}';
-      //console.log((jQuery.parseJSON(tr)));
-      oTblReport.DataTable ({
-      "data" : jQuery.parseJSON(tr),
-      "columns" : [
-      { "data" : "name"},
-      { "data" : "country"},
-      { "data" : "user"},
-      { "data" : "date"}
-      ]
-      });
-      });
+      function isEmpty(){
+      var value=$("#ex3").val();
+      console.log(value);
+      if(value.length==0 || parseInt(value) == 0)
+      {
+      alert('Enter valid number');
+      return false;
+      }
+      }
+
+
+      var options = {
+      useEasing: true,
+      useGrouping: true,
+      separator: ',',
+      decimal: '.',
+      prefix: '$ ',
+      };
+
+      if("#{buyButton}" == "false")
+      {
+        $("#NXT").remove();
+      }
+
+      var options2 = {
+      useEasing: true,
+      useGrouping: true,
+      separator: ',',
+      decimal: '.',
+      prefix: 'BTC ',
+      };
+      var value = 1;
+      setInterval(function(){
+      var value2 = document.getElementById('ex3').value;
+      console.log(value2);
+      if(value != value2)
+      {
+      var demo2 = new CountUp('targetBTC', 0, (value2)*"#{sipValue}"/"#{btcValue}" , 10, 1.2, options2);
+      if (!demo2.error) {
+      demo2.start();
+      value = value2;
+      } else {
+      console.error(demo2.error);
+      }
+      }
+      },1000)
       $(function(){
       $(document).on('click',".button_hey_logout",function(){
       $("#btn-logout").click();
       });
       })
+      // var demo = new CountUp('targer_here', 0, 4178, 0, 2.5, options);
+      // if (!demo.error) {
+      // demo.start();
+      // } else {
+      // console.error(demo.error);
+      // }
       var data_for_the_popover='<div class="container"> <div class="row"> <div class="col-sm-2" style="background-color:#222222;color:white;padding-left: 0px;padding-right: 0px;"> <div class="row"> <div class="col-sm-12" style="color:white;padding:20px;font-family:lato_bold,open-serif;"> <center><h5 style="font-size:17px;color:white;">#{user.email} </h5> </center> </div> <div class="col-sm-12"> <br> </div> <div class="col-sm-12 hover_change_back"> <h5 style="font-size:20px;font-family:lato_light;"> <a href="/account" style="color:white;text-decoration:none;"> <i style="padding-right:3px;padding-left:10px;"class="fa fa-cogs" aria-hidden="true"></i> Account Settings </a> </h5> </div> <div class="col-sm-12"> <hr> </div> <div  class="col-sm-12 hover_change_back button_hey_logout"> <h5 style="font-size:20px;font-family:lato_light;"> <i style="padding-right:12px;padding-left:10px;" class="fa fa-power-off" aria-hidden="true"></i>Log out </h5> </div> </div> <br> </div> </div> </div>';
-
       $(function(){
       $('.open_the_popup').popover({content:data_for_the_popover ,placement: "bottom",html: true,trigger: "focus"});
       })
@@ -298,10 +312,29 @@ html(lang='en')
       function closeNav() {
       document.getElementById("mySidenav").style.width = "0";
       }
+
+
       $("#mySidenav").mouseleave(function(){
       document.getElementById("mySidenav").style.width = "0";
       });
 
+      $(document).mouseup(function(e)
+      {
+      var container = $("#sideNav");
+      if (!container.is(e.target) && container.has(e.target).length === 0)
+      {
+      document.getElementById("mySidenav").style.width = "0";
+      }
+      });
 
+      $(window).scroll(function(){
+      document.getElementById("mySidenav").style.width = "0";
+      });
+
+      //
+      // $(document).on('click',function(){
+      //   document.getElementById("mySidenav").style.width = "0";
+      //  })
+      //
 include modals/alert
 include modals/confirm

@@ -57,6 +57,7 @@ var transactions = db.collection('transactions');
 var referrals = db.collection('referrals');
 var sipStage = db.collection('SIPStage');
 var Res = db.collection('RES');
+var withdrawalCol=db.collection('withdrawals');
 
 
 // function to return the child node of the parent referral node
@@ -137,12 +138,16 @@ exports.formTreeData = function(referral, callback)
 					finalData.push({
 						key : resArray[0].selfReferralCode,
 						parent : resArray[0].parentReferralCode,
-						name : resArray[0].username
+						name : resArray[0].username,
+						leftCount : resArray[0].leftCount,
+						rightCount : resArray[0].rightCount
 					})
 					finalData.push({
 						key : resArray[1].selfReferralCode,
 						parent : resArray[1].parentReferralCode,
-						name : resArray[1].username
+						name : resArray[1].username,
+						leftCount : resArray[1].leftCount,
+						rightCount : resArray[1].rightCount
 					})
 
 				}
@@ -150,12 +155,16 @@ exports.formTreeData = function(referral, callback)
 					finalData.push({
 						key : resArray[1].selfReferralCode,
 						parent : resArray[1].parentReferralCode,
-						name : resArray[1].username
+						name : resArray[1].username,
+						leftCount : resArray[1].leftCount,
+						rightCount : resArray[1].rightCount
 					})
 					finalData.push({
 						key : resArray[0].selfReferralCode,
 						parent : resArray[0].parentReferralCode,
-						name : resArray[0].username
+						name : resArray[0].username,
+						leftCount : resArray[0].leftCount,
+						rightCount : resArray[0].rightCount
 					})
 				}
 				return resArray;
@@ -167,12 +176,16 @@ exports.formTreeData = function(referral, callback)
 					finalData.push({
 						key : resArray[0].selfReferralCode,
 						parent : resArray[0].parentReferralCode,
-						name : resArray[0].username
+						name : resArray[0].username,
+						leftCount : resArray[0].leftCount,
+						rightCount : resArray[0].rightCount
 					})
 					finalData.push({
 						key : "Empty",
 						parent : resArray[0].parentReferralCode,
-						name : "No Child"
+						name : "No Child",
+						leftCount : 0,
+						rightCount : 0
 					})
 
 				}
@@ -181,12 +194,16 @@ exports.formTreeData = function(referral, callback)
 					finalData.push({
 						key : "Empty",
 						parent : resArray[0].parentReferralCode,
-						name : "No Child"
+						name : "No Child",
+						leftCount : 0,
+						rightCount : 0
 					})
 					finalData.push({
 						key : resArray[0].selfReferralCode,
 						parent : resArray[0].parentReferralCode,
-						name : resArray[0].username
+						name : resArray[0].username,
+						leftCount : resArray[0].leftCount,
+						rightCount : resArray[0].rightCount
 					})
 				}
 				return resArray;
@@ -480,40 +497,22 @@ exports.incrementTokens = function(username, tok, callback)
 }
 
 //increment tokens in referral document
+exports.get_first_transaction=function(username,callback)
+{
+		transactions.findOne({user:username,amountPaid:true},function(e,o){
+				if(o)
+				{
+					var amount=o.valueOfOneToken*o.tokens;
+					planAmt = amount;
+					referrals.update({user:username},{$inc:{currentAmt:amt},$set:{planAmt:planAmt}},callback("currentAmt updated"));
+				}
+		});
+}
+
 exports.incrementTokensAmtInReferral = function(username, amt, callback)
 {
 	console.log("inside referral tokens increment");
-	var planAmt;
-
-	if(amt > 10000)
-	{
-		planAmt = 10000;
-	}
-	else if(amt > 3000)
-	{
-		planAmt = 3000;
-	}
-	else if(amt > 2000)
-	{
-		planAmt = 2000;
-	}
-	else if(amt > 1000)
-	{
-		planAmt = 1000;
-	}
-	else if(amt > 500)
-	{
-		planAmt = 500;
-	}
-	else if(amt > 150)
-	{
-		planAmt = 150;
-	}
-	else {
-		planAmt = amt;
-	}
-
-	referrals.update({user:username},{$inc:{currentAmt:amt},$set:{planAmt:planAmt}},callback("currentAmt updated"));
+	referrals.update({username:username},{$inc:{currentAmt:amt},$set:{planAmt:amt}},callback("currentAmt updated for : "+username));
 	//db.testing.update({case:3},{$inc:{a:5},$set:{b:5}})
 }
 
@@ -546,7 +545,7 @@ exports.updateTokenValueOfUserInDB = function(username, emailid, tokenvalue, cal
 		if(o)
 		{
 			o.valueOfTokens = o.tokens * tokenvalue;
-			o.valueOfReferralTokens = o.referralTokens * tokenvalue;
+			//o.valueOfReferralTokens = o.referralTokens * tokenvalue;
 			accounts.save(o,{safe:true}, callback)
 		}
 	})
@@ -706,13 +705,36 @@ exports.validateResetLink = function(email, passHash, callback)
 
 exports.getAllRecords = function(callback)
 {
-	accounts.find({},{_id:0,email:0,tokens:0,pass:0,referralTokens:0,valueOfTokens:0,selfReferralCode:0,referralCode:0,secret:0,accountVerified:0,planAmountSet:0}).toArray(
+	accounts.find({},{_id:0}).toArray(
 		function(e, res) {
-			console.log(res);
 		if (e) callback(e)
 		else callback(null, res)
 	});
 }
+
+// insertion of withdrawal doc
+exports.withdrawalDocUpdation=function(dataCollection,callback)
+{
+	withdrawalCol.insert(dataCollection,callback("withdrawal accepted"));
+}
+
+
+// updation of commission balance
+exports.withdrawalCommission=function(username,withdrawalAmount,callback)
+{
+	console.log("withdrawal commission updated for : "+username);
+	accounts.update({user:username},{$inc:{totalCommission:withdrawalAmount}});
+	referrals.update({username:username},{$inc:{totalCommission:withdrawalAmount}},callback("updated"));
+}
+
+//get withdrawal doc
+exports.getwithdrawalData=function(tid,callback)
+{
+		withdrawalCol.findOne({TransactionID:tid},function(e,o){
+			callback(o);
+		});
+}
+
 
 exports.getTransactions = function(username, emailid, callback)
 {

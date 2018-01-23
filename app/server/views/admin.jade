@@ -77,7 +77,7 @@ html(lang='en')
       background-color:#11a8ab;
       }
       table{
-      font-size: 16px;
+      font-size: 13px;
       }
       input[type=search] {
       padding: 12px 20px;
@@ -87,6 +87,9 @@ html(lang='en')
       border-radius: 4px;
       box-sizing: border-box;
       }
+
+
+
       select {
       padding: 10px 10px;
       margin: 8px ;
@@ -118,8 +121,32 @@ html(lang='en')
       .sidenav {padding-top: 15px;}
       .sidenav a {font-size: 18px;}
       }
+
+      input{
+      padding: 12px 20px;
+      margin: 8px 0;
+      display: inline-block;
+      border: 1px solid #ccc;
+      border-radius: 4px;
+      box-sizing: border-box;
+      }
+
+      label{
+        padding-top:12px;
+      }
+
+      ::-webkit-scrollbar {
+              display: none;
+          }
+
+      ::-moz-scrollbar {
+              display: none;
+          }
+
   body
     - user = typeof(udata) != 'undefined' ? udata : { }
+    - msgobject = typeof(message) != 'undefined' ? message : { }
+
     #mySidenav.sidenav(style='z-index:1234;')
       a.closebtn(href='javascript:void(0)', onclick='closeNav()') ×
       .Container.hey_me
@@ -150,7 +177,7 @@ html(lang='en')
           .col-sm-12
             a(href='/print?secret=SIPcoinICO')
               i.fa.fa-list-alt(aria-hidden='true')
-              |  &nbsp User list
+              |  &nbsp User List
           .col-sm-12
             br
           .col-sm-12
@@ -207,86 +234,45 @@ html(lang='en')
               .row
                 .col-sm-12
                   center
-                    h3.boldLatto(style='color:black;')  User History
+                    h3.boldLatto(style='color:black;')  Add Amount
                     br
                 .col-sm-12.lightLatto
                   #hey_one.table-responsive
-              br
-              br
-              br
-              br
-              br
-      #footer.my_footer_class(style='margin-bottom:0px;background-color:#222222;')
-        .container
-          .row
-            br
-            .col-sm-4
-              center
-                button.btn(type='button', style='padding-top:20px;')
-                  a(href='/', style='border:none;color:white;margin-right:0px;')
-                    img(src='/images/sipcoin_logo2d.png', alt='Person', width='50', height='50')
-                button.btn(type='button', style='padding-top:20px;')
-                  a(href='/', style='text-decoration:none;color:white;font-size:30px;') SIPcoin
-            .col-sm-3
-              .row
-                .col-sm-12
-                  h3 Contact
-                .col-sm-12
-                  h4
-                    i.fa.fa-ticket.fa-1x(aria-hidden='true', style='margin-right:10px;')
-                    a(href='http://support.sipcoin.io', style='border:none;color:white;margin-right:0px;' target='_blank') Support Center
-                .col-sm-12
-            .col-sm-5
-              .row
-                br
-                .col-sm-12
-                  h3 Follow Us
-                .col-sm-12
-                  a(href='https://www.facebook.com/sipcoin/', target='_blank')
-                    img(src='/images/facebook.png', height='50px;', width='50px;', style='margin-right:15px;')
-                  a(href='https://www.instagram.com/sipcoin.io/?hl=en', target='_blank')
-                    img(src='/images/insta_1.png', height='50px;', width='50px;', style='margin-right:15px;')
-                  a(href='https://twitter.com/sipcoin_io', target='_blank')
-                    img(src='/images/twitter.png', height='50px;', width='50px;', style='margin-right:15px;')
-                  a(href='https://goo.gl/e37G3Z', target='_blank')
-                    img(src='/images/Slack.png', height='50px;', width='50px;', style='margin-right:15px;')
-                  a(href='/about_us',style='text-decoration:none;color:white;margin-right:15px;margin-left:10px;')
-                    img(src='/images/about.png', alt='Person', style='height:40px;width:40px;margin-right:10px;')
-                    |  About Us
-
-            .col-sm-12
-              hr
-            .col-sm-12
-              center
-                h4 © Copyright SIPcoin.io 2017
-            .col-sm-12
-              br
+              .coin-update
+                .row
+                  .col-sm-6.col-sm-offset-3
+                    form(action='/addAmount', method='post')
+                      .form-group
+                        label.control-label.col-sm-4(for='username',style="color:black;") Username
+                        .col-sm-8
+                          input#inputUsername.form-control(type='text', name='username', placeholder='Username', required='')
+                      .form-group
+                        label.control-label.col-sm-4(for='tokens',style="color:black;") Coins
+                        .col-sm-8
+                          input#inputTokens.form-control(type='number', name='tokens', step='0.01', placeholder='Coins', required='')
+                      .form-group
+                        label.control-label.col-sm-4(for='USD',style="color:black;") Bitcoin in USD
+                        .col-sm-8
+                          input#inputUSD.form-control(type='number', name='USD', step='0.01', placeholder='Bitcoin Value in USD', required='')
+                      .form-group
+                        label.control-label.col-sm-4(for='tokenValue',style="color:black;") Token Value
+                        .col-sm-8
+                          input#inputTokenValue.form-control(type='number', name='tokenValue', step='0.01', placeholder='Token Value', required='')
+                      .form-group
+                        .col-sm-12
+                        center
+                          button.btn.btn-primary(type='submit',style="margin-top:20px;") Submit
+                          br
+                          br
 
 
     script.
-      $(document).ready(function(){
-      $("#tblReportResultsDemographics_wrapper").remove();
-      $("#hey_one").append('<table style="border:none;" id="tblReportResultsDemographics" class="table table-striped table-bordered" width="100%"> <thead> <tr> <th>Name</th> <th>Country</th> <th>User</th> <th>Date</th></tr> </thead> <tfoot> <tr> <th>Name</th> <th>Country</th> <th>User</th> <th>Date</th></tr> </tfoot> </table>');
-      var oTblReport = $("#tblReportResultsDemographics")
-      //
-
-      var tr = '!{accts}';
-      //console.log((jQuery.parseJSON(tr)));
-      oTblReport.DataTable ({
-      "data" : jQuery.parseJSON(tr),
-      "columns" : [
-      { "data" : "name"},
-      { "data" : "country"},
-      { "data" : "user"},
-      { "data" : "date"}
-      ]
-      });
-      });
       $(function(){
       $(document).on('click',".button_hey_logout",function(){
       $("#btn-logout").click();
       });
       })
+
       var data_for_the_popover='<div class="container"> <div class="row"> <div class="col-sm-2" style="background-color:#222222;color:white;padding-left: 0px;padding-right: 0px;"> <div class="row"> <div class="col-sm-12" style="color:white;padding:20px;font-family:lato_bold,open-serif;"> <center><h5 style="font-size:17px;color:white;">#{user.email} </h5> </center> </div> <div class="col-sm-12"> <br> </div> <div class="col-sm-12 hover_change_back"> <h5 style="font-size:20px;font-family:lato_light;"> <a href="/account" style="color:white;text-decoration:none;"> <i style="padding-right:3px;padding-left:10px;"class="fa fa-cogs" aria-hidden="true"></i> Account Settings </a> </h5> </div> <div class="col-sm-12"> <hr> </div> <div  class="col-sm-12 hover_change_back button_hey_logout"> <h5 style="font-size:20px;font-family:lato_light;"> <i style="padding-right:12px;padding-left:10px;" class="fa fa-power-off" aria-hidden="true"></i>Log out </h5> </div> </div> <br> </div> </div> </div>';
 
       $(function(){
@@ -302,6 +288,17 @@ html(lang='en')
       document.getElementById("mySidenav").style.width = "0";
       });
 
+      if('#{msgobject.UserName}'=='none' && '#{msgobject.wrong_value}'=='none')
+      {
+        console.log('first time');
+      }else
+      if('#{msgobject.UserName}'!='none' && '#{msgobject.wrong_value}'=='none')
+      {
+        var message_bj = "# Username : "+'#{msgobject.UserName}' + "\n\n# Updated with Coins : "+'#{msgobject.CoinsUpdation}'+"\n\n# Total Coins : "+'#{msgobject.TotalCoins}';
+        alert(message_bj);
+      }else{
+      alert('Invalid Entry, Check Username');
+      }
 
 include modals/alert
 include modals/confirm
