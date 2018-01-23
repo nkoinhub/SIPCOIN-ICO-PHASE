@@ -1,7 +1,7 @@
 doctype html
 html(lang='en')
   head
-    title SIPcoin
+    title Bootstrap Example
     meta(charset='utf-8')
     meta(name='viewport', content='width=device-width, initial-scale=1')
     link(rel='stylesheet', href='/css/bootstrap.min.css')
@@ -46,15 +46,124 @@ html(lang='en')
       border-right:1px solid #ccc;
       border-bottom: 1px solid #ccc;
       }
+
+      #text_data{
+      position:absolute;
+      top:1%;
+      left:40%;
+      height:5%;
+      width:60%;
+      }
       #section1 {color: black; background-color: white;}
       #section2 {color: black; background-color: black;}
       #section3 {color: black; background-color: white;}
       #section41 {color: black; background-color: #00bcd4;}
       #section42 {color: black; background-color: #009688;}
-      @media screen and (max-width: 810px) {
-      #section1, #section2, #section3, #section41, #section42  {
-      margin-left: 150px;
+
+      .text_here{
+      margin-top:100px;
       }
+
+      .remove_me{
+      display:block;
+      }
+
+      #my_text_about_us{
+      display:none;
+      }
+
+      #myCarousel{
+      display:block;
+      }
+
+      #footer{
+      margin-bottom:0px;
+      width:117%;
+      margin-left:-10%;
+      }
+
+
+
+      @media screen and (max-width: 480px) {
+      #myScrollspy{
+      display:none;
+      }
+      #image_data{
+      display:none;
+      }
+      #text_data{
+      position:absolute;
+      top:0%;
+      left:0%;
+      width:100%;
+      margin:0px;
+      }
+      #section1{
+      margin:10px;
+      }
+
+      #section2{
+      margin:0px;
+      background-color:white;
+      height:1400px;
+      }
+
+      #my_text_about_us{
+      margin:0px;
+      display:block;
+      }
+
+      #myCarousel{
+      display:none;
+      }
+
+      #section3{
+        margin:0px;
+        height:1200px;
+      }
+
+      #section4{
+      margin:0px;
+      height:1200px;
+      }
+
+      #section5{
+      margin:0px;
+      height:300px;
+      }
+
+      #section6{
+      margin:0px;
+      height:900px;
+      }
+
+      #section7{
+      margin:0px;
+      height:1100px;
+      }
+
+      #section8{
+      margin:0px;
+      height:1100px;
+      }
+
+      #section9{
+      margin:0px;
+      }
+
+      #footer{
+      margin-left:-5%;
+      margin-top:300px;
+      }
+
+      .remove_me{
+      dispaly:none;
+      }
+
+      .text_here{
+      0px;
+      }
+
       }
   body(data-spy='scroll', data-target='#myScrollspy', data-offset='20')
 
@@ -109,7 +218,7 @@ html(lang='en')
             li
               a(href='#section6') SIP Services
             li
-              a(href='#section7') How to Stake SIP
+              a(href='#section7') How to stake SIP
             li
               a(href='#section8') How to Lend SIP
             li
@@ -118,12 +227,21 @@ html(lang='en')
           #section1
             #image_data(style='position:absolute;top:2%;left:0%;')
               img(src='/images/sip.png', height='300px', width='300px')
-            #text_data(style='position:absolute;top:1%;left:40%;height:5%;width:60%;')
+            #text_data
               .row(style='margin:0;padding:20px;')
                 .col-sm-12(style='margin:0;font-size:20px;line-height:200%;')
                   h1(style='margin:0;padding:0;') SIPcoin
-                  |               SIPcoin is here to help you with the crypto currency revolution with its AI based Smart Investment Platform (SIP).  Our open source decentralized system is designed to make the process of trading, staking, mining and investing much easier.  It’s transparent to all users from everywhere and educates its community allowing you the possibility of the stable income and financial freedom.
+                  |               SIPcoin is here to help you with the crypto currency revolution with its AI based smart Investment Platform (SIP).  Our open source decentralized system is design to make the process of trading, staking, mining and investing much easier.  It’s transparent to all users from everywhere and educates its community allowing you to possibility of the stable income and financial freedom.
           #section2
+            #my_text_about_us
+              .row
+                .col-sm-12.text_here
+                  p(style='margin:0;font-size:20px;line-height:200%;')
+                    | SIP has been created by crypto currency enthusiasts from various verticals like banking, trading and technology spread across the word. We understand that due to the lack of proper platform not every person can be part of crypto revolution. SIP will provide platform of opportunities created in the crypto currency ecosystem. Our aim is to bring the crypto investment and education for the people.
+                  p(style='margin-bottom:20px;font-size:20px;line-height:200%;')
+                    | Unique and visionary, the Smart Investment Platform (SIPcoin) is a decentralized digital public currency that offers everything investors look for in a crypto currency. SIP’s artificial intelligence (AI) based trading bots analyzes massive volumes of financial data to predict financial markets.
+                  p(style='margin:0;font-size:20px;line-height:200%;')
+                    | Created through complicated mathematical calculations and verified by millions of computer users, SIP is backed by genuine blockchain applications. It is an open source investment platform facilitating P2P transactions with four distinct investment channels viz. lending, stacking, mining, and trading.And because we do not operate on fractional reserves the way banks across the world do, there is no scope for excessive creation of SIP coins. This eliminates the pitfall of devaluation of SIP coins. If anything, they will appreciate with time.
             #myCarousel.carousel.slide(data-ride='carousel')
               ol.carousel-indicators
                 li.active(data-target='#myCarousel', data-slide-to='0')
@@ -153,12 +271,13 @@ html(lang='en')
           #section3
             .row
               .col-sm-12
-                br
-                br
+                p.remove_me
+                  br
+                  br
                 p(style='text-align:left;font-size:25px;line-height:200%;')
                   | How it Works
                 p(style='text-align:left;font-size:20px;line-height:200%;')
-                  | SIPcoin draws its value from the combine average value of the top ten coins currently trending and it gives you holistic approach to the digital currency market but protects you from volatility and inheriting individual coins
+                  | Sipcoin draws its value from the combine average value of the top ten coins currently trending and it gives you holistic approach to the digital currency market but protects you from volatility and inheriting individual coins
                 br
                 p(style='text-align:left;font-size:20px;line-height:200%;')
                   | The funds generated through ICO would be pooled to invest in the top ten highly traded coins as the value of holdings grows or falls so will the value of sip coin in equal proportion however if the value of any one or two of the currency’s fall disproportionately  the pooled value of the other coins will still sustain  the value of the Sipcoin a globally unique mechanism this not only help mitigate investor risk but also make investment itself more affordable since the Sipcoin are priced much more reasonably as compare to other coins
@@ -177,7 +296,7 @@ html(lang='en')
               | Sipcoin aims to be the best alternative to Bitcoin and Ethereum, the popular crypto currencies of the present day. You can buy, sell, and trade Sipcoins on the SIP exchange.
               | Democracy is woven into the very fabric of our thinking.
             p(style='text-align:left;font-size:20px;line-height:200%;')
-              | Having a solid and strong technical foundation drives our strategy. In the final analysis, we, at SIP want SIPcoin to be Easy-to-use, secure cryptocurrency for the people.
+              | Having a solid and strong technical foundation drives our strategy. In the final analysis, we Sip want SIPcoin to be Easy-to-use, secure cryptocurrency for the people.
           #section5
             br
             br
@@ -190,12 +309,12 @@ html(lang='en')
             br
             br
             p(style='text-align:left;font-size:25px;line-height:200%;')
-              | Staking
+              | Stacking
             p
             p(style='text-align:left;font-size:20px;line-height:200%;')
               | Receive fix 15% monthly on staking of SIP for one year and fix 20% monthly on staking Sipcoins for eighteen months
             p(style='text-align:left;font-size:25px;line-height:200%;') Lending
-            p(style='text-align:left;font-size:20px;line-height:200%;') Lend your Sipcoins and earn daily profits through our AI based trading Bots
+            p(style='text-align:left;font-size:20px;line-height:200%;') Lend your Sipcoins and earn daily profits through our AI based trading BOTs
             p(style='text-align:left;font-size:25px;line-height:200%;') Mining
             p(style='text-align:left;font-size:20px;line-height:200%;')
               | Earn mining (CPU / GPU) rewards for SIP mining by downloading the SIP mining software from the mining pool
@@ -203,12 +322,12 @@ html(lang='en')
             p(style='text-align:left;font-size:20px;line-height:200%;') Trade your SIP coins on the SIP exchange to earn margin points
           #section7
             br
-            p(style='text-align:left;font-size:25px;line-height:100%;margin-top:50px;') Staking
+            p(style='text-align:left;font-size:25px;line-height:100%;margin-top:50px;') Stacking
             p(style='text-align:left;font-size:20px;line-height:200%;')
               | Two plans of diverse durations available.
               | All ICO participants will be able to select a staking plan on March 2, 2018 when the customer portal will go live.
               | A 15% flat interest will be paid on a prorate basis for holding coins till March 2, 2018
-            p(style='text-align:left;font-size:25px;line-height:100%;') Staking SIP
+            p(style='text-align:left;font-size:25px;line-height:100%;') Stacking SIP
             p(style='text-align:left;font-size:20px;line-height:200%;')
               ul
                 li(style='text-align:left;font-size:20px;line-height:200%;') Deposit BTC to your unique wallet in SIP
@@ -227,8 +346,8 @@ html(lang='en')
                         center(style='font-size:20px;') Staking Plans
                   tbody
                     tr
-                      td 12 Months Plan
-                      td 18 Months Plan
+                      td 12 Month Plan
+                      td 18 Month Plan
                     tr
                       td Coins free for trading after 12 months
                       td Coins free for trading after 18 months
@@ -257,13 +376,13 @@ html(lang='en')
                     th Lend $100 to $1,000
                     th Lend $1,010 to $10,000
                     th Lend $10,010 to $50,000
-                    th Lend $50,010 to $100,000
+                    th Lend $50,100 to $100,000
                 tbody
                   tr
                     td Up to 42% monthly
-                    td Up to 42% monthly + 0.10% fixed daily
+                    td Up to 42% monthly + 0.1% fixed daily
                     td Up to 42% monthly + 0.15% fixed daily
-                    td Up to 42% monthly + 0.20% fixed daily
+                    td Up to 42% monthly + 0.2% fixed daily
                   tr
                     td Capital release after 8 months
                     td Capital release after 7 months
@@ -296,7 +415,7 @@ html(lang='en')
                 li(style='text-align:left;font-size:20px;line-height:200%;') Use your CPU / GPU computation power to contribute to validate transactions.
                 li(style='text-align:left;font-size:20px;line-height:200%;') Earn mining rewards in the form of SIP coins.
 
-      #footer.my_footer_class(style='margin-bottom:0px;width:117%;margin-left:-10%;')
+      #footer.my_footer_class
           .container
             .row
               br

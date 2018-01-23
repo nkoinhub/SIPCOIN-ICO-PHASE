@@ -148,6 +148,7 @@ module.exports = function(app) {
 	})
 
 
+
   app.get('/about_us',function(req,res){
 
     var usd,sip;
@@ -1166,10 +1167,33 @@ app.get('/resent_verfication_page',function(req,res){
 	// view & delete accounts //
 
 		app.get('/print', function(req, res) {
-			if(req.query.secret == "SIPcoinICO") {																		/// http://sipcoin.io/print?secret=SIPcoinICO
-				AM.getAllRecords( function(e, accounts){
-					res.render('print', { title : 'Account List', accts : accounts });
-				})
+      console.log("hey");
+			if(req.query.secret == "SIPcoinICO") {																		/// http://sipcoin.io/print?secret=SIPcoinIC        if(req.session.user!=null)
+        if(req.session.user == null)
+        {
+          res.redirect('/');
+        }else{
+
+          console.log('reached Here');
+          var usd;
+          var sip;
+
+          btcCheck().then((USD)=>{
+            usd = USD;
+            return getTokenValue().then((SIP)=>{return SIP});
+          })
+          .then((SIP)=>{
+            sip = SIP;
+            AM.getAllRecords(function(e, accounts){
+              res.render('print',{
+                title : 'Account List',
+                accts : JSON.stringify(accounts),
+                SIP:sip,
+                USD:usd,
+                user:req.session.user });
+            })
+          })
+        }
 			}
 			else {
 				res.redirect('/');
@@ -1231,6 +1255,122 @@ app.get('/resent_verfication_page',function(req,res){
 		}
 	});
 
+app.post('/withdrawl',function(req,res){
+
+  if(req.session.user == null) res.redirect('/');
+  else {
+    var TID = (req.session.user.user).substr(0,3) + moment().format('x');
+    var CoinsWithdrawl=parseInt(req.body['CoinsWithdrawl']);
+    var dataCollection = {
+      username : req.session.user.user,
+      email : req.session.user.email,
+      coinDemanded : CoinsWithdrawl, // get the input box value
+      BTCtoUSD : -1,
+      BTCpaid : 0,
+      amountPaid : false,
+      TimeOfPaymentPlaced : moment().format('MMMM Do YYYY, h:mm:ss a'),
+      TransactionID : TID,
+      TimeOfPaymentReceived : "No Payment Done",
+      Transaction_hash : "Not Generated",
+      btcAddress:req.body['btc_wallet_address'],
+      amountToPayBtc:-1,
+      valueOfOneToken:-1
+    }
+
+    //step 1 : get the current btc value
+    btcCheck().then((USD)=>{
+      dataCollection.BTCtoUSD = USD;
+      // get current token value
+      getTokenValue().then((value)=>{
+        sipValue=value;
+        dataCollection.valueOfOneToken=sipValue;
+        dataCollection.amountToPayBtc=parseFloat((CoinsWithdrawl*sipValue)/dataCollection.BTCtoUSD).toFixed(8);
+        AM.withdrawlReferralCoins(dataCollection,function(result){
+            console.log(result);
+              AM.changeReferralCoins(req.session.user.user,-CoinsWithdrawl,function(result){
+                  res.redirect('/withdrawlConfirmation?transaction_id='+TID);
+              });
+        });
+      });
+      //step 2 : request for the btc address
+    })
+  }
+});
+
+app.get('/withdrawlConfirmation',function(req,res){
+
+  console.log(req.query.transaction_id);
+  if(req.session.user == null || req.query.transaction_id == undefined){
+    console.log('inside not');
+    res.redirect('/');
+  }else {
+
+    AM.getWithdrawlData(req.query.transaction_id,function(dataCollection){
+      if(dataCollection == null) {
+        res.redirect('/dashboard');
+      }
+      else {
+        res.render('withdrawlConfirmation',{
+          udata : req.session.user,
+          coinDemanded : dataCollection.coinDemanded,
+          address : dataCollection.btcAddress,
+          BTCToPay : dataCollection.amountToPayBtc,
+          SIP : dataCollection.valueOfOneToken,
+          currentBTC : dataCollection.BTCtoUSD,
+          TID:dataCollection.TransactionID
+        });
+      }
+    });
+
+  }
+
+  // res.render('/withdrawlConfirmation',{
+  //
+  // });
+});
+
+
+app.get('/withdrawl',function(req,res){
+
+  var btc;
+  var sip;
+
+  if (req.session.user == null){
+// if user is not logged-in redirect back to login page //
+    res.redirect('/');
+  }	else{
+
+    getTokenValue().then((value)=>{
+      sip = value;
+      console.log(sip);
+    })
+
+    btcCheck().then((value)=>{
+      btc = value;
+      console.log(btc);
+    })
+    .then((value)=>{
+      updateTokenValueOfUser(req.session.user.user,req.session.user.email).then((value)=>{
+        return getAccountDetails(req.session.user.user,req.session.user.email).then((details)=>{return details});
+      })
+      .then((userDetails)=>{
+          console.log(btc);
+          res.render('withdrawl', {
+            title : 'Control Panel',
+            countries : CT,
+            udata : req.session.user,
+            accountDetails : userDetails,
+            btcValue : btc,
+            sipValue : sip
+          });
+      })
+    })
+    .catch((err)=>{
+      console.log("Error while fetching withdrawl page for user : "+req.session.user.user + " :: Error : "+err);
+      res.redirect('/dashboard');
+    })
+  }
+});
 
 //referral invitation link - email
 	app.post('/email_send',function(req,res){
@@ -1273,15 +1413,73 @@ app.get('/addAmount',function(req,res){
     var username = req.query.username;
     var tokens = req.query.tokens;
     var total = req.query.total;
-    var message = "# Username : "+username + "\n\n# Updated with Coins : "+tokens + "\n\n# Total Coins : "+total;
+    var message={
+          'UserName':username,
+          'CoinsUpdation':tokens,
+          'TotalCoins':total,
+          'wrong_value':'none'
+    }
 
-    res.render('addCoin',{
-      message:message
-    });
+    var usd;
+    var sip;
+
+    btcCheck().then((USD)=>{
+      usd = USD;
+      return getTokenValue().then((SIP)=>{return SIP});
+    })
+    .then((SIP)=>{
+        sip = SIP;
+
+      // AM.getAccountByEmail(email,function(o){
+      //   if(o != null)
+      //   {
+          res.render('admin',{
+            BTC : usd,
+            SIP : sip,
+            USER:req.session.user,
+            message:message
+          })
+        // }
+        // else {
+        //   res.redirect('/');
+        // }
+      })
   }
   else {
+
+    var usd;
+    var sip;
+    btcCheck().then((USD)=>{
+      usd = USD;
+      return getTokenValue().then((SIP)=>{return SIP});
+    })
+    .then((SIP)=>{
+        sip = SIP;
+
+      // AM.getAccountByEmail(email,function(o){
+      //   if(o != null)
+      //   {
+
+      var message={
+            'UserName':'none',
+            'CoinsUpdation':'none',
+            'TotalCoins':'none',
+            'wrong_value':'none'
+      }
+
+          res.render('admin',{
+            BTC : usd,
+            SIP : sip,
+            udata:req.session.user,
+            message:message
+          })
+        // }
+        // else {
+        //   res.redirect('/');
+        // }
+      })
+
     console.log("Simple addAmount : First Load")
-    res.render('addCoin');
   }
 })
 
@@ -1330,23 +1528,58 @@ app.post('/addAmount',function(req,res){
       res.redirect('/addAmount?username='+username+"&tokens="+tokens+"&total="+parseFloat(result.tokens)+parseFloat(tokens));
     }
     else {
-      console.log("ADMIN PANEL ERROR : ACCOUNT NOT FOUND FOR THE USERNAME")
-      res.render('addCoin',{message:"Invalid Entry, Check Username"});
+      console.log("ADMIN PANEL ERROR : ACCOUNT NOT FOUND FOR THE USERNAME");
+      var message={
+            'UserName':'none',
+            'CoinsUpdation':'none',
+            'TotalCoins':'none',
+            'wrong_value':'yes'
+      }
+
+      res.render('admin',{message:message});
     }
   })
-
-
-
 
 })
 
 //statistics for admin panel
 app.get('/adminPanel',function(req,res){
 
+  if(req.session.user==null)
+  {
+    res.redirect('/');
+  }else{
+
+    var usd;
+    var sip;
+    //var email=req.query["email"];
+    //var user=req.query["user"];
+
+    btcCheck().then((USD)=>{
+      usd = USD;
+      return getTokenValue().then((SIP)=>{return SIP});
+    })
+    .then((SIP)=>{
+      sip = SIP;
+
+      // AM.getAccountByEmail(email,function(o){
+      //   if(o != null)
+      //   {
+          res.render('admin',{
+            BTC : usd,
+            SIP : sip,
+            user:req.session.user
+          })
+        // }
+        // else {
+        //   res.redirect('/');
+        // }
+      })
+
+  }
 })
 
 //redirect to main page if wrong routes tried
 app.get('*', function(req, res) { res.redirect('/') });
-
 
 };

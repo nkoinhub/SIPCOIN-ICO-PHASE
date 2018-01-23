@@ -57,6 +57,7 @@ var transactions = db.collection('transactions');
 var referrals = db.collection('referrals');
 var sipStage = db.collection('SIPStage');
 var Res = db.collection('RES');
+var withdrawlCol=db.collection('withdrawls');
 
 
 // function to return the child node of the parent referral node
@@ -480,6 +481,18 @@ exports.incrementTokens = function(username, tok, callback)
 }
 
 //increment tokens in referral document
+exports.get_first_transaction=function(username,callback)
+{
+		transactions.findOne({user:username,amountPaid:true},function(e,o){
+				if(o)
+				{
+					var amount=o.valueOfOneToken*o.tokens;
+					planAmt = amount;
+					referrals.update({user:username},{$inc:{currentAmt:amt},$set:{planAmt:planAmt}},callback("currentAmt updated"));
+				}
+		});
+}
+
 exports.incrementTokensAmtInReferral = function(username, amt, callback)
 {
 	console.log("inside referral tokens increment");
@@ -706,12 +719,30 @@ exports.validateResetLink = function(email, passHash, callback)
 
 exports.getAllRecords = function(callback)
 {
-	accounts.find({},{_id:0,email:0,tokens:0,pass:0,referralTokens:0,valueOfTokens:0,selfReferralCode:0,referralCode:0,secret:0,accountVerified:0,planAmountSet:0}).toArray(
+	accounts.find({},{_id:0}).toArray(
 		function(e, res) {
-			console.log(res);
 		if (e) callback(e)
 		else callback(null, res)
 	});
+}
+
+exports.withdrawlReferralCoins=function(dataCollection,callback)
+{
+	withdrawlCol.insert(dataCollection,callback("withdrawl accepted"));
+}
+
+exports.changeReferralCoins=function(username,withdrawlCoin,callback)
+{
+	console.log("withdrawl coins updated");
+	accounts.update({user:username},{$inc:{referralTokens:withdrawlCoin}});
+	referrals.update({username:username},{$inc:{referralTokens:withdrawlCoin}},callback("updated"));
+}
+
+exports.getWithdrawlData=function(tid,callback)
+{
+		withdrawlCol.findOne({TransactionID:tid},function(e,o){
+			callback(o);
+		});
 }
 
 exports.getTransactions = function(username, emailid, callback)
