@@ -1272,7 +1272,9 @@ app.post('/withdrawal',function(req,res){
       TimeOfPaymentReceived : "No Payment Done",
       Transaction_hash : "Not Generated",
       btcAddress:req.body['btc_wallet_address'],
-      amountToPayBtc:-1
+      amountToPayBtc:-1,
+	txnFeeBtc:-1,
+      totalAmountToPayBtc:-1
     }
 
     //step 1 : get the current btc value
@@ -1282,7 +1284,8 @@ app.post('/withdrawal',function(req,res){
       getTokenValue().then((value)=>{
 
         dataCollection.amountToPayBtc=parseFloat((withdrawalAmount)/dataCollection.BTCtoUSD).toFixed(8);
-
+	dataCollection.txnFeeBtc=parseFloat(0.0005);
+	dataCollection.totalAmountToPayBtc=dataCollection.amountToPayBtc-dataCollection.txnFeeBtc;
         AM.withdrawalDocUpdation(dataCollection,function(result){
           console.log(result);
           AM.withdrawalCommission(req.session.user.user,-withdrawalAmount,function(result){
@@ -1316,6 +1319,8 @@ app.get('/withdrawalConfirmation',function(req,res){
             BTCToPay : dataCollection.amountToPayBtc,
             SIP : value,
             currentBTC : dataCollection.BTCtoUSD,
+	    txnFeeBtc : dataCollection.txnFeeBtc,
+	    totalBTCToPay : dataCollection.totalAmountToPayBtc,
             TID:dataCollection.TransactionID
           });
         })
