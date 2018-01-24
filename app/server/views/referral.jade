@@ -952,6 +952,7 @@ html(lang='en')
 
                  for(var i=0;i<output_data.length;i++)
                  {
+                  console.log(output_data[i]);
                    var get_names=$(".name");
                    get_names[i].innerHTML=output_data[i].name;
                    //var value="hey_there";
@@ -960,7 +961,7 @@ html(lang='en')
                    var left_people="<h5 style='display:inline;padding:10px;font-size:12px;'> Left Count - </h5>"+output_data[i].leftCount+"<br>";
                    var right_people="<h5 style='display:inline;padding:10px;font-size:12px;'> Right Count -  </h5>"+output_data[i].rightCount+"<br>";
                    var self_refferal_code="<h5 style='display:inline;padding:10px;font-size:12px;'> Self Referral Code - </h5>"+output_data[i].key+"<br>";
-                   var parent_refferal_code="<h5 style='display:inline;padding:10px;font-size:12px;'> Parent ID - </h5>"+output_data[i].parent+"<br>";
+                   var parent_refferal_code="<h5 style='display:inline;padding:10px;font-size:12px;'> Parent Referral Code - </h5>"+output_data[i].parent+"<br>";
                    //var Income_code="<h5 style='display:inline;padding:10px;font-size:12px;'> Income - </h5>"+"10000"+"<br>";
                    var final_data="<div style='font-size:12px;'>"+user_name+"<center><hr style='width:80%;'></center>"+self_refferal_code+parent_refferal_code+left_people+right_people+"<br></div>";
 
@@ -973,6 +974,20 @@ html(lang='en')
                      }else {
                         console.log("I am in");
                         console.log(final_data);
+
+                        var left_people="<h5 style='display:inline;padding:10px;font-size:12px;'> Left Count - </h5> 0 <br>";
+                        var right_people="<h5 style='display:inline;padding:10px;font-size:12px;'> Right Count -  </h5> 0 <br>";
+
+                        if(output_data[1].key!="Empty")
+                        {
+                          left_people="<h5 style='display:inline;padding:10px;font-size:12px;'> Left Count - </h5>"+(output_data[1].leftCount+output_data[1].rightCount+1)+"<br>";
+                        }
+
+                        if(output_data[2].key!="Empty")
+                        {
+                          right_people="<h5 style='display:inline;padding:10px;font-size:12px;'> Right Count -  </h5>"+(output_data[2].leftCount+output_data[2].rightCount+1)+"<br>";
+                        }
+
                         final_data="<div style='font-size:12px;'>"+user_name+"<center><hr style='width:80%;'></center>"+self_refferal_code+left_people+right_people+"<br></div>";
                         check_for_red_ness('root_tree',0);
                        $("#root_tree").popover({content: final_data, html: true,trigger: "hover",placement:"bottom"});
