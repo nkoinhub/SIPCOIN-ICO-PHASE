@@ -1,4 +1,4 @@
-doctype html
+Account Listdoctype html
 html(lang='en')
   head
     title SIPcoin
@@ -21,8 +21,20 @@ html(lang='en')
     <link rel="manifest" href="/images/favicons/manifest.json">
     <link rel="mask-icon" href="favicons/safari-pinned-tab.svg" color="#5bbad5">
     <meta name="theme-color" content="#ffffff">
+    link(rel='stylesheet', href='https://cdn.datatables.net/buttons/1.5.1/css/buttons.dataTables.min.css')
+    link(rel='stylesheet', href='https://cdn.datatables.net/select/1.2.4/css/select.dataTables.min.css')
+    script(src='https://cdn.datatables.net/select/1.2.4/js/dataTables.select.min.js')
+    script(src='https://cdn.datatables.net/buttons/1.5.1/js/dataTables.buttons.min.js')
 
     style.
+
+      ::-webkit-scrollbar {
+      display: none;
+      }
+      ::-moz-scrollbar {
+      display: none;
+      }
+
       tr {
       background-color: none;
       color: black;
@@ -118,6 +130,10 @@ html(lang='en')
       .sidenav {padding-top: 15px;}
       .sidenav a {font-size: 18px;}
       }
+      .dt-button{
+        margin-top:10px;
+        margin-left:20px;
+      }
   body
     - user = typeof(udata) != 'undefined' ? udata : { }
     #mySidenav.sidenav(style='z-index:1234;')
@@ -150,7 +166,7 @@ html(lang='en')
           .col-sm-12
             a(href='/print?secret=SIPcoinICO')
               i.fa.fa-list-alt(aria-hidden='true')
-              |  &nbsp User list
+              |  &nbsp Account List
           .col-sm-12
             br
           .col-sm-12
@@ -186,7 +202,7 @@ html(lang='en')
                   button.btn(type='button',style="margin-top:10px;margin-bottom:5px;")
                     .chip(style='font-size:18px;')
                       img(src='/images/coin.png', alt='Person',style='height:40px;width:40px;')
-                      |  $ #{BTC}
+                      |  $ #{USD}
                   button.btn(type='button',style="margin-top:10px;margin-bottom:5px;")
                     .chip(style='font-size:18px;')
                       img(src='/images/sipcoin_logo2d.png', alt='Person', style='height:40px;width:40px;')
@@ -209,6 +225,8 @@ html(lang='en')
                   center
                     h3.boldLatto(style='color:black;')  User History
                     br
+                .col-sm-12#push_here
+
                 .col-sm-12.lightLatto
                   #hey_one.table-responsive
               br
@@ -264,6 +282,7 @@ html(lang='en')
 
 
     script.
+      var count;
       $(document).ready(function(){
       $("#tblReportResultsDemographics_wrapper").remove();
       $("#hey_one").append('<table style="border:none;" id="tblReportResultsDemographics" class="table table-striped table-bordered" width="100%"> <thead> <tr> <th>Name</th> <th>Country</th> <th>User</th> <th>Date</th></tr> </thead> <tfoot> <tr> <th>Name</th> <th>Country</th> <th>User</th> <th>Date</th></tr> </tfoot> </table>');
@@ -272,7 +291,8 @@ html(lang='en')
 
       var tr = '!{accts}';
       //console.log((jQuery.parseJSON(tr)));
-      oTblReport.DataTable ({
+
+      var data_present_here = oTblReport.DataTable ({
       "data" : jQuery.parseJSON(tr),
       "columns" : [
       { "data" : "name"},
@@ -281,6 +301,9 @@ html(lang='en')
       { "data" : "date"}
       ]
       });
+
+      //console.log(data_present_here.rows({ selected: true }).data());
+
       });
       $(function(){
       $(document).on('click',".button_hey_logout",function(){

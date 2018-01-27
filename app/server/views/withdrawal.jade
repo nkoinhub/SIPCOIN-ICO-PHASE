@@ -67,6 +67,14 @@ html(lang='en')
       .sidenav {padding-top: 15px;}
       .sidenav a {font-size: 18px;}
       }
+      input[type=number]::-webkit-inner-spin-button,
+      input[type=number]::-webkit-outer-spin-button {
+      -webkit-appearance: none;
+      -moz-appearance: none;
+      appearance: none;
+      margin: 0;
+      }
+
   body
   - user = typeof(udata) != 'undefined' ? udata : { }
     #mySidenav.sidenav(style='z-index:1234;')
@@ -150,21 +158,20 @@ html(lang='en')
         .container
           .row
             br
-            br
             #step_one.col-sm-8.col-sm-offset-2.my_card_style_2
               br
               center
                 .row
                   .col-sm-12
-                    h3.boldLatto Withdraw Your Referral Coins
+                    h3.boldLatto Withdraw Your Referral Amount
                 hr(style="border-top:1px solid black;")
               .row
-                .col-sm-5(style='height:300px;background-color:#d0d3c5;margin-left:14px;margin-right:14px;border-radius:5px;')
+                .col-sm-5(style='height:300px;background-color:#d0d3c5;margin-left:14px;margin-right:14px;margin-bottom:20px;border-radius:5px;')
                   center
                     br
                     br
                     br
-                    h2.regularLatto Referral Coins
+                    h2.regularLatto Referral Amount
                     hr(style="border-top:1px solid black;")
                     h3#targer_here.lightLatto(style='color:black;font-size:30px;')
                       | $ #{accountDetails.totalCommission}
@@ -172,20 +179,25 @@ html(lang='en')
                   br
                 .col-sm-6
                   center
-                    br
                     button#btn-logout(style='display:none')
                     form(method='post', action='/withdrawal')
-                      input#ex3.form-control.input-lg.lightLatto(style='background:#222222;color:white;',required='' ,name='withdrawalAmount', placeholder='Enter number of coins',type='number',step='0.01')
-                      br
+                      input#ex3.form-control.input-lg.lightLatto(style='background:#222222;color:white;margin-bottom:25px;',required='' ,name='withdrawalAmount', placeholder='Enter amount',type='number',step='any')
                       center
-                        br
-                        h4.regularLatto Amount of Coins in BTC
+                        h4.regularLatto Amount in BTC (* transaction fees included)
                         hr(style="border-top:1px solid black;")
-                        h1#targetBTC.lightLatto(style='color:black;font-size:25px;') BTC 0.0000000000
+                        h1#targetBTC.lightLatto(style='color:black;font-size:25px;') BTC 0.00000000
                       br
                       input#ex4.form-control.input-lg.regularLatto(style='background:white;color:black;',required='',name='btc_wallet_address', placeholder='Enter BTC Wallet Address')
                       br
                       input#NXT.btn.button_style.btn-primary.btn-md(type='submit', style='background-color: #08708a;')
+                .col-sm-12
+                  hr(style="border-top:1px solid black;")
+                .col-sm-12
+                  center
+                    h4.lightLatto * Transaction Fees of &nbsp;
+                      b
+                        | 0.0005 BTC
+                      will  will be deducted for each transaction
               br
               br
       #footer.my_footer_class(style='margin-bottom:0px;')
@@ -245,16 +257,10 @@ html(lang='en')
       return true;
       }
 
-      function isEmpty(){
-      var value=$("#ex3").val();
-      console.log(value);
-      if(value.length==0 || parseInt(value) == 0)
-      {
-      alert('Enter valid number');
-      return false;
-      }
-      }
-
+      $("#ex3").attr({
+      "max" : "#{accountDetails.totalCommission}",
+      "min" : (0.0005)* "#{btcValue}"
+      });
 
       var options = {
       useEasing: true,
@@ -282,7 +288,13 @@ html(lang='en')
       console.log(value2);
       if(value != value2)
       {
-      var demo2 = new CountUp('targetBTC', 0, (value2)*"#{sipValue}"/"#{btcValue}" , 10, 1.2, options2);
+      if((((value2)/"#{btcValue}")-0.0005).toFixed(8) > 0)
+      {
+      var demo2 = new CountUp('targetBTC', 0, (((value2)/"#{btcValue}")-0.0005).toFixed(8), 8, 1.2, options2);
+      }else{
+      var demo2 = new CountUp('targetBTC', 0, 0 , 8, 1.2, options2);
+      }
+
       if (!demo2.error) {
       demo2.start();
       value = value2;
