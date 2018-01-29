@@ -1368,6 +1368,33 @@ app.get('/withdrawal',function(req,res){
   }
 });
 
+//referral invitation link - email
+	app.post('/email_send',function(req,res){
+
+		var part1_invite='<head> <title> </title> <style> #one{ position: absolute; top:0%; left:0%; height: 60%; width: 40%; } #gatii{ position: absolute; top:26%; left:5%; height: 20%; width: 20%; } #text_div { position: absolute; top: 10%; left: 5%; } #final_regards { position: absolute; top: 50%; left: 5%; } </style> </head> <body> <div id="text_div"> <b>Welcome, to SIPcoin. You have been invited by ' +req.session.user.name+ ' to join SIPcoin.io </b> <br> <br> Please click on the link below to join <br><br>';
+		var part2_invite=' <br><br> <br> P.S.- You are requested to preserve this mail for future references. <br> <br> </div> <iframe id="gatii" src="https://drive.google.com/file/d/1k99fX9I4HOdhKZA1KwrDflM1W-orCSh0/preview" width="40" height="40"></iframe> <br> <br> <div id="final_regards"> Thank You, <br> <br> Team SIPcoin.io <br> <br> <a href="http://support.sipcoin.io">Support Team</a> <br> <br> </div> </body>'
+
+
+		var mailOptions = {
+			from: sipCoinEmailId,
+			to: req.body.value,
+			subject: ' SIPCOIN || Referral Invitation Link',
+			html: part1_invite +req.body.link+part2_invite,
+		};
+
+		transporter.sendMail(mailOptions, function(error, info){
+			if (error) {
+				console.log(error);
+				console.log("email_not_sent");
+				res.send({"val":"-1"})
+			} else {
+				console.log("Email sent")
+				res.send({"val":"1"});
+			}
+		});
+
+	});
+
   //=======================================================================================================================================================================
   //=======================================================================================================================================================================
   //================================================================ ADMIN PANEL CONFIGURATIONS ===========================================================================
