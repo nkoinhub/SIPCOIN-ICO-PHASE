@@ -345,7 +345,6 @@ exports.updateSIPStageDocument = function()
 }
 
 //check for presence of correct referral Code
-
 exports.checkForReferral = function(ref, callback)
 {
 	referrals.findOne({selfReferralCode:ref},function(e,res){
@@ -744,6 +743,12 @@ exports.getAllRecords = function(callback)
 exports.withdrawalDocUpdation=function(dataCollection,callback)
 {
 	withdrawalCol.insert(dataCollection,callback("withdrawal accepted"));
+}
+
+//admin updates the transaction hash manually through portal, thus, completing the withdrawal request
+exports.updateWithdrawal = function(TID, transactionHash, callback)
+{
+	withdrawalCol.update({TransactionID:TID},{$set:{Transaction_hash:transactionHash,TimeOfPaymentReceived:moment().format('MMMM Do YYYY, h:mm:ss a'),amountPaid:true}},callback("Updated"));
 }
 
 

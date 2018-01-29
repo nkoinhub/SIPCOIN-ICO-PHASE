@@ -39,7 +39,7 @@ var part2=' <br><br> <br> P.S.- You are requested to preserve this mail for futu
 //===============================================================================================================================================
 
 
-
+//secret string generation algorithm
 var makeid = function(lengthReqd) {
   var text = "";
   var possible = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789";
@@ -1594,6 +1594,17 @@ app.post('/addAmount',function(req,res){
     }
   })
 
+})
+
+//post request for transaction hash insertion and completion of withdrawal request
+app.post('/pendingWithdrawals',function(req,res){
+  var TID = req.body['TID'];
+  var transactionHash = req.body['transactionHash'];
+
+  AM.updateWithdrawal(TID, transactionHash, function(message){
+    console.log("Withdrawal Doc :: "+message+" :: for TID : " + TID);
+    res.redirect('/pendingWithdrawals');
+  })
 })
 
 
