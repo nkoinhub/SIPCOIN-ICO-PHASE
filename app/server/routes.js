@@ -147,6 +147,40 @@ module.exports = function(app) {
 		})
 	})
 
+  app.get('/pendingWithdrawal',function(req,res){
+    if(req.query.secret == "SIPcoinICO") {																		/// http://sipcoin.io/print?secret=SIPcoinIC        if(req.session.user!=null)
+      if(req.session.user == null)
+      {
+        res.redirect('/');
+      }else{
+
+        var usd;
+        var sip;
+
+        btcCheck().then((USD)=>{
+          usd = USD;
+          return getTokenValue().then((SIP)=>{return SIP});
+        })
+        .then((SIP)=>{
+          sip = SIP;
+          AM.getPendingWithdrawals(function(withdrawalList){
+            res.render('pendingWithdrawals',{
+              title : 'Withdarwal Pending List',
+              listWithdrawal : JSON.stringify(withdrawalList),
+              SIP:sip,
+              USD:usd,
+              udata:req.session.user
+            });
+          })
+        })
+      }
+    }
+    else {
+      res.redirect('/');
+    }
+
+  });
+
 
 
   app.get('/about_us',function(req,res){
@@ -1168,7 +1202,6 @@ app.get('/resent_verfication_page',function(req,res){
 	// view & delete accounts //
 
 		app.get('/print', function(req, res) {
-      console.log("hey");
 			if(req.query.secret == "SIPcoinICO") {																		/// http://sipcoin.io/print?secret=SIPcoinIC        if(req.session.user!=null)
         if(req.session.user == null)
         {

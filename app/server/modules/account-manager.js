@@ -494,6 +494,26 @@ exports.getTransaction = function(TID, callback)
 	})
 }
 
+exports.getPendingWithdrawals = function(callback)
+{
+	withdrawalCol.find({amountPaid:false}).toArray(function(e,o){
+		if(o)
+		{
+			callback(o);
+		}
+	})
+}
+
+exports.getAllWithdrawals = function(callback)
+{
+	withdrawalCol.find().toArray(function(e,o){
+		if(o)
+		{
+			callback(o);
+		}
+	})
+}
+
 exports.incrementTokens = function(username, tok, callback)
 {
 	console.log("inside increment tokens");

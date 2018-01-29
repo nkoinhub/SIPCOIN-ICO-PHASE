@@ -179,6 +179,40 @@ html(lang='en')
               .button_hey_logout(style='cursor:pointer;')
                 i.fa.fa-power-off(aria-hidden='true')
                 |   &nbsp Log Out
+    #myModal.modal.fade(role='dialog')
+      .modal-dialog
+        // Modal content
+        .modal-content
+          .modal-header
+            button.close(type='button', data-dismiss='modal') ×
+            h4.modal-title
+              center
+                | Insert Withdrawal Details
+          .modal-body
+            .row
+              .col-sm-5.col-sm-offset-1(style='text-align:right;margin-bottom:10px;')
+                | User Name -
+              .col-sm-6(style='margin-bottom:10px;')
+                | sipadmin
+              .col-sm-5.col-sm-offset-1(style='text-align:right;margin-bottom:10px;')
+                | BTC Amount -
+              .cols-sm-6(style='margin-bottom:10px;')
+                | 0.90909900
+              .col-sm-5.col-sm-offset-1(style='text-align:right;margin-bottom:10px;')
+                | Time of Payement Placed -
+              .col-sm-6(style='margin-bottom:10px;')
+                | January 25th 2018, 1:05:36 am
+              .col-sm-12
+                form(action='/pendingWithdrawals',method='post')
+                  .col-sm-12
+                    .form-group
+                      .col-sm-5.col-sm-offset-1(style='text-align:right;margin-bottom:10px;')
+                        label(for='email') Enter Transaction Hash -
+                      .col-sm-6(style='margin-bottom:10px;')
+                        input#transaction_input.form-control(type='text',required='',name='transactionHash')
+                    .col-sm-12
+                      center
+                        button.btn(type='submit',style='color:white;') Submit
     #first_frame
       .container
         .row
@@ -222,8 +256,10 @@ html(lang='en')
               .row
                 .col-sm-12
                   center
-                    h3.boldLatto(style='color:black;')  User History
+                    h3.boldLatto(style='color:black;')  Pending Withdrawals
                     br
+                .col-sm-12
+                  button.btn.btn-primary(type='button', data-toggle='modal', data-target='#myModal') Hey
                 .col-sm-12#push_here
 
                 .col-sm-12.lightLatto
@@ -284,20 +320,23 @@ html(lang='en')
       var count;
       $(document).ready(function(){
       $("#tblReportResultsDemographics_wrapper").remove();
-      $("#hey_one").append('<table style="border:none;" id="tblReportResultsDemographics" class="table table-striped table-bordered" width="100%"> <thead> <tr> <th>Name</th> <th>Country</th> <th>User</th> <th>Date</th></tr> </thead> <tfoot> <tr> <th>Name</th> <th>Country</th> <th>User</th> <th>Date</th></tr> </tfoot> </table>');
+      $("#hey_one").append('<table style="border:none;" id="tblReportResultsDemographics" class="table table-striped table-bordered" width="100%"> <thead> <tr> <th>User</th> <th>Email</th> <th>Coins Withdrawal</th> <th>BTC Address</th> <th>Amount to Pay in BTC</th> <th>Time of Payment Placed</th> <th>Transaction ID</th> </tr> </thead> <tfoot> <tr> <th>User</th> <th>Email</th> <th>Coins Withdrawal</th> <th>BTC Address</th> <th>Amount to Pay in BTC</th> <th>Time of Payment Placed</th> <th>Transaction ID</th> </tr> </tfoot> </table>');
       var oTblReport = $("#tblReportResultsDemographics")
       //
 
-      var tr = '!{accts}';
+      var tr = '!{listWithdrawal}';
       //console.log((jQuery.parseJSON(tr)));
 
       var data_present_here = oTblReport.DataTable ({
       "data" : jQuery.parseJSON(tr),
       "columns" : [
-      { "data" : "name"},
-      { "data" : "country"},
-      { "data" : "user"},
-      { "data" : "date"}
+      { "data" : "username"},
+      { "data" : "email"},
+      { "data" : "coinDemanded"},
+      { "data" : "btcAddress"},
+      { "data" : "amountToPayBtc"},
+      { "data" : "TimeOfPaymentPlaced"},
+      { "data" : "TransactionID"},
       ]
       });
 
