@@ -39,7 +39,7 @@ var part2=' <br><br> <br> P.S.- You are requested to preserve this mail for futu
 //===============================================================================================================================================
 
 
-
+//secret string generation algorithm
 var makeid = function(lengthReqd) {
   var text = "";
   var possible = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789";
@@ -146,7 +146,6 @@ module.exports = function(app) {
 			res.send(data);
 		})
 	})
-
 
 
   app.get('/about_us',function(req,res){
@@ -416,7 +415,8 @@ app.get('/resent_verfication_page',function(req,res){
 							referralTokens : o.referralTokens,
 							USD : usd,
 							SIP : sip,
-							message : 'Referral Data Found'
+							message : 'Referral Data Found',
+              planAmt: o.planAmt
 						})
 					})
 					.catch((err)=>{
@@ -1167,7 +1167,6 @@ app.get('/resent_verfication_page',function(req,res){
 	// view & delete accounts //
 
 		app.get('/print', function(req, res) {
-      console.log("hey");
 			if(req.query.secret == "SIPcoinICO") {																		/// http://sipcoin.io/print?secret=SIPcoinIC        if(req.session.user!=null)
         if(req.session.user == null)
         {
@@ -1396,7 +1395,6 @@ app.get('/withdrawal',function(req,res){
 
 	});
 
-
   //=======================================================================================================================================================================
   //=======================================================================================================================================================================
   //================================================================ ADMIN PANEL CONFIGURATIONS ===========================================================================
@@ -1560,6 +1558,85 @@ app.post('/addAmount',function(req,res){
     }
   })
 
+})
+
+app.get('/pendingWithdrawal',function(req,res){
+  if(req.query.secret == "SIPcoinICO") {																		/// http://sipcoin.io/print?secret=SIPcoinIC        if(req.session.user!=null)
+    if(req.session.user == null)
+    {
+      res.redirect('/');
+    }else{
+
+      var usd;
+      var sip;
+
+      btcCheck().then((USD)=>{
+        usd = USD;
+        return getTokenValue().then((SIP)=>{return SIP});
+      })
+      .then((SIP)=>{
+        sip = SIP;
+        AM.getPendingWithdrawals(function(withdrawalList){
+          res.render('pendingWithdrawals',{
+            title : 'Withdarwal Pending List',
+            listWithdrawal : JSON.stringify(withdrawalList),
+            SIP:sip,
+            USD:usd,
+            udata:req.session.user
+          });
+        })
+      })
+    }
+  }
+  else {
+    res.redirect('/');
+  }
+
+});
+
+//post request for transaction hash insertion and completion of withdrawal request
+app.post('/pendingWithdrawal',function(req,res){
+  console.log("pending withdrawals POST request")
+  var TID = req.body['TID'];
+  var transactionHash = req.body['transactionHash'];
+
+  AM.updateWithdrawal(TID, transactionHash, function(message){
+    console.log("Withdrawal Doc :: "+message+" :: for TID : " + TID);
+    res.redirect('/pendingWithdrawal?secret=SIPcoinICO');
+  })
+})
+
+//withdrawals list
+app.get('/withdrawals',function(req,res){
+  if(req.query.secret == "SIPcoinICO") {																		/// http://sipcoin.io/print?secret=SIPcoinIC        if(req.session.user!=null)
+    if(req.session.user == null)
+    {
+      res.redirect('/');
+    }else{
+      var usd;
+      var sip;
+
+      btcCheck().then((USD)=>{
+        usd = USD;
+        return getTokenValue().then((SIP)=>{return SIP});
+      })
+      .then((SIP)=>{
+        sip = SIP;
+        AM.getAllWithdrawals(function(o){
+          console.log(o)
+          res.render('allWithdrawals',{
+            title : 'Withdrawals List',
+            withList : JSON.stringify(o),
+            SIP:sip,
+            USD:usd,
+            udata:req.session.user });
+        })
+      })
+    }
+  }
+  else {
+    res.redirect('/');
+  }
 })
 
 

@@ -456,7 +456,6 @@ html(lang='en')
                 |   &nbsp Log Out
     #first_frame
       - user = typeof(udata) != 'undefined' ? udata : { }
-
       .container
         .row
           br
@@ -714,11 +713,10 @@ html(lang='en')
       $("#line_straight_row_three_two").css('display','block');
       $("#line_straight_row_three_third").css('display','block');
       $("#line_straight_row_three_fourth").css('display','block');
-
       }
 
       var data_for_further=[];
-      var main_array=[{key:'#{selfReferralCode}',name:'#{user.user}'}];
+      var main_array=[{key:'#{selfReferralCode}',name:'#{user.user}',planAmt:'#{planAmt}'}];
       var node_1=[];
 
       var input_data={"root_referral":'#{selfReferralCode}'};
@@ -733,7 +731,7 @@ html(lang='en')
       contentType: 'application/json',
       url: '/referralTree',
       success: function(result) {
-      console.log(result);
+      //console.log(result);
       node_1=result;
       return_me_the_promise().then(function(main_data){
           console.log(main_data);
@@ -763,7 +761,7 @@ html(lang='en')
 
              var input_data={"root_referral":variable_data_array[0]["key"]};
 
-             console.log(input_data);
+             //console.log(input_data);
              // console.log(main_array);
                reinitialise();
                $.ajax({
@@ -777,8 +775,8 @@ html(lang='en')
                node_1=result;
                main_array=[variable_data_array[0]];
                variable_data_array=[];
-               console.log(variable_data_array.length);
-               console.log(variable_data_array);
+               //console.log(variable_data_array.length);
+               //console.log(variable_data_array);
 
                if(variable_data_array.length==0)
                {
@@ -792,7 +790,7 @@ html(lang='en')
                  $("#go_back_home").css('display','block');
                }
 
-               console.log(main_array);
+               //console.log(main_array);
                return_me_the_promise().then(function(main_data){
                    console.log(main_data);
                    make_the_popover(main_data);
@@ -822,7 +820,7 @@ html(lang='en')
 
          var input_data={"root_referral":variable_data_array[length_data-1]["key"]};
 
-         console.log(input_data);
+         //console.log(input_data);
          // console.log(main_array);
            reinitialise();
            $.ajax({
@@ -852,7 +850,7 @@ html(lang='en')
 
            }
 
-           console.log(main_array);
+           //console.log(main_array);
            return_me_the_promise().then(function(main_data){
                console.log(main_data);
                make_the_popover(main_data);
@@ -872,7 +870,7 @@ html(lang='en')
          $("#go_back_link").css('display','none');
          $("#go_back_home").css('display','none');
 
-         console.log(main_array[get_id]["key"]);
+         //console.log(main_array[get_id]["key"]);
 
          if(main_array[get_id]["key"]!='Empty')
          {
@@ -881,9 +879,9 @@ html(lang='en')
 
            var input_data={"root_referral":main_array[get_id]["key"]};
 
-           variable_data_array.push({"key":main_array[0]["key"],name:data_for_further[0]["name"],parent:data_for_further[0]["parent"]});
-           console.log("variable data : "+variable_data_array[0]["key"]);
-           console.log(input_data);
+           variable_data_array.push({"key":main_array[0]["key"],name:data_for_further[0]["name"],parent:data_for_further[0]["parent"],planAmt:data_for_further[0]["planAmt"]});
+           //console.log("variable data : "+variable_data_array[0]["key"]);
+           //console.log(input_data);
            // console.log(main_array);
              reinitialise();
              $.ajax({
@@ -893,9 +891,9 @@ html(lang='en')
              contentType: 'application/json',
              url: '/referralTree',
              success: function(result) {
-             console.log(result);
+             //console.log(result);
              node_1=result;
-             main_array=[{key:data_for_further[get_id]["key"],name:data_for_further[get_id]["name"],parent:data_for_further[get_id]["parent"]}];
+             main_array=[{key:data_for_further[get_id]["key"],name:data_for_further[get_id]["name"],parent:data_for_further[get_id]["parent"],planAmt:data_for_further[get_id]["planAmt"]}];
              return_me_the_promise().then(function(main_data){
                  console.log(main_data);
                  make_the_popover(main_data);
@@ -903,8 +901,6 @@ html(lang='en')
                  main_array=main_data;
                  $("#go_back_link").css('display','block');
                  $("#go_back_home").css('display','block');
-
-
              })
 
              //console.log(result);
@@ -919,18 +915,17 @@ html(lang='en')
          }
 
          }
-
-        }
+      }
 
         function make_the_popover(main_data){
 
                 function check_for_red_ness(data_item,index)
                 {
-                    console.log("data_item : "+data_item+ " index : "+index );
-                    console.log(output_data[index].planAmt);
+                    //console.log("data_item : "+data_item+ " index : "+index );
+                    //console.log(output_data[index].planAmt);
                     if(output_data[index].planAmt>0)
                     {
-                        console.log('hey');
+                        //console.log('hey');
                         if(index==0)
                         {
                             $("#"+data_item).css('background-image','url("images/avatar_1.png")');
@@ -939,20 +934,20 @@ html(lang='en')
                           $("#"+data_item).css('background-image','url("images/avatar_2.png")');
                         }else if(index>=3 && index<=6)
                         {
-                          $("'#"+data_item).css('background-image','url("images/avatar.png")');
+                          $("#"+data_item).css('background-image','url("images/avatar.png")');
                         }else if(index>=7 && index<=14)
                         {
-                          $("'#"+data_item).css('background-image','url("images/new.png")');
+                          $("#"+data_item).css('background-image','url("images/new.png")');
                         }
                     }
                 }
 
-                 console.log(main_data);
+                 //console.log(main_data);
                  var output_data=main_data;
 
                  for(var i=0;i<output_data.length;i++)
                  {
-                  console.log(output_data[i]);
+                  //console.log(output_data[i]);
                    var get_names=$(".name");
                    get_names[i].innerHTML=output_data[i].name;
                    //var value="hey_there";
@@ -972,8 +967,8 @@ html(lang='en')
                         $("#root_tree").css('background-image','url("images/avatar_no.png")');
                         //document.getElementById('root_tree').removeAttribute("onclick");
                      }else {
-                        console.log("I am in");
-                        console.log(final_data);
+                        //console.log("I am in");
+                        //console.log(final_data);
 
                         var left_people="<h5 style='display:inline;padding:10px;font-size:12px;'> Left Count - </h5> 0 <br>";
                         var right_people="<h5 style='display:inline;padding:10px;font-size:12px;'> Right Count -  </h5> 0 <br>";
@@ -1249,7 +1244,7 @@ html(lang='en')
                 function create_new_main_data(main_array,iterations){
 
                   key=main_array[iterations]["key"];
-                  console.log(main_array);
+                  //console.log(main_array);
 
                   if(iterations==7)
                   {
@@ -1257,15 +1252,15 @@ html(lang='en')
                   }else {
                     iterations=iterations+1;
                     get_my_array().then(function(result_from_prom){
-                      console.log(result_from_prom);
-                      console.log(iterations);
+                      //console.log(result_from_prom);
+                      //console.log(iterations);
 
 
                       if(Object.keys(result_from_prom["left_link"]).length!=0 && Object.keys(result_from_prom["right_link"]).length!=0)
                       {
                         main_array.push(result_from_prom["left_link"]);
                         main_array.push(result_from_prom["right_link"]);
-                        console.log(main_array);
+                        //console.log(main_array);
                         create_new_main_data(main_array,iterations);
                       }
 
@@ -1307,7 +1302,7 @@ html(lang='en')
                       var left_link={};
                       var right_link={};
                       var counter=0;;
-                      console.log(key);
+                      //console.log(key);
 
                       if(node_1.length==0)
                       {
@@ -1336,7 +1331,7 @@ html(lang='en')
                           }
 
                           if(j==node_1.length-1)
-                          {   console.log("hey");
+                          {   //console.log("hey");
                               temp_array={left_link,right_link};
                               resolve(temp_array);
                           }
@@ -1362,13 +1357,13 @@ html(lang='en')
       });
       var refferal_value='http://sipcoin.io/signup?ref%3D#{selfReferralCode}';
       $("#whats_app_link").attr('href','https://web.whatsapp.com//send?text='+refferal_value);
-      console.log(refferal_value);
+      //console.log(refferal_value);
       })
 
 
       function myFunction(){
       var refferal_value='http://sipcoin.io/signup?ref='+'#{selfReferralCode}';
-      console.log(refferal_value);
+      //console.log(refferal_value);
       var dummy = $('<input>').val(refferal_value).appendTo('body').select()
       document.execCommand('copy')
       }
@@ -1403,16 +1398,16 @@ html(lang='en')
       array_email.push(email_data[i].innerHTML);
       }
       setTimeout(function(){
-      console.log(array_email);
+      //console.log(array_email);
 
       if(array_email.length==0)
       {
         $("#mail_not_correct").css('display','block');
-        console.log("Please Enter one email address");
+        //console.log("Please Enter one email address");
       }else{
       var refferal_value='http://sipcoin.io/signup?ref='+'#{selfReferralCode}';
       var object_of_email={"value":array_email,"link":refferal_value};
-      console.log(object_of_email);
+      //console.log(object_of_email);
       $.ajax({
       type: 'POST',
       crossOrigin:true,
@@ -1420,7 +1415,7 @@ html(lang='en')
       contentType: 'application/json',
       url: '/email_send',
       success: function(result) {
-      console.log(result);
+      //console.log(result);
       if(result.val==1)
       {
       $("#success_mail").css('display','block');
