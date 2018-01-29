@@ -191,41 +191,6 @@ html(lang='en')
               .button_hey_logout(style='cursor:pointer;')
                 i.fa.fa-power-off(aria-hidden='true')
                 |   &nbsp Log Out
-    #myModal.modal.fade(role='dialog')
-      .modal-dialog
-        // Modal content
-        .modal-content
-          .modal-header
-            button.close(type='button', data-dismiss='modal') ×
-            h4.modal-title
-              center
-                | Insert Withdrawal Details
-          .modal-body
-            .row
-              .col-sm-5.col-sm-offset-1(style='text-align:right;margin-bottom:10px;')
-                | User Name -
-              .col-sm-6#user_input(style='margin-bottom:10px;')
-              .col-sm-5.col-sm-offset-1(style='text-align:right;margin-bottom:10px;')
-                | BTC Amount -
-              .col-sm-6#btc_amount_input(style='margin-bottom:10px;')
-              .col-sm-5.col-sm-offset-1(style='text-align:right;margin-bottom:10px;')
-                | BTC Address -
-              .col-sm-6#btc_address_input(style='margin-bottom:10px;')
-              .col-sm-5.col-sm-offset-1(style='text-align:right;margin-bottom:10px;')
-                | Time of Payement Placed -
-              .col-sm-6#time_input(style='margin-bottom:10px;')
-              .col-sm-12
-                form(action='/pendingWithdrawal',method='post')
-                  .col-sm-12
-                    .form-group
-                      .col-sm-5.col-sm-offset-1(style='text-align:right;margin-bottom:10px;')
-                        label(for='email') Enter Transaction Hash -
-                      .col-sm-6(style='margin-bottom:10px;')
-                        input#transaction_input.form-control(type='text',required='',name='transactionHash')
-                    .form-group
-                      .col-sm-6(style='margin-bottom:10px;')
-                        input#transaction_id_input.form-control(type='text',required='',name='TID',style='display:none;')
-                  button.btn(type='submit',style='color:white;') Submit
     #first_frame
       .container
         .row
@@ -269,7 +234,7 @@ html(lang='en')
               .row
                 .col-sm-12
                   center
-                    h3.boldLatto(style='color:black;')  Pending Withdrawals
+                    h3.boldLatto(style='color:black;')  Withdrawals History
                     br
                 .col-sm-12#push_here
 
@@ -331,55 +296,26 @@ html(lang='en')
       var count;
       $(document).ready(function(){
       $("#tblReportResultsDemographics_wrapper").remove();
-      $("#hey_one").append('<table style="border:none;" id="tblReportResultsDemographics" class="table table-striped table-bordered" width="100%"> <thead> <tr> <th>User</th> <th>Email</th> <th>Coins Withdrawal</th> <th>BTC Address</th> <th>Amount to Pay in BTC</th> <th>Time of Payment Placed</th> <th>Transaction ID</th> </tr> </thead> <tfoot> <tr> <th>User</th> <th>Email</th> <th>Coins Withdrawal</th> <th>BTC Address</th> <th>Amount to Pay in BTC</th> <th>Time of Payment Placed</th> <th>Transaction ID</th> </tr> </tfoot> </table>');
+      $("#hey_one").append('<table style="border:none;" id="tblReportResultsDemographics" class="table table-striped table-bordered" width="100%"><thead><tr><th>Name</th><th>Email</th><th>Coins Withdrawal</th><th>Amount Paid</th><th>Time Of Payment Placed</th><th>Transaction ID </th><th>Time Of Payment Received</th><th>Transaction Hash</th><th>BTC Address</th><th>BTC Amount</th></tr></thead><tfoot><tr><th>Name</th><th>Email</th><th>Coins Withdrawal</th><th>Amount Paid</th><th>Time Of Payment Placed</th><th>Transaction ID </th><th>Time Of Payment Received</th><th>Transaction Hash</th><th>BTC Address</th><th>BTC Amount</th></tr></tfoot></table>');
       var oTblReport = $("#tblReportResultsDemographics")
       //
 
-      var tr = '!{listWithdrawal}';
+      var tr = '!{withList}';
       //console.log((jQuery.parseJSON(tr)));
 
       var data_present_here = oTblReport.DataTable ({
-      select: true,
-      dom: 'Blfrtip',
-      buttons: [{
-      text: "Add Transaction Hash",
-      action: function( e, dt, node, config ) {
-      var rows = dt.rows( {selected: true} ).indexes();
-      var user_name=dt.cells( rows, 0 ).data();
-      var btc_address=dt.cells( rows, 3 ).data();
-      var btc_amount=dt.cells( rows, 4 ).data();
-      var time_of_payment_placed=dt.cells( rows, 5 ).data();
-      var transaction_id=dt.cells( rows, 6).data();
-      user_name=user_name.join(' ');
-      btc_address=btc_address.join(' ');
-      btc_amount=btc_amount.join(' ');
-      time_of_payment_placed=time_of_payment_placed.join(' ');
-      transaction_id=transaction_id.join(' ');
-      
-      if(btc_amount==''){
-        alert('Please select one Transaction');
-        return;
-      }
-      
-      $('#user_input').html(user_name);
-      $('#btc_amount_input').html(btc_amount);
-      $('#btc_address_input').html(btc_address);
-      $('#time_input').html(time_of_payment_placed);
-      $('#transaction_id_input').val(transaction_id);
-      console.log(transaction_id);
-      $('#myModal').modal('show');
-      
-      }}
-      ],
       "data" : jQuery.parseJSON(tr),
       "columns" : [
       { "data" : "username"},
       { "data" : "email"},
       { "data" : "coinDemanded"},
-      { "data" : "btcAddress"},
-      { "data" : "amountToPayBtc"},
+      { "data" : "amountPaid"},
       { "data" : "TimeOfPaymentPlaced"},
       { "data" : "TransactionID"},
+      { "data" : "TimeOfPaymentReceived"},
+      { "data" : "Transaction_hash"},
+      { "data" : "btcAddress"},
+      { "data" : "amountToPayBtc"}
       ]
       });
 

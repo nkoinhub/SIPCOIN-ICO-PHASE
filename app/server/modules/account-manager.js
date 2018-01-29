@@ -505,9 +505,10 @@ exports.getPendingWithdrawals = function(callback)
 
 exports.getAllWithdrawals = function(callback)
 {
-	withdrawalCol.find().toArray(function(e,o){
+	withdrawalCol.find({}).toArray(function(e,o){
 		if(o)
 		{
+			console.log("inside getAll " + o.length)
 			callback(o);
 		}
 	})
@@ -748,6 +749,7 @@ exports.withdrawalDocUpdation=function(dataCollection,callback)
 //admin updates the transaction hash manually through portal, thus, completing the withdrawal request
 exports.updateWithdrawal = function(TID, transactionHash, callback)
 {
+	console.log("updateWithdrawal Called")
 	withdrawalCol.update({TransactionID:TID},{$set:{Transaction_hash:transactionHash,TimeOfPaymentReceived:moment().format('MMMM Do YYYY, h:mm:ss a'),amountPaid:true}},callback("Updated"));
 }
 
