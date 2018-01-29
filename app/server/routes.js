@@ -1,4 +1,4 @@
-process.env.NODE_ENV = "production";
+process.env.NODE_ENV = "default";
 
 console.log("========================= NODE ENVIRONMENT : " + process.env.NODE_ENV + "============================\n")
 
@@ -416,7 +416,8 @@ app.get('/resent_verfication_page',function(req,res){
 							referralTokens : o.referralTokens,
 							USD : usd,
 							SIP : sip,
-							message : 'Referral Data Found'
+							message : 'Referral Data Found',
+              planAmt: o.planAmt
 						})
 					})
 					.catch((err)=>{
