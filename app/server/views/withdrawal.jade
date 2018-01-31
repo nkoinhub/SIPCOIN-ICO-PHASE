@@ -77,6 +77,33 @@ html(lang='en')
 
   body
   - user = typeof(udata) != 'undefined' ? udata : { }
+    #myModal.modal.fade(role='dialog')
+      .modal-dialog
+        // Modal content
+        .modal-content
+          .modal-header
+            button.close(type='button', data-dismiss='modal') ×
+            h4.modal-title
+              center
+                | Confirm Withdrawal
+          .modal-body
+            .row
+              .col-sm-5.col-sm-offset-1.col-xs-5(style='text-align:right;margin-bottom:10px;')
+                | Amount -
+              .col-sm-6.col-xs-7#trans_amount_input(style='margin-bottom:10px;')
+              .col-sm-5.col-sm-offset-1.col-xs-5(style='text-align:right;margin-bottom:10px;')
+                | BTC Amount -
+              .col-sm-6.col-xs-7#btc_amount_input(style='margin-bottom:10px;')
+              .col-sm-5.col-sm-offset-1.col-xs-5(style='text-align:right;margin-bottom:10px;')
+                | BTC Address -
+              .col-sm-6.col-xs-7#btc_address_input(style='margin-bottom:10px;')
+              .col-sm-12.col-xs-12
+                .row
+                  .col-sm-6.col-xs-6(style='text-align:right;')
+                    button.btn#no_go_now(type='submit',style='color:white;background-color:#428bca;') Cancel
+                  .col-sm-6.col-xs-6(style='text-align:left;')
+                    button.btn#yes_go_now(type='submit',style='color:white;background-color:#5cb85c;') Yes
+
     #mySidenav.sidenav(style='z-index:1234;')
       a.closebtn(href='javascript:void(0)', onclick='closeNav()') ×
       .Container.hey_me
@@ -189,7 +216,8 @@ html(lang='en')
                       br
                       input#ex4.form-control.input-lg.regularLatto(style='background:white;color:black;',required='',name='btc_wallet_address', placeholder='Enter BTC Wallet Address')
                       br
-                      input#NXT.btn.button_style.btn-primary.btn-md(type='submit', style='background-color: #08708a;')
+                      button.btn.btn-primary(style='background-color: #08708a;',onclick='open_modal()',type='button') Submit
+                      input#NXT.btn.button_style.btn-primary.btn-md(type='submit', style='background-color: #08708a;display:none;')
                 .col-sm-12
                   hr(style="border-top:1px solid black;")
                 .col-sm-12
@@ -247,6 +275,30 @@ html(lang='en')
               br
 
     script.
+      $('form').bind("keypress", function(e) {
+      if (e.keyCode == 13) {
+      e.preventDefault();
+      return false;
+      }
+      });
+
+      function open_modal()
+      {
+      $('#trans_amount_input').html($('#ex3').val());
+      $('#btc_amount_input').html($('#targetBTC').html());
+      $('#btc_address_input').html($('#ex4').val());
+      $("#myModal").modal("show");
+      }
+
+      $('#yes_go_now').click(function(){
+      $("#myModal").modal("hide");
+      $("#NXT").click();
+      });
+
+      $('#no_go_now').click(function(){
+      $("#myModal").modal("hide");
+      });
+
       var count_for_dots=0;
       function isNumber(evt) {
       evt = (evt) ? evt : window.event;
