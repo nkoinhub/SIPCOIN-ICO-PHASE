@@ -770,7 +770,20 @@ exports.getwithdrawalData=function(tid,callback)
 		});
 }
 
+//get the transaction history excluding withdrawals history
+exports.getWithdrawalTransactions = function(username, emailid, callback)
+{
+	withdrawalCol.find({username:username,email:emailid},{_id:0}).toArray(
+		function(e, res) {
+			if(e) callback(e)
+			else{
+				//console.log(res);
+				callback(null,res)
+			}
+		});
+}
 
+//get the transaction history excluding withdrawals history
 exports.getTransactions = function(username, emailid, callback)
 {
 	transactions.find({username:username,email:emailid},{_id:0}).toArray(
