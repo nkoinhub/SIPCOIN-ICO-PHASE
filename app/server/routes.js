@@ -334,6 +334,53 @@ app.get('/resent_verfication_page',function(req,res){
 		})
 	})
 
+  //withdrawals details of the user
+  app.get('/withdrawalTransactions',function(req,res){
+    if(req.session.user == null)
+    {
+      res.redirect('/');
+    }
+    else {
+      AM.getWithdrawalTransactions(req.session.user.user,req.session.user.email,function(e,o){
+        if(e)
+        {
+          res.render('withdrawalTransactions',{
+            udata : req.session.user,
+            withList : JSON.stringify([]),
+            BTC : usd,
+            SIP : sip,
+            message : 'Withdrawal Transactions Data Not Found'
+          })
+        }
+        else {
+          //console.log(JSON.stringify(o));
+          //res.send({transactions:o});
+          var usd;
+          var sip;
+
+          btcCheck().then((USD)=>{
+            usd = USD;
+            return getTokenValue().then((SIP)=>{return SIP});
+          })
+          .then((SIP)=>{
+            sip = SIP;
+
+            res.render('withdrawalTransactions',{
+              udata : req.session.user,
+              withList : JSON.stringify(o),
+              BTC : usd,
+              SIP : sip,
+              message : 'Withdrawal Transactions Data Found'
+            })
+          })
+          .catch((err)=>{
+            console.log("Error while fetching withdrawal transaction list for user : " + req.session.user.user + " :: Error : " + err)
+          })
+        }
+      })
+    }
+  })
+  
 	//transaction details of the user
 	app.get('/transaction',function(req,res){
 		if(req.session.user == null)
