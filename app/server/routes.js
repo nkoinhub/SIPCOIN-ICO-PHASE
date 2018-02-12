@@ -1,4 +1,4 @@
-process.env.NODE_ENV = "production";
+process.env.NODE_ENV = "default";
 
 console.log("========================= NODE ENVIRONMENT : " + process.env.NODE_ENV + "============================\n")
 
@@ -380,7 +380,7 @@ app.get('/resent_verfication_page',function(req,res){
       })
     }
   })
-  
+
 	//transaction details of the user
 	app.get('/transaction',function(req,res){
 		if(req.session.user == null)
