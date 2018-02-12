@@ -380,7 +380,7 @@ app.get('/resent_verfication_page',function(req,res){
       })
     }
   })
-  
+
 	//transaction details of the user
 	app.get('/transaction',function(req,res){
 		if(req.session.user == null)
@@ -460,6 +460,10 @@ app.get('/resent_verfication_page',function(req,res){
 							level : o.level,
 							referredCount : o.referredCount,
 							referralTokens : o.referralTokens,
+              leftCount : o.leftCount,
+              rightCount : o.rightCount,
+              totalLeftSideBusiness : o.totalLeftSideBusiness,
+							totalRightSideBusiness : o.totalRightSideBusiness,
 							USD : usd,
 							SIP : sip,
 							message : 'Referral Data Found',

@@ -533,22 +533,71 @@ html(lang='en')
                               img(src='/images/link.png', alt='Person', width='25', height='25')
                   .col-sm-12
                     hr
-                  .col-sm-3.lightLatto
-                    center
-                      h3#refferal_level
-                        i.fa.fa-level-up(aria-hidden='true', style='margin-right:10px;')
-                        |  Refferal Level  &nbsp - &nbsp #{level}
-                  .col-sm-4.lightLatto
-                    center
-                      h3#no_of_referral_code
-                        i.fa.fa-thumbs-o-up(aria-hidden='true', style='margin-right:10px;')
-                        |  No. of Refferals &nbsp - &nbsp #{referredCount}
-                  .col-sm-5.lightLatto
-                    center
-                      h3#no_of_referral_tokens
-                        img(src='/images/sipcoin_logo2d.png', height='40px', weight='40px', style='margin-right:10px;')
-                        |  Referral Commission Earned &nbsp - &nbsp #{referralTokens}
               br
+              .row
+                .col-sm-12(style='margin-top:0px; background-color:white;')
+                  center
+                    .col-sm-12(style='margin-top:0px; width:10px; height:200px; background-color:white;')
+                    .col-sm-4.my_card_style(style='margin-top:50px; margin-left:px; background-color:#AED6F1; width:220px;height:150px;')
+                      center
+                        br
+                        h3.boldLatto(style='font-size:21px; color: black;') Left Count
+
+                      .col-sm-4.my_card_style(style='background-color:white; color:white; width:190px;height:48px;margin-left:0px;margin-top:11px;')
+                        center
+                          .col-sm-1.col-sm-offset-2
+                            center
+
+                              i.fa.fa(aria-hidden='true', style='color:black; font-size:25px; width:75px; margin-top:13px;') #{leftCount}
+                              br
+                    .col-sm-4(style='margin-top:50px; width:65px; height:10px;')
+
+
+                    .col-sm-4.my_card_style(style='margin-top:50px; background-color:#AED6F1; width:220px;height:150px;')
+                      center
+                        br
+                        h3.boldLatto(style='font-size:21px; color: black;') Right Count
+
+                      .col-sm-4.my_card_style(style='background-color:white; color:white; width:190px;height:48px;margin-left:0px;margin-top:11px;')
+                        center
+                          .col-sm-1.col-sm-offset-2
+                            center
+
+                              i.fa.fa(aria-hidden='true', style='color:black; font-size:25px; width:75px; margin-top:13px;') #{rightCount}
+                              br
+                    .col-sm-4(style='margin-top:50px; width:65px; height:10px;')
+
+
+
+                    .col-sm-4.my_card_style(style='margin-top:50px; background-color:#AED6F1; width:220px;height:150px;')
+                      center
+                        br
+                        h3.boldLatto(style='font-size:21px; color: black;') Left Business
+
+                      .col-sm-4.my_card_style(style='background-color:white; color:white; width:190px;height:48px;margin-left:0px;margin-top:11px;')
+                        center
+                          .col-sm-1.col-sm-offset-2
+                            center
+
+                              i.fa.fa(aria-hidden='true', style='color:black; font-size:25px; width:75px; margin-top:13px;') #{totalLeftSideBusiness}
+                              br
+                    .col-sm-4(style='margin-top:50px; width:65px; height:10px;')
+
+
+
+                    .col-sm-4.my_card_style(style='margin-top:50px; background-color:#AED6F1; width:220px;height:150px;')
+                      center
+                        br
+                        h3.boldLatto(style='font-size:21px; color: black;') Right Business
+
+                      .col-sm-4.my_card_style(style='background-color:white; color:white; width:190px;height:48px;margin-left:0px;margin-top:11px;')
+                        center
+                          .col-sm-1.col-sm-offset-2(style='bakcground-color: blue;')
+
+                            i.fa.fa(aria-hidden='true', style='color:black;font-size:25px; width:75px; height:0px; margin-top:13px;') #{totalRightSideBusiness}
+                            br
+                    //.col-sm-4(style='margin-top:50px; width:10px; height:200px;')
+
             .col-sm-12
               br
               br
@@ -961,10 +1010,13 @@ html(lang='en')
                    //var normal_name="<h5 style='display:inline;padding:10px;font-size:12px;'> Name - </h5>"+"Rajat Rawat"+"<br>";
                    var left_people="<h5 style='display:inline;padding:10px;font-size:12px;'> Left Count - </h5>"+output_data[i].leftCount+"<br>";
                    var right_people="<h5 style='display:inline;padding:10px;font-size:12px;'> Right Count -  </h5>"+output_data[i].rightCount+"<br>";
+                   var left_bv="<h5 style='display:inline;padding:10px;font-size:12px;'> Left Business - </h5>"+output_data[i].totalLeftSideBusiness+"<br>";
+                   var right_bv="<h5 style='display:inline;padding:10px;font-size:12px;'> Right Business - </h5>"+output_data[i].totalRightSideBusiness+"<br>";
+
                    var self_refferal_code="<h5 style='display:inline;padding:10px;font-size:12px;'> Self Referral Code - </h5>"+output_data[i].key+"<br>";
                    var parent_refferal_code="<h5 style='display:inline;padding:10px;font-size:12px;'> Parent Referral Code - </h5>"+output_data[i].parent+"<br>";
                    //var Income_code="<h5 style='display:inline;padding:10px;font-size:12px;'> Income - </h5>"+"10000"+"<br>";
-                   var final_data="<div style='font-size:12px;'>"+user_name+"<center><hr style='width:80%;'></center>"+self_refferal_code+parent_refferal_code+left_people+right_people+"<br></div>";
+                   var final_data="<div style='font-size:12px;'>"+user_name+"<center><hr style='width:80%;'></center>"+self_refferal_code+parent_refferal_code+left_people+right_people+left_bv+right_bv+"<br></div>";
 
                    if(i==0)
                    {

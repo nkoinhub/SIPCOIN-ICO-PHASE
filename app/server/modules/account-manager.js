@@ -65,7 +65,7 @@ var withdrawalCol=db.collection('withdrawals');
 var getChildren = function(referral)
 {
 	return new Promise(function(resolve,reject){
-		referrals.find({parentReferralCode:referral},{_id:0,selfReferralCode:1,parentReferralCode:1,sponsorReferralCode:1,link:1,username:1,leftCount:1,rightCount:1,planAmt:1}).toArray(function(e,res){
+		referrals.find({parentReferralCode:referral},{_id:0,selfReferralCode:1,parentReferralCode:1,sponsorReferralCode:1,link:1,username:1,leftCount:1,rightCount:1,totalLeftSideBusiness:1,totalRightSideBusiness:1,planAmt:1}).toArray(function(e,res){
 			resolve(res);
 		})
 	})
@@ -78,12 +78,12 @@ var getChildrenNew = function(referral, link)
 	return new Promise(function(resolve,reject){
 		if(link == "left")
 		{
-			referrals.findOne({selfReferralCode:referral},{_id:0,leftLink:1,leftCount:1,rightCount:1,planAmt:1},function(e,res){
+			referrals.findOne({selfReferralCode:referral},{_id:0,leftLink:1,leftCount:1,rightCount:1,totalLeftSideBusiness:1,totalRightSideBusiness:1,planAmt:1},function(e,res){
 				resolve(res);
 			})
 		}
 		else if(link == "right"){
-			referrals.findOne({selfReferralCode:referral},{_id:0,rightLink:1,leftCount:1,rightCount:1,planAmt:1},function(e,res){
+			referrals.findOne({selfReferralCode:referral},{_id:0,rightLink:1,leftCount:1,rightCount:1,totalLeftSideBusiness:1,totalRightSideBusiness:1,planAmt:1},function(e,res){
 				resolve(res);
 			})
 		}
@@ -141,6 +141,8 @@ exports.formTreeData = function(referral, callback)
 						name : resArray[0].username,
 						leftCount : resArray[0].leftCount,
 						rightCount : resArray[0].rightCount,
+						totalLeftSideBusiness : resArray[0].totalLeftSideBusiness,
+						totalRightSideBusiness : resArray[0].totalRightSideBusiness,
 						planAmt : resArray[0].planAmt
 					})
 					finalData.push({
@@ -149,6 +151,8 @@ exports.formTreeData = function(referral, callback)
 						name : resArray[1].username,
 						leftCount : resArray[1].leftCount,
 						rightCount : resArray[1].rightCount,
+						totalLeftSideBusiness : resArray[1].totalLeftSideBusiness,
+						totalRightSideBusiness : resArray[1].totalRightSideBusiness,
 						planAmt : resArray[1].planAmt
 					})
 
@@ -160,6 +164,8 @@ exports.formTreeData = function(referral, callback)
 						name : resArray[1].username,
 						leftCount : resArray[1].leftCount,
 						rightCount : resArray[1].rightCount,
+						totalLeftSideBusiness : resArray[1].totalLeftSideBusiness,
+						totalRightSideBusiness : resArray[1].totalRightSideBusiness,
 						planAmt : resArray[1].planAmt
 					})
 					finalData.push({
@@ -168,6 +174,8 @@ exports.formTreeData = function(referral, callback)
 						name : resArray[0].username,
 						leftCount : resArray[0].leftCount,
 						rightCount : resArray[0].rightCount,
+						totalLeftSideBusiness : resArray[0].totalLeftSideBusiness,
+						totalRightSideBusiness : resArray[0].totalRightSideBusiness,
 						planAmt : resArray[0].planAmt
 					})
 				}
@@ -183,6 +191,8 @@ exports.formTreeData = function(referral, callback)
 						name : resArray[0].username,
 						leftCount : resArray[0].leftCount,
 						rightCount : resArray[0].rightCount,
+						totalLeftSideBusiness : resArray[0].totalLeftSideBusiness,
+						totalRightSideBusiness : resArray[0].totalRightSideBusiness,
 						planAmt : resArray[0].planAmt
 					})
 					finalData.push({
@@ -191,6 +201,8 @@ exports.formTreeData = function(referral, callback)
 						name : "No Child",
 						leftCount : 0,
 						rightCount : 0,
+						totalLeftSideBusiness : 0,
+						totalRightSideBusiness : 0,
 						planAmt : "No Plan Amount"
 					})
 
@@ -203,6 +215,8 @@ exports.formTreeData = function(referral, callback)
 						name : "No Child",
 						leftCount : 0,
 						rightCount : 0,
+						totalLeftSideBusiness : 0,
+						totalRightSideBusiness : 0,
 						planAmt : "No Plan Amount"
 					})
 					finalData.push({
@@ -211,6 +225,8 @@ exports.formTreeData = function(referral, callback)
 						name : resArray[0].username,
 						leftCount : resArray[0].leftCount,
 						rightCount : resArray[0].rightCount,
+						totalLeftSideBusiness : resArray[0].totalLeftSideBusiness,
+						totalRightSideBusiness : resArray[0].totalRightSideBusiness,
 						planAmt : resArray[0].planAmt
 					})
 				}
