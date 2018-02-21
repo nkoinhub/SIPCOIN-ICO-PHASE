@@ -1040,8 +1040,22 @@ app.get('/resent_verfication_page',function(req,res){
 													html: part1 +URLforVerification+part2,
 												};
 
-												AM.referralAddInParent(parentNode, newAccount.selfReferralCode, req.body['link'], function(message){console.log(message)});
-												AM.referralAddInSponsor(newAccount.referralCode, newAccount.selfReferralCode, function(message){console.log(message)});
+                        if (newAccount.referralCode==parentNode)
+                        {
+                          console.log("Parent and sponsor are same");
+
+                          AM.referralAddInSponsorAndParent(newAccount.referralCode, newAccount.selfReferralCode, newAccount.selfReferralCode, req.body['link'], function(message){console.log(message)});
+
+                        } else {
+                          console.log("Parent and sponsor are not same");
+                          AM.referralAddInParent(parentNode, newAccount.selfReferralCode, req.body['link'], function(message){
+                            console.log(message);
+                            AM.referralAddInSponsor(newAccount.referralCode, newAccount.selfReferralCode, function(message){console.log(message)});
+                          });
+                        }
+
+												//AM.referralAddInParent(parentNode, newAccount.selfReferralCode, req.body['link'], function(message){console.log(message)});
+												//AM.referralAddInSponsor(newAccount.referralCode, newAccount.selfReferralCode, function(message){console.log(message)});
 
 												transporter.sendMail(mailOptions, function(error, info){
 													if (error) {
