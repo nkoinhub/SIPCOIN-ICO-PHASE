@@ -449,6 +449,25 @@ exports.referralAddInSponsor = function(selfCode, toBePushedCode, callback)
 	})
 }
 
+exports.referralAddInSponsorAndParent = function(selfCode, toBePushedCode, toBeLinked, link,  callback)
+{
+	referrals.findOne({selfReferralCode:selfCode},function(e,o){
+
+		if(o)
+		{
+
+			if(link == "left")
+			{
+				o.leftLink = toBeLinked;
+			} else if (link=="right"){
+				o.rightLink = toBeLinked;
+			}
+			o.referred.push(toBePushedCode);
+			o.referredCount = o.referredCount + 1;
+			referrals.save(o, {safe:true}, callback("New Referral : " + toBePushedCode + " added in sponsorer : " + selfCode));
+		}
+	})
+}
 
 //checking whether the plan amount is set or not based on the first investment
 exports.checkForPlanAmtSet = function(username, callback)
