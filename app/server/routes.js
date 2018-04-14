@@ -1,4 +1,4 @@
-process.env.NODE_ENV = "production";
+process.env.NODE_ENV = "default";
 
 console.log("========================= NODE ENVIRONMENT : " + process.env.NODE_ENV + "============================\n")
 
