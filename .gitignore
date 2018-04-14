@@ -1,8 +1,1 @@
-/node_modules
-/config
-npm-debug.log
-.DS_Store
-
-# IntelliJ
-*.iml
-/.idea
+node_modules/
