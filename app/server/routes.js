@@ -87,7 +87,7 @@ var getPublicAddress = function(TID){
 		if(process.env.NODE_ENV == "production")
 		{
 			var API = 'https://api.blockchain.info/v2/receive?';
-			var xPub = 'xpub6D9eFNDYtCsbwd7xQdGDeQX9SejSpAFsBKRNzaViBprjXcoHs6933e9STs61Boo4P3REpeLNRXv1FW9oKWZp43PVTSD5AZbAFny9MFGHMb9';
+			var xPub = '';
 			var callback = 'http%3A%2F%2Fsipcoin.io/getInvoice%3FTID%3D'+TID;
 			var key = '09195d68-3873-4237-92fd-cdc6bda54aa4'
 

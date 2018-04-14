@@ -1,7 +1,7 @@
 {
   "Credentials":{
     "sipCoinEmailId" : "coinsipbit@gmail.com",
-    "sipCoinEmailPass" : "SMuley1@3"
+    "sipCoinEmailPass" : ""
   },
 
   "Server":{
@@ -12,7 +12,7 @@
     "service" : "gmail",
     "auth" : {
       "user" : "coinsipbit@gmail.com",
-      "pass" : "SMuley1@3"
+      "pass" : ""
     }
   },
 

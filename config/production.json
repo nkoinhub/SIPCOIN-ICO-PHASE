@@ -1,18 +1,18 @@
 {
   "Credentials":{
     "sipCoinEmailId" : "coinsipbit@gmail.com",
-    "sipCoinEmailPass" : "SMuley1@3"
+    "sipCoinEmailPass" : ""
   },
 
   "Server":{
-    "IP" : "http://sipcoin.io"
+    "IP" : ""
   },
 
   "Transporter":{
     "service" : "gmail",
     "auth" : {
       "user" : "coinsipbit@gmail.com",
-      "pass" : "SMuley1@3"
+      "pass" : ""
     }
   },
 
